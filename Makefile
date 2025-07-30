@@ -24,7 +24,7 @@ SRCS       := $(wildcard $(SRC_DIR)/*.c)
 OBJS       := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
 # Alvos finais
-TARGET         := main
+TARGET         := main.c
 
 # Alvo padrão: compila para Linux/macOS
 all: $(BUILD_DIR) $(TARGET)
