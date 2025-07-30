@@ -15,17 +15,16 @@ git clone https://github.com/DianneK13/ProjetoFinal_PI-CIN0005 --recursive
 ```
 ### 2o - Compile o raylib
 ```bash
-cd external/raylib/src
+cd ProjetoFinal_PI-CIN0005/external/raylib/src
 make
 ```
-
 ### 3o - Compile o projeto
+Volte para a pasta do projeto e digite o comando
 ```bash
-# Volte para a pasta do projeto e digite o comando
+cd ProjetoFinal_PI-CIN0005
 make
 ```
-
-### 4o - Rode
+### 4o - Rode o projeto
 ```bash
 ./main
 ```
