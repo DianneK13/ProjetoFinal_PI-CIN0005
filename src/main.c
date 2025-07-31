@@ -1,125 +1,160 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "raylib.h"
+#include "state_manager.h"
 
-typedef enum GameScreen { MENU, GAMEPLAY, ENDING } GameScreen;
+// Window dimensions
+#define SCREEN_WIDTH 1200
+#define SCREEN_HEIGHT 800
 
-// TODO: Define required structs
+// Global variables
+Texture2D bedroomBackground;
+const char* hoveredObjectName = NULL;
+Font gameFont;
+GameObject* objects;
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
-int main()
+// Function prototypes
+void LoadAssets(void);
+void UnloadAssets(void);
+void DrawObjects(void);
+void CheckMouseHover(void);
+void DrawSubtitle(void);
+void DrawCenteredText(const char* text, int y, Color color);
+
+int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 720;
-    const int screenHeight = 450;
+    // Initialize window
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
+    SetTargetFPS(60);
+    
+    // Load assets
+    LoadAssets();
+    
+    // Setup objects
+    SetupObjects();
 
-    // LESSON 01: Window initialization and screens management
-    InitWindow(screenWidth, screenHeight, "Sagui Island");
-    
-    // NOTE: Load resources (textures, fonts, audio) after Window initialization
-
-    // Game required variables
-    GameScreen screen = MENU;
-    
-    int framesCounter = 0;          // General pourpose frames counter
-    int gameResult = -1;            // Game result: 0 - Loose, 1 - Win, -1 - Not defined
-    bool gamePaused = false;        // Game paused state toggle
-    
-    // TODO: Define and Initialize game variables
-        
-    SetTargetFPS(60);               // Set desired framerate (frames per second)
-    //--------------------------------------------------------------------------------------
-    
     // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    while (!WindowShouldClose())
     {
         // Update
-        //----------------------------------------------------------------------------------
-        switch(screen) 
-        {
-            case MENU:
-            {
-                // Update MENU screen data here!
-                
-                framesCounter++;
-                
-                // LESSON 03: Inputs management (keyboard, mouse)
-                if (IsKeyPressed(KEY_ENTER)) screen = GAMEPLAY;
-                
-            } break;
-            case GAMEPLAY:
-            { 
-                // Update GAMEPLAY screen data here!
-
-                if (!gamePaused)
-                {
-                    // TODO: Gameplay logic
-                }
-                
-                if (IsKeyPressed(KEY_ENTER)) screen = ENDING;
-
-            } break;
-            case ENDING: 
-            {
-                // Update END screen data here!
-                
-                framesCounter++;
-                
-                // LESSON 03: Inputs management (keyboard, mouse)
-                if (IsKeyPressed(KEY_ENTER)) screen = MENU;
-
-            } break;
-            default: break;
-        }
-        //----------------------------------------------------------------------------------
+        CheckMouseHover();
 
         // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
         
-            ClearBackground(RAYWHITE);
-            
-            switch(screen) 
-            {
-                case MENU:
-                {
-                    // TODO: Draw MENU screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
-                    DrawText("MENU SCREEN", 20, 20, 40, DARKGREEN);
-                    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
-
-                } break;
-                case GAMEPLAY:
-                {
-                    // TODO: Draw GAMEPLAY screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, PURPLE);
-                    DrawText("GAMEPLAY SCREEN", 20, 20, 40, MAROON);
-                    DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
-
-                } break;
-                case ENDING:
-                {
-                    // TODO: Draw ENDING screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
-                    DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
-                    DrawText("PRESS ENTER or TAP to RETURN to MENU SCREEN", 120, 220, 20, DARKBLUE);
-
-                } break;
-                default: break;
-            }
+        ClearBackground(RAYWHITE);
+        
+        // Draw bedroom background
+        DrawTexture(bedroomBackground, 0, 0, WHITE);
+        
+        // Draw all objects
+        DrawObjects();
+        
+        // Draw subtitle if hovering over object
+        DrawSubtitle();
         
         EndDrawing();
-        //----------------------------------------------------------------------------------
     }
-
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
     
-    // NOTE: Unload any loaded resources (texture, fonts, audio)
-
-    CloseWindow();              
-    //--------------------------------------------------------------------------------------
+    // Cleanup
+    UnloadAssets();
+    CloseWindow();
     
     return 0;
 }
+
+void CheckMouseHover(void)
+{
+    Vector2 mousePos = GetMousePosition();
+    hoveredObjectName = NULL;
+    
+    for (int i = 0; i < objectCount; i++) {
+        if (CheckCollisionPointRec(mousePos, objects[i].bounds)) {
+            hoveredObjectName = objects[i].name;
+            break;
+        }
+    }
+}
+
+void LoadAssets(void)
+{
+    // Load bedroom background
+    bedroomBackground = LoadTexture("BOTAR IMAGEM DO JOGO");
+    
+    // Load font for subtitles
+    gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
+    if (gameFont.texture.id == 0) {
+        // Fallback to default font if custom font not found
+        gameFont = GetFontDefault();
+    }
+}
+
+void UnloadAssets(void)
+{
+    // Unload bedroom background
+    UnloadTexture(bedroomBackground);
+    
+    // Unload object textures
+    for (int i = 0; i < objectCount; i++) {
+        UnloadTexture(objects[i].texture);
+    }
+    
+    // Free objects array
+    if (objects != NULL) {
+        free(objects);
+        objects = NULL;
+    }
+}
+
+void DrawObjects(void)
+{
+    for (int i = 0; i < objectCount; i++) {
+        // Draw object texture
+        DrawTexturePro(
+            objects[i].texture,
+            (Rectangle){0, 0, objects[i].texture.width, objects[i].texture.height},
+            (Rectangle){objects[i].position.x, objects[i].position.y, objects[i].size.x, objects[i].size.y},
+            (Vector2){0, 0},
+            0.0f,
+            WHITE
+        );
+        
+        // Debug: Draw bounds (uncomment for debugging)
+        // DrawRectangleRec(objects[i].bounds, (Color){255, 0, 0, 100});
+    }
+}
+
+void CheckMouseHover(void)
+{
+    Vector2 mousePos = GetMousePosition();
+    hoveredObjectName = NULL;
+    
+    for (int i = 0; i < objectCount; i++) {
+        if (CheckCollisionPointRec(mousePos, objects[i].bounds)) {
+            hoveredObjectName = objects[i].name;
+            break;
+        }
+    }
+}
+
+void DrawSubtitle(void)
+{
+    if (hoveredObjectName != NULL) {
+        DrawCenteredText(hoveredObjectName, SCREEN_HEIGHT - 80, BLACK);
+    }
+}
+
+void DrawCenteredText(const char* text, int y, Color color)
+{
+    int textWidth = MeasureText(text, 24);
+    int x = (SCREEN_WIDTH - textWidth) / 2;
+    
+    // Draw background rectangle for better readability
+    DrawRectangle(x - 10, y - 5, textWidth + 20, 34, (Color){255, 255, 255, 200});
+    DrawRectangleLines(x - 10, y - 5, textWidth + 20, 34, BLACK);
+    
+    // Draw text
+    DrawText(text, x, y, 24, color);
+} 
