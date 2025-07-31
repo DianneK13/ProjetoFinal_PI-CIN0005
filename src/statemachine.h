@@ -1,43 +1,36 @@
 #include "raylib.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef enum GameScreen {MENU, GAMEPLAY, ENDING} GameScreen;
+typedef enum GameState {MENU, GAMEPLAY, ENDING} GameState;
 typedef enum PuzzleObjectState {ORIGINAL, ALTERED} PuzzleObjectState;
 typedef enum PuzzleObjectType {INTERACTIVE, COLECTABLE} PuzzleObjectType;
-typedef enum StateEventStatus {STATE_CHANGED, STATE_UNCHANGED} StateEventStatus;
 
-typedef struct PuzzleObject{
-  PuzzleObjectState state;
-  PuzzleObjectType type;
+// Object structure
+// TUDO que der pra clicar no jogo é um GameObject
+typedef struct GameObject{
+    PuzzleObjectState state;
+    PuzzleObjectType type;
 
-  const char* name;
-  Texture2D image;
-  Rectangle bounds;
-  Vector2 position;
-  Vector2 size;
+    int id;
+    const char* name;
+    Texture2D texture;
+    Rectangle bounds;
+    Vector2 position;
+    Vector2 size;
+} GameObject;
 
-}PuzzleObject;
+GameObject* objects;
+int objectCount;
 
-typedef struct StateEvent { 
-  StateEventStatus status;
-  char * message;
+void InitializeState();
 
-}StateEvent;
+void processEvent(GameObject* object);
+void processMenuEvent(GameObject* clickedObject);
+void processGameplayEvent(GameObject* utility, GameObject* target);
+void processEndingEvent(GameObject* clickedObject);
 
-PuzzleObject armario();
-PuzzleObject caixa1;
-PuzzleObject caixa2;
-PuzzleObject buraco;
-PuzzleObject diario;
-PuzzleObject vitrola;
-PuzzleObject garrafa;
-PuzzleObject estante;
-PuzzleObject mapa;
-PuzzleObject pirata;
-PuzzleObject varaPesca;
-PuzzleObject chave;
-PuzzleObject bilhete;
-PuzzleObject dente;
+GameObject* SetupObjects(void);
 
-StateEvent processEvent(PuzzleObject utility, PuzzleObject target);
-
-void CheckMouseHover(void);
+GameObject* GetObjectInHand(void);
