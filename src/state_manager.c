@@ -1,4 +1,4 @@
-#include "statemachine.h"
+#include "state_manager.h"
 
 #define ID_ARMARIO 0
 #define ID_CAIXA_ARMARIO 1
@@ -44,83 +44,7 @@ void processEndingEvent(GameObject* clickedObject){
 
 //process action between object in player's hand and object from background that was clicked
 void processGameplayEvent(GameObject* utility, GameObject* target){
-//  // Update
-//         //----------------------------------------------------------------------------------
-//         switch(screen) 
-//         {
-//             case MENU:
-//             {
-//                 // Update MENU screen data here!
-                
-//                 framesCounter++;
-                
-//                 // LESSON 03: Inputs management (keyboard, mouse)
-//                 if (IsKeyPressed(KEY_ENTER)) screen = GAMEPLAY;
-                
-//             } break;
-//             case GAMEPLAY:
-//             { 
-//                 // Update GAMEPLAY screen data here!
 
-//                 if (!gamePaused)
-//                 {
-//                     // TODO: Gameplay logic
-//                 }
-                
-//                 if (IsKeyPressed(KEY_ENTER)) screen = ENDING;
-
-//             } break;
-//             case ENDING: 
-//             {
-//                 // Update END screen data here!
-                
-//                 framesCounter++;
-                
-//                 // LESSON 03: Inputs management (keyboard, mouse)
-//                 if (IsKeyPressed(KEY_ENTER)) screen = MENU;
-
-//             } break;
-//             default: break;
-//         }
-//         //----------------------------------------------------------------------------------
-
-//         // Draw
-//         //----------------------------------------------------------------------------------
-//         BeginDrawing();
-        
-//             ClearBackground(RAYWHITE);
-            
-//             switch(screen) 
-//             {
-//                 case MENU:
-//                 {
-//                     // TODO: Draw MENU screen here!
-//                     DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
-//                     DrawText("MENU SCREEN", 20, 20, 40, DARKGREEN);
-//                     DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
-
-//                 } break;
-//                 case GAMEPLAY:
-//                 {
-//                     // TODO: Draw GAMEPLAY screen here!
-//                     DrawRectangle(0, 0, screenWidth, screenHeight, PURPLE);
-//                     DrawText("GAMEPLAY SCREEN", 20, 20, 40, MAROON);
-//                     DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
-
-//                 } break;
-//                 case ENDING:
-//                 {
-//                     // TODO: Draw ENDING screen here!
-//                     DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
-//                     DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
-//                     DrawText("PRESS ENTER or TAP to RETURN to MENU SCREEN", 120, 220, 20, DARKBLUE);
-
-//                 } break;
-//                 default: break;
-//             }
-        
-//         EndDrawing();
-//         //----------------------------------------------------------------------------------
 }
 
 GameObject* GetgameplayObjects(void){
