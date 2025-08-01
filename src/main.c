@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "raylib.h"
-#include "statemachine.h"
+#include "state_manager.h"
 
 // Window dimensions
 #define SCREEN_WIDTH 1200
