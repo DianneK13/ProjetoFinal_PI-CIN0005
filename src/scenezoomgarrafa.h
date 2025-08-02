@@ -5,10 +5,10 @@
 #include "common.h"
 
 
-void InitializeState();
+void InitializeZoomGarrafaState();
 
-void processEvent(GameObject* object);
+void processZoomGarrafaEvent(GameObject* object);
 
-GameObject* GetBackground(void);
+GameObject* GetZoomGarrafaBackground(void);
 
-GameObject* GetObjects(void);
+GameObject* GetZoomGarrafaObjects(void);

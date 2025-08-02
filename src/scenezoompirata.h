@@ -5,10 +5,10 @@
 #include "common.h"
 
 
-void InitializeState();
+void InitializeZoomPirataState();
 
-void processEvent(GameObject* object);
+void processZoomPirataEvent(GameObject* object);
 
-GameObject* GetBackground(void);
+GameObject* GetZoomPirataBackground(void);
 
-GameObject* GetObjects(void);
+GameObject* GetZoomPirataObjects(void);

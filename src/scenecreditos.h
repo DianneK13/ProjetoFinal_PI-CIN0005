@@ -5,10 +5,10 @@
 #include "common.h"
 
 
-void InitializeState();
+void InitializeCreditosState();
 
-void processEvent(GameObject* object);
+void processCreditosEvent(GameObject* object);
 
-GameObject* GetBackground(void);
+GameObject* GetCreditosBackground(void);
 
-GameObject* GetObjects(void);
+GameObject* GetCreditosObjects(void);

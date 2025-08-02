@@ -5,10 +5,10 @@
 #include "common.h"
 
 
-void InitializeState();
+void InitializeZoomCaixaArmarioState();
 
-void processEvent(GameObject* object);
+void processZoomCaixaArmarioEvent(GameObject* object);
 
-GameObject* GetBackground(void);
+GameObject* GetZoomCaixaArmarioBackground(void);
 
-GameObject* GetObjects(void);
+GameObject* GetZoomCaixaArmarioObjects(void);

@@ -5,10 +5,10 @@
 #include "common.h"
 
 
-void InitializeState();
+void InitializeZoomBilheteState();
 
-void processEvent(GameObject* object);
+void processZoomBilheteEvent(GameObject* object);
 
-GameObject* GetBackground(void);
+GameObject* GetZoomBilheteBackground(void);
 
-GameObject* GetObjects(void);
+GameObject* GetZoomBilheteObjects(void);

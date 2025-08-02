@@ -5,10 +5,10 @@
 #include "common.h"
 
 
-void InitializeState();
+void InitializeZoomDiarioState();
 
-void processEvent(GameObject* object);
+void processZoomDiarioEvent(GameObject* object);
 
-GameObject* GetBackground(void);
+GameObject* GetZoomDiarioBackground(void);
 
-GameObject* GetObjects(void);
+GameObject* GetZoomDiarioObjects(void);

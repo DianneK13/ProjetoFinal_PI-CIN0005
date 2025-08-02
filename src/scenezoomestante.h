@@ -5,10 +5,10 @@
 #include "common.h"
 
 
-void InitializeState();
+void InitializeZoomEstanteState();
 
-void processEvent(GameObject* object);
+void processZoomEstanteEvent(GameObject* object);
 
-GameObject* GetBackground(void);
+GameObject* GetZoomEstanteBackground(void);
 
-GameObject* GetObjects(void);
+GameObject* GetZoomEstanteObjects(void);
