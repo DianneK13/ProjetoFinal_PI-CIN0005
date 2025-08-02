@@ -9,8 +9,6 @@ void InitializeState();
 
 void processEvent(GameObject* object);
 
-Texture2D GetBackground(void);
+GameObject* GetBackground(void);
 
 GameObject* GetObjects(void);
-
-int GetObjectCount(void);

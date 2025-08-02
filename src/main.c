@@ -4,6 +4,7 @@
 
 #include "raylib.h"
 #include "statemachine.h"
+#include "common.h"
 
 // Window dimensions
 #define SCREEN_WIDTH 1200
@@ -17,9 +18,9 @@ GameObject* objects;
 
 // Function prototypes
 void LoadAssets(void);
-void UnloadAssets(void);
-void DrawObjects(void);
-void CheckMouseHover(void);
+//void UnloadAssets(void);
+void DrawObjects(GameObject* objects, int objectCount);
+void CheckMouseHover(GameObject* objects, int objectCount);
 void DrawSubtitle(void);
 void DrawCenteredText(const char* text, int y, Color color);
 
@@ -40,8 +41,8 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose())
     {
-        // Update
-        GameObject* go = GetClickedObject();
+        // retornar objeto que o player clicar
+        GameObject* go = GetClickedObject(GetObjects(), GetObjectCount());
 
         if(go != NULL) 
             processEvent(go);
@@ -54,7 +55,7 @@ int main(void)
         DrawTexture(GetBackground(), 0, 0, WHITE);
         
         // Draw all objects
-        DrawObjects(GetObjects());
+        DrawObjects(GetObjects(), GetObjectCount());
         
         // Draw subtitle if hovering over object
         DrawSubtitle();
@@ -63,13 +64,13 @@ int main(void)
     }
     
     // Cleanup
-    UnloadAssets();
+    //UnloadAssets();
     CloseWindow();
     
     return 0;
 }
 
-void CheckMouseHover(void)
+void CheckMouseHover(GameObject* objects, int objectCount)
 {
     Vector2 mousePos = GetMousePosition();
     hoveredObjectName = NULL;
@@ -82,7 +83,7 @@ void CheckMouseHover(void)
     }
 }
 
-GameObject* GetClickedObject(void)
+GameObject* GetClickedObject(GameObject* objects, int objectCount)
 {
     if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
         Vector2 mousePos = GetMousePosition();
@@ -98,7 +99,7 @@ GameObject* GetClickedObject(void)
 
 void LoadAssets(void)
 {
-    // Load bedroom background
+    // Load background
     bedroomBackground = LoadTexture("BOTAR IMAGEM DO JOGO");
     
     // Load font for subtitles
@@ -109,10 +110,12 @@ void LoadAssets(void)
     }
 }
 
-void UnloadAssets(void)
+
+/*
+void UnloadAssets(GameObject* objects, int objectCount)
 {
-    // Unload bedroom background
-    UnloadTexture(bedroomBackground);
+    // Unload background
+    UnloadTexture("assets/botarfundo");
     
     // Unload object textures
     for (int i = 0; i < objectCount; i++) {
@@ -125,8 +128,9 @@ void UnloadAssets(void)
         objects = NULL;
     }
 }
+*/
 
-void DrawObjects(void)
+void DrawObjects(GameObject* objects, int objectCount)
 {
     for (int i = 0; i < objectCount; i++) {
         // Draw object texture
@@ -145,7 +149,7 @@ void DrawObjects(void)
 }
 
 // ve se o mouse ta em cima de algum objeto
-void CheckMouseHover(void)
+void CheckMouseHover(GameObject* objects, int objectCount)
 {
     Vector2 mousePos = GetMousePosition();
     hoveredObjectName = NULL;

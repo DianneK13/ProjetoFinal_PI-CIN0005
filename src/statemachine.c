@@ -1,237 +1,30 @@
 #include "statemachine.h"
 
-#define ID_ARMARIO 0
-#define ID_CAIXA_ARMARIO 1
-#define ID_CAIXA_CAMA 2
-#define ID_BURACO 3
-#define ID_DIARIO 4
-#define ID_VITROLA 5
-#define ID_GARRAFA 6
-#define ID_ESTANTE 7
-#define ID_MAPA 8
-#define ID_PIRATA 9 
-#define ID_VARA_PESCA 10
-#define ID_CHAVE 11
-#define ID_BILHETE 12
+#include "scenemenu.h"
+#include "scenegameplay.h"
+#include "sceneending.h"
 
-GameObject* gameplayObjects = NULL;
-int gameplayObjectCount = 0;
+GameState state = STATE_MENU;
 
-GameObject* menuObjects = NULL;
-int menuObjectCount = 0;
 
-GameObject* endingObjects = NULL;
-int endingObjectCount = 0;
-
-//object in player's hand
-GameObject* hand = NULL;
-
-GameState state = MENU;
-
-//funcions return the new current state, array of objects and background to be drawn
-
-//process changes between 3 main game states (menu, gameplay and ending)
-void processEvent(GameObject* clickedObject){
+void InitializeState() {
+    InitializeMenuState();
+    InitializeGameplayState();
+    InitializeEndingState();
 }
 
-//process actions during menu screen
-void processMenuEvent(GameObject* clickedObject){
-}
+//funções atualizam o estado, o array de objetos e o fundo a ser desenhado no momento
 
-//process actions during ending screen
-void processEndingEvent(GameObject* clickedObject){
-}
-
-//process action between object in player's hand and object from background that was clicked
-void processGameplayEvent(GameObject* utility, GameObject* target){
-//  // Update
-//         //----------------------------------------------------------------------------------
-//         switch(screen) 
-//         {
-//             case MENU:
-//             {
-//                 // Update MENU screen data here!
-                
-//                 framesCounter++;
-                
-//                 // LESSON 03: Inputs management (keyboard, mouse)
-//                 if (IsKeyPressed(KEY_ENTER)) screen = GAMEPLAY;
-                
-//             } break;
-//             case GAMEPLAY:
-//             { 
-//                 // Update GAMEPLAY screen data here!
-
-//                 if (!gamePaused)
-//                 {
-//                     // TODO: Gameplay logic
-//                 }
-                
-//                 if (IsKeyPressed(KEY_ENTER)) screen = ENDING;
-
-//             } break;
-//             case ENDING: 
-//             {
-//                 // Update END screen data here!
-                
-//                 framesCounter++;
-                
-//                 // LESSON 03: Inputs management (keyboard, mouse)
-//                 if (IsKeyPressed(KEY_ENTER)) screen = MENU;
-
-//             } break;
-//             default: break;
-//         }
-//         //----------------------------------------------------------------------------------
-
-//         // Draw
-//         //----------------------------------------------------------------------------------
-//         BeginDrawing();
-        
-//             ClearBackground(RAYWHITE);
-            
-//             switch(screen) 
-//             {
-//                 case MENU:
-//                 {
-//                     // TODO: Draw MENU screen here!
-//                     DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
-//                     DrawText("MENU SCREEN", 20, 20, 40, DARKGREEN);
-//                     DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
-
-//                 } break;
-//                 case GAMEPLAY:
-//                 {
-//                     // TODO: Draw GAMEPLAY screen here!
-//                     DrawRectangle(0, 0, screenWidth, screenHeight, PURPLE);
-//                     DrawText("GAMEPLAY SCREEN", 20, 20, 40, MAROON);
-//                     DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
-
-//                 } break;
-//                 case ENDING:
-//                 {
-//                     // TODO: Draw ENDING screen here!
-//                     DrawRectangle(0, 0, screenWidth, screenHeight, BLUE);
-//                     DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
-//                     DrawText("PRESS ENTER or TAP to RETURN to MENU SCREEN", 120, 220, 20, DARKBLUE);
-
-//                 } break;
-//                 default: break;
-//             }
-        
-//         EndDrawing();
-//         //----------------------------------------------------------------------------------
-}
-
-GameObject* GetgameplayObjects(void){
-    return hand;
-}
-
-void InitializeState(){
-
-}
-
-GameObject* SetupGameplayObjects(void){
-    // Define number of gameplayObjects
-    objectCount = 8;
-    gameplayObjects = (GameObject*)malloc(objectCount * sizeof(GameObject));
-    
-    if (gameplayObjects == NULL) {
-        //printf("Failed to allocate memory for gameplayObjects\n");
-        return;
+void processEvent(GameObject* clickedObject) {
+    switch(state) {
+        case STATE_MENU:
+            state = processMenuEvent(clickedObject);
+            break;
+        case STATE_GAMEPLAY:
+            state = processGameplayEvent(clickedObject);
+            break;
+        case STATE_ENDING:
+            state = processEndingEvent(clickedObject);
+            break;
     }
-    
-    // Initialize gameplayObjects with their properties
-    gameplayObjects[ID_ARMARIO].name = "armario";
-    gameplayObjects[ID_ARMARIO].id = ID_ARMARIO;
-    gameplayObjects[ID_ARMARIO].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_ARMARIO].position = (Vector2){50, 100};
-    gameplayObjects[ID_ARMARIO].size = (Vector2){150, 120};
-    gameplayObjects[ID_ARMARIO].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_CAIXA_ARMARIO].name = "caixaArmario";
-    gameplayObjects[ID_CAIXA_ARMARIO].id = ID_CAIXA_ARMARIO;    
-    gameplayObjects[ID_CAIXA_ARMARIO].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_CAIXA_ARMARIO].position = (Vector2){50, 100};
-    gameplayObjects[ID_CAIXA_ARMARIO].size = (Vector2){150, 120};
-    gameplayObjects[ID_CAIXA_ARMARIO].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_CAIXA_CAMA].name = "caixaCama";
-    gameplayObjects[ID_CAIXA_CAMA].id = ID_CAIXA_CAMA;
-    gameplayObjects[ID_CAIXA_CAMA].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_CAIXA_CAMA].position = (Vector2){50, 100};
-    gameplayObjects[ID_CAIXA_CAMA].size = (Vector2){150, 120};
-    gameplayObjects[ID_CAIXA_CAMA].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_BURACO].name = "buraco";
-    gameplayObjects[ID_BURACO].id = ID_BURACO;
-    gameplayObjects[ID_BURACO].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_BURACO].position = (Vector2){50, 100};
-    gameplayObjects[ID_BURACO].size = (Vector2){150, 120};
-    gameplayObjects[ID_BURACO].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_DIARIO].name = "diario";
-    gameplayObjects[ID_DIARIO].id = ID_DIARIO;
-    gameplayObjects[ID_DIARIO].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_DIARIO].position = (Vector2){50, 100};
-    gameplayObjects[ID_DIARIO].size = (Vector2){150, 120};
-    gameplayObjects[ID_DIARIO].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_VITROLA].name = "vitrola";
-    gameplayObjects[ID_VITROLA].id = ID_VITROLA;
-    gameplayObjects[ID_VITROLA].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_VITROLA].position = (Vector2){50, 100};
-    gameplayObjects[ID_VITROLA].size = (Vector2){150, 120};
-    gameplayObjects[ID_VITROLA].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_GARRAFA].name = "garrafa";
-    gameplayObjects[ID_GARRAFA].id = ID_GARRAFA;
-    gameplayObjects[ID_GARRAFA].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_GARRAFA].position = (Vector2){50, 100};
-    gameplayObjects[ID_GARRAFA].size = (Vector2){150, 120};
-    gameplayObjects[ID_GARRAFA].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_ESTANTE].name = "estante";
-    gameplayObjects[ID_ESTANTE].id = ID_ESTANTE;
-    gameplayObjects[ID_ESTANTE].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_ESTANTE].position = (Vector2){50, 100};
-    gameplayObjects[ID_ESTANTE].size = (Vector2){150, 120};
-    gameplayObjects[ID_ESTANTE].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_MAPA].name = "mapa";
-    gameplayObjects[ID_MAPA].id = ID_MAPA;
-    gameplayObjects[ID_MAPA].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_MAPA].position = (Vector2){50, 100};
-    gameplayObjects[ID_MAPA].size = (Vector2){150, 120};
-    gameplayObjects[ID_MAPA].bounds = (Rectangle){50, 100, 150, 120};
-
-    gameplayObjects[ID_PIRATA].name = "pirata";
-    gameplayObjects[ID_PIRATA].id = ID_PIRATA;
-    gameplayObjects[ID_PIRATA].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_PIRATA].position = (Vector2){50, 100};
-    gameplayObjects[ID_PIRATA].size = (Vector2){150, 120};
-    gameplayObjects[ID_PIRATA].bounds = (Rectangle){50, 100, 150, 120};       
-
-    gameplayObjects[ID_VARA_PESCA].name = "varaPesca";
-    gameplayObjects[ID_VARA_PESCA].id = ID_VARA_PESCA;
-    gameplayObjects[ID_VARA_PESCA].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_VARA_PESCA].position = (Vector2){50, 100};
-    gameplayObjects[ID_VARA_PESCA].size = (Vector2){150, 120};
-    gameplayObjects[ID_VARA_PESCA].bounds = (Rectangle){50, 100, 150, 120};     
-
-    gameplayObjects[ID_CHAVE].name = "chave";
-    gameplayObjects[ID_CHAVE].id = ID_CHAVE;
-    gameplayObjects[ID_CHAVE].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_CHAVE].position = (Vector2){50, 100};
-    gameplayObjects[ID_CHAVE].size = (Vector2){150, 120};
-    gameplayObjects[ID_CHAVE].bounds = (Rectangle){50, 100, 150, 120};   
-
-    gameplayObjects[ID_BILHETE].name = "bilhete";
-    gameplayObjects[ID_BILHETE].id = ID_BILHETE;
-    gameplayObjects[ID_BILHETE].texture = LoadTexture("assets/.png");
-    gameplayObjects[ID_BILHETE].position = (Vector2){50, 100};
-    gameplayObjects[ID_BILHETE].size = (Vector2){150, 120};
-    gameplayObjects[ID_BILHETE].bounds = (Rectangle){50, 100, 150, 120};         
-
-    return gameplayObjects;
 }
