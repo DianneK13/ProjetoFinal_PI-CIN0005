@@ -1,4 +1,4 @@
-#include "sceneending.h"
+#include "scenes/sceneending.h"
 
 
 GameObject* objects;

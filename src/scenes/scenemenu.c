@@ -1,4 +1,4 @@
-#include "scenemenu.h"
+#include "scenes/scenemenu.h"
 
 GameObject* objects;
 int objectCount;

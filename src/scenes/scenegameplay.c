@@ -1,4 +1,4 @@
-#include "scenegameplay.h"
+#include "scenes/scenegameplay.h"
 
 
 GameObject* objects;
