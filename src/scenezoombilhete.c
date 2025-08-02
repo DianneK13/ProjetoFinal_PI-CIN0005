@@ -12,7 +12,7 @@ void InitializeZoomBilheteState() {
     
 }
 
-void processZoomBilheteEvent(GameObject* object) {
+GameplaySubstate processZoomBilheteEvent(GameObject* object) {
     
 }
 

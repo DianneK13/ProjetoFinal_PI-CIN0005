@@ -13,7 +13,7 @@ void InitializeZoomCaixaArmarioState() {
     
 }
 
-void processZoomCaixaArmarioEvent(GameObject* object) {
+GameplaySubstate processZoomCaixaArmarioEvent(GameObject* object) {
     
 }
 

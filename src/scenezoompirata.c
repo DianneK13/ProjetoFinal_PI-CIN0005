@@ -12,7 +12,7 @@ void InitializeZoomPirataState() {
     
 }
 
-void processZoomPirataEvent(GameObject* object) {
+GameplaySubstate processZoomPirataEvent(GameObject* object) {
     
 }
 

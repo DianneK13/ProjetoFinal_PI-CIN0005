@@ -13,7 +13,7 @@ void InitializeCreditosState() {
 
 }
 
-GameState processCreditosEvent(GameObject* object) {
+MenuSubstate processCreditosEvent(GameObject* object) {
     
 }
 

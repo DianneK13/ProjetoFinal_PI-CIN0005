@@ -12,7 +12,7 @@ void InitializeZoomDiarioState() {
     
 }
 
-void processZoomDiarioEvent(GameObject* object) {
+GameplaySubstate processZoomDiarioEvent(GameObject* object) {
     
 }
 

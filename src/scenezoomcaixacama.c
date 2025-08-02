@@ -12,7 +12,7 @@ void InitializeZoomCaixaCamaState() {
     
 }
 
-void processZoomCaixaCamaEvent(GameObject* object) {
+GameplaySubstate processZoomCaixaCamaEvent(GameObject* object) {
     
 }
 

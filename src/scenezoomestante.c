@@ -12,7 +12,7 @@ void InitializeZoomEstanteState() {
     
 }
 
-void processZoomEstanteEvent(GameObject* object) {
+GameplaySubstate processZoomEstanteEvent(GameObject* object) {
     
 }
 
