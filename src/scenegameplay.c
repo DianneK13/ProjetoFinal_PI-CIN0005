@@ -1,11 +1,18 @@
 #include "scenegameplay.h"
 
-
+//array de objects desta cena
 GameObject* objects;
+//qtd de objetos desta cena
 int objectCount;
+
+//imagem de fundo desta cena
+Texture2D background;
 
 //object in player's hand
 GameObject* hand = NULL;
+
+//subestado da gameplay (tela principal, zoomcaixa...)
+GameState substate;
 
 
 void InitializeGameplayState() {

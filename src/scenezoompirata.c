@@ -1,14 +1,18 @@
-#include "scene.h"
+#include "scenezoompirata.h"
 
-
+//array de objects desta cena
 GameObject* objects;
+//qtd de objetos desta cena
 int objectCount;
+
+//imagem de fundo desta cena
+Texture2D background;
 
 void InitializeZoomPirataState() {
     
 }
 
-void processZoomPirataEvent(GameObject* object) {
+GameplaySubstate processZoomPirataEvent(GameObject* object) {
     
 }
 

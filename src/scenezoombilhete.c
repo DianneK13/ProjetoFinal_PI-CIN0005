@@ -1,14 +1,18 @@
-#include "scene.h"
+#include "scenezoombilhete.h"
 
-
+//array de objects desta cena
 GameObject* objects;
+//qtd de objetos desta cena
 int objectCount;
+
+//imagem de fundo desta cena
+Texture2D background;
 
 void InitializeZoomBilheteState() {
     
 }
 
-void processZoomBilheteEvent(GameObject* object) {
+GameplaySubstate processZoomBilheteEvent(GameObject* object) {
     
 }
 

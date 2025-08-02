@@ -1,10 +1,17 @@
 #include "scenemenu.h"
 
+//array de objects desta cena
 GameObject* objects;
+//qtd de objetos desta cena
 int objectCount;
 
+//imagem de fundo desta cena
+Texture2D background;
 
-void InitializeGameplayState() {
+//subestado do menu (menu principal, creditos)
+MenuSubstate submenu;
+
+void InitializeMenuState() {
 
     // numero de objetos
     // SEMPRE ATUALIZAR ESSE NUMERO CASO ADICIONE NOVO OBJETO
@@ -35,6 +42,8 @@ void InitializeGameplayState() {
     objects[ID_MENU_BOTAO_CREDITOS].state = ORIGINAL;
     objects[ID_MENU_BOTAO_CREDITOS].type = INTERACTIVE;
 
+    submenu = MENU_SUBSTATE_MAIN;
+
     return objects;
 }
 
@@ -59,5 +68,6 @@ GameState processBotaoStartEvent(GameObject* target) {
 }
 
 GameState processBotaoCreditosEvent(GameObject* target) {
-    return STATE_CREDITOS;
+    submenu = MENU_SUBSTATE_CREDITOS;
+    return STATE_MENU;
 }
