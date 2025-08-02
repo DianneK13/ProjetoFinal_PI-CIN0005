@@ -4,8 +4,8 @@
 
 #include "raylib.h"
 
-#include "state_manager.h"
-#include "common.h"
+#include "core/state_manager.h"
+#include "core/common.h"
 
 // Window dimensions
 #define SCREEN_WIDTH 1200
