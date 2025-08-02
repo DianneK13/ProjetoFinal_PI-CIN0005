@@ -38,6 +38,7 @@ typedef enum GameObjectType {
 typedef struct GameObject{
     //atributos que podem mudar
     GameObjectState state;
+
     Texture2D texture;
     Rectangle bounds;
     Vector2 position;
