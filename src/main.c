@@ -3,7 +3,8 @@
 #include <string.h>
 
 #include "raylib.h"
-#include "statemachine.h"
+
+#include "state_manager.h"
 #include "common.h"
 
 // Window dimensions
