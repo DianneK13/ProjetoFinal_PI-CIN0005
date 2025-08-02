@@ -1,5 +1,13 @@
 {
   "files.associations": {
-    "string.h": "c"
+    "string.h": "c",
+    "scenegameplay.h": "c",
+    "scenezoombilhete.h": "c",
+    "scenezoomcaixaarmario.h": "c",
+    "scenezoomcaixacama.h": "c",
+    "scenezoomdiario.h": "c",
+    "scenezoomestante.h": "c",
+    "scenezoomgarrafa.h": "c",
+    "scenezoompirata.h": "c"
   }
 }

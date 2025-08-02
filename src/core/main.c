@@ -4,7 +4,7 @@
 
 #include "raylib.h"
 
-#include "state_manager.h"
+#include "core/state_manager.h"
 #include "common.h"
 
 // Window dimensions

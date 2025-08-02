@@ -1,4 +1,4 @@
-#include "scenecreditos.h"
+#include "scenes/scenecreditos.h"
 
 
 //array de objects desta cena
