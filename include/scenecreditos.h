@@ -4,7 +4,6 @@
 
 #include "common.h"
 
-
 void InitializeCreditosState();
 
 GameState processCreditosEvent(GameObject* object);
