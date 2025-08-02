@@ -1,4 +1,4 @@
-#include "sceneending.h"
+#include "scenes/sceneending.h"
 
 
 //array de objects desta cena

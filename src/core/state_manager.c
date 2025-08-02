@@ -1,8 +1,8 @@
-#include "state_manager.h"
+#include "core/state_manager.h"
 
-#include "scenemenu.h"
-#include "scenegameplay.h"
-#include "sceneending.h"
+#include "scenes/scenemenu.h"
+#include "scenes/scenegameplay.h"
+#include "scenes/sceneending.h"
 
 GameState state = STATE_MENU;
 

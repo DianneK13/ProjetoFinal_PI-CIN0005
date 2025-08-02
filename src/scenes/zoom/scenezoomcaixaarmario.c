@@ -1,4 +1,4 @@
-#include "scenezoomcaixaarmario.h"
+#include "scenes/zoom/scenezoomcaixaarmario.h"
 
 
 //array de objects desta cena

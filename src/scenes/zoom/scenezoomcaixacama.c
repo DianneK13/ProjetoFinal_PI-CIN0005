@@ -1,4 +1,4 @@
-#include "scenezoomcaixacama.h"
+#include "scenes/zoom/scenezoomcaixacama.h"
 
 //array de objects desta cena
 GameObject* objects;

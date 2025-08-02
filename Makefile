@@ -20,11 +20,11 @@ SRC_DIR       := src
 BUILD_DIR     := build
 
 # Fontes e objetos
-SRCS       := $(wildcard $(SRC_DIR)/*.c)
+SRCS       := $(shell find $(SRC_DIR) -name '*.c')
 OBJS       := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
-# Alvos finais
-TARGET         := main.c
+# Alvo final
+TARGET         := main
 
 # Alvo padrão: compila para Linux/macOS
 all: $(BUILD_DIR) $(TARGET)
@@ -32,10 +32,12 @@ all: $(BUILD_DIR) $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $^ -o $@ $(LDFLAGS)
 
-# Regra para objetos (Linux/macOS compatível)
+# Regra para compilar objetos e criar diretórios de build conforme necessário
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+	mkdir -p $(dir $@)
 	$(CC) -c $< -o $@ $(CFLAGS)
 
+# Cria o diretório build caso não exista
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
