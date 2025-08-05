@@ -7,7 +7,7 @@
 
 void InitializeZoomCaixaArmarioState();
 
-void processZoomCaixaArmarioEvent(GameObject* object);
+GameplaySubstate processZoomCaixaArmarioEvent(GameObject* object);
 
 GameObject* GetZoomCaixaArmarioBackground(void);
 

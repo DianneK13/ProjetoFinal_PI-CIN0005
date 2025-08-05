@@ -5,7 +5,6 @@
 #include "raylib.h"
 
 #include "core/state_manager.h"
-#include "common.h"
 
 // Window dimensions
 #define SCREEN_WIDTH 1200
@@ -25,9 +24,22 @@ void CheckMouseHover(GameObject* objects, int objectCount);
 void DrawSubtitle(void);
 void DrawCenteredText(const char* text, int y, Color color);
 
+GameObject* GetClickedObject(GameObject* objects, int objectCount)
+{
+    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+        Vector2 mousePos = GetMousePosition();
+        
+        for (int i = 0; i < objectCount; i++) {
+            if (CheckCollisionPointRec(mousePos, objects[i].bounds)) {
+                return &objects[i];
+            }
+        }
+    }
+    return NULL;
+}
+
 int main(void)
 {
-    objects = SetupObjects();
 
     // Initialize window
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
@@ -71,6 +83,7 @@ int main(void)
     return 0;
 }
 
+// ve se o mouse ta em cima de algum objeto
 void CheckMouseHover(GameObject* objects, int objectCount)
 {
     Vector2 mousePos = GetMousePosition();
@@ -82,20 +95,6 @@ void CheckMouseHover(GameObject* objects, int objectCount)
             break;
         }
     }
-}
-
-GameObject* GetClickedObject(GameObject* objects, int objectCount)
-{
-    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
-        Vector2 mousePos = GetMousePosition();
-        
-        for (int i = 0; i < objectCount; i++) {
-            if (CheckCollisionPointRec(mousePos, objects[i].bounds)) {
-                return &objects[i];
-            }
-        }
-    }
-    return NULL;
 }
 
 void LoadAssets(void)
@@ -149,19 +148,7 @@ void DrawObjects(GameObject* objects, int objectCount)
     }
 }
 
-// ve se o mouse ta em cima de algum objeto
-void CheckMouseHover(GameObject* objects, int objectCount)
-{
-    Vector2 mousePos = GetMousePosition();
-    hoveredObjectName = NULL;
-    
-    for (int i = 0; i < objectCount; i++) {
-        if (CheckCollisionPointRec(mousePos, objects[i].bounds)) {
-            hoveredObjectName = objects[i].name;
-            break;
-        }
-    }
-}
+
 
 //faz aparecer o nome do objeto quando passa o mouse por cima dele
 void DrawSubtitle(void)

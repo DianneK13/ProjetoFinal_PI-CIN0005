@@ -21,10 +21,22 @@ void processEvent(GameObject* clickedObject) {
             state = processMenuEvent(clickedObject);
             break;
         case STATE_GAMEPLAY:
-            state = processGameplayEvent(clickedObject);
+            state = processGameplayEvent(hand, clickedObject);
             break;
         case STATE_ENDING:
             state = processEndingEvent(clickedObject);
             break;
     }
+}
+
+Texture2D GetBackground(void){
+
+}
+
+GameObject* GetObjects(void){
+
+}
+
+int GetObjectCount(void){
+
 }

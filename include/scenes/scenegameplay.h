@@ -17,12 +17,15 @@
 #define ID_GAMEPLAY_CHAVE 10
 #define ID_GAMEPLAY_BILHETE 11
 
+//object in player's hand
+extern GameObject* hand;
 
 void InitializeGameplayState();
 
-GameState processGameplayEvent(GameObject* object);
+GameState processGameplayEvent(GameObject* utility, GameObject* target);
 
 GameObject* GetGameplayBackground(void);
 
 GameObject* GetGameplayObjects(void);
+
 int GetGameplayObjectCount(void);

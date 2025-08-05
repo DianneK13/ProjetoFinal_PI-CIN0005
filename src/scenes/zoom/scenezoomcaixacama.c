@@ -1,12 +1,12 @@
 #include "scenes/zoom/scenezoomcaixacama.h"
 
 //array de objects desta cena
-GameObject* objects;
+GameObject* objects_sceneCaixaCama;
 //qtd de objetos desta cena
-int objectCount;
+int objectCount_sceneCaixaCama;
 
 //imagem de fundo desta cena
-Texture2D background;
+Texture2D background_sceneCaixaCama;
 
 void InitializeZoomCaixaCamaState() {
     

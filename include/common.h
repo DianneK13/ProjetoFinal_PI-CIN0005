@@ -1,3 +1,6 @@
+#ifndef COMMON_H
+#define COMMON_H
+
 #include "raylib.h"
 
 typedef enum GameState {
@@ -51,3 +54,4 @@ typedef struct GameObject{
 
 } GameObject;
 
+#endif

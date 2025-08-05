@@ -1,12 +1,12 @@
 #include "scenes/zoom/scenezoomestante.h"
 
 //array de objects desta cena
-GameObject* objects;
+GameObject* objects_sceneEstante;
 //qtd de objetos desta cena
-int objectCount;
+int objectCount_sceneEstante;
 
 //imagem de fundo desta cena
-Texture2D background;
+Texture2D background_sceneEstante;
 
 void InitializeZoomEstanteState() {
     

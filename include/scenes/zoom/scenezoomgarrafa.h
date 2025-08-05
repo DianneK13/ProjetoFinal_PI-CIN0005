@@ -7,7 +7,7 @@
 
 void InitializeZoomGarrafaState();
 
-void processZoomGarrafaEvent(GameObject* object);
+GameplaySubstate processZoomGarrafaEvent(GameObject* object);
 
 GameObject* GetZoomGarrafaBackground(void);
 
