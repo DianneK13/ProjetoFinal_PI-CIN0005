@@ -66,6 +66,7 @@ typedef struct GameScene{
 }GameScene;
 //struct que armazenará todas as informações dos cenários do jogo.
 typedef struct GameContext{
+    GameState state;
     GameScene menu;
     GameScene gameplay;
     GameScene creditos;

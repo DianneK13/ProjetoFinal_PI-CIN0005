@@ -18,7 +18,8 @@
 #define ID_GAMEPLAY_BILHETE 11
 
 //object in player's hand
-extern GameObject* hand;
+
+GameObject* GetHand(void);
 
 GameContext InitializeGameplayState(GameContext context);
 

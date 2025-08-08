@@ -1,5 +1,5 @@
 #include "scenes/scenegameplay.h"
-
+GameObject* hand;
 
 GameplaySubstate processArmarioEvent(GameObject* utility, GameObject* target){
 
@@ -49,6 +49,9 @@ GameplaySubstate processBilheteEvent(GameObject* utility, GameObject* target){
 
 }
 
+GameObject* GetHand(void){
+    return hand;
+}
 
 GameContext InitializeGameplayState(GameContext context) {
 

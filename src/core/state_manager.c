@@ -4,10 +4,11 @@
 #include "scenes/scenegameplay.h"
 #include "scenes/sceneending.h"
 
-GameState state = STATE_MENU;
+
 
 
 GameContext InitializeState(GameContext context) {
+    context.state = STATE_MENU;
     context = InitializeMenuState(context);
     context = InitializeGameplayState(context);
     context = InitializeEndingState(context);
@@ -17,12 +18,12 @@ GameContext InitializeState(GameContext context) {
 //funções atualizam o estado, o array de objetos e o fundo a ser desenhado no momento
 
 void processEvent(GameObject* clickedObject,GameContext context) {
-    switch(state) {
+    switch(context.state) {
         case STATE_MENU:
-            state = processMenuEvent(clickedObject);
+            context.state = processMenuEvent(clickedObject);
             break;
         case STATE_GAMEPLAY:
-            state = processGameplayEvent(hand, clickedObject, context);
+            context.state = processGameplayEvent(GetHand(), clickedObject, context);
             break;
         case STATE_ENDING:
             //state = processEndingEvent(clickedObject);
@@ -32,7 +33,7 @@ void processEvent(GameObject* clickedObject,GameContext context) {
 
 Texture2D GetBackground(GameContext context){
     Texture2D background;
-    switch(state){
+    switch(context.state){
         case STATE_MENU:
             background = GetMenuBackground(context);
             background.height = SCREEN_HEIGHT;
@@ -55,7 +56,7 @@ Texture2D GetBackground(GameContext context){
 }
 
 GameObject* GetObjects(GameContext context){
-    switch(state){
+    switch(context.state){
         case STATE_MENU:
             return GetMenuObjects(context);
             break;
@@ -69,7 +70,7 @@ GameObject* GetObjects(GameContext context){
 }
 
 int GetObjectCount(GameContext context){
-    switch(state){
+    switch(context.state){
         case STATE_MENU:
             return GetMenuObjectCount(context);
             break;
