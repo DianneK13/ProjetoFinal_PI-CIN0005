@@ -6,12 +6,8 @@
 
 #include "core/state_manager.h"
 
-// Window dimensions
-#define SCREEN_WIDTH 1200
-#define SCREEN_HEIGHT 800
-
 // Global variables
-Texture2D bedroomBackground;
+//Texture2D background;
 const char* hoveredObjectName = NULL;
 Font gameFont;
 GameObject* objects;
@@ -59,7 +55,7 @@ int main(void)
 
         if(go != NULL) 
             processEvent(go);
-
+        
         // Draw
         BeginDrawing();
         
@@ -100,7 +96,7 @@ void CheckMouseHover(GameObject* objects, int objectCount)
 void LoadAssets(void)
 {
     // Load background
-    bedroomBackground = LoadTexture("BOTAR IMAGEM DO JOGO");
+    //background = LoadTexture("assets/menu.png");
     
     // Load font for subtitles
     gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);

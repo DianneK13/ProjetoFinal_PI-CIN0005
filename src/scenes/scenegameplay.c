@@ -181,7 +181,9 @@ void InitializeGameplayState() {
     objects_mainGameplay[ID_GAMEPLAY_BILHETE].state = ORIGINAL;
     objects_mainGameplay[ID_GAMEPLAY_BILHETE].type = INTERACTIVE;
 
+    background_mainGameplay = LoadTexture("assets/fundofodao.png");
 
+    objectCount_mainGameplay = 12;
 }
 
 //processa ações entre o objeto na mão do jogador e o objeto em que ele clicou
@@ -240,7 +242,7 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target){
 
 
 
-GameObject* GetGameplayBackground(void) {
+Texture2D GetGameplayBackground(void) {
 
 }
 

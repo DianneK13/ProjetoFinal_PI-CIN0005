@@ -8,6 +8,7 @@
     "scenezoomdiario.h": "c",
     "scenezoomestante.h": "c",
     "scenezoomgarrafa.h": "c",
-    "scenezoompirata.h": "c"
+    "scenezoompirata.h": "c",
+    "state_manager.h": "c"
   }
 }

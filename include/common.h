@@ -3,6 +3,10 @@
 
 #include "raylib.h"
 
+// Window dimensions
+#define SCREEN_WIDTH 1200
+#define SCREEN_HEIGHT 800
+
 typedef enum GameState {
     STATE_MENU, 
     STATE_GAMEPLAY, 

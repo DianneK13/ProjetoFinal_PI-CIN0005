@@ -24,7 +24,7 @@ void InitializeGameplayState();
 
 GameState processGameplayEvent(GameObject* utility, GameObject* target);
 
-GameObject* GetGameplayBackground(void);
+Texture2D GetGameplayBackground(void);
 
 GameObject* GetGameplayObjects(void);
 
