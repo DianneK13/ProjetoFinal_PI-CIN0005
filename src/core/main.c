@@ -5,14 +5,9 @@
 #include "raylib.h"
 
 #include "core/state_manager.h"
-#include "common.h"
-
-// Window dimensions
-#define SCREEN_WIDTH 1200
-#define SCREEN_HEIGHT 800
 
 // Global variables
-Texture2D bedroomBackground;
+//Texture2D background;
 const char* hoveredObjectName = NULL;
 Font gameFont;
 GameObject* objects;
@@ -25,9 +20,22 @@ void CheckMouseHover(GameObject* objects, int objectCount);
 void DrawSubtitle(void);
 void DrawCenteredText(const char* text, int y, Color color);
 
+GameObject* GetClickedObject(GameObject* objects, int objectCount)
+{
+    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+        Vector2 mousePos = GetMousePosition();
+        
+        for (int i = 0; i < objectCount; i++) {
+            if (CheckCollisionPointRec(mousePos, objects[i].bounds)) {
+                return &objects[i];
+            }
+        }
+    }
+    return NULL;
+}
+
 int main(void)
 {
-    objects = SetupObjects();
 
     // Initialize window
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
@@ -47,7 +55,7 @@ int main(void)
 
         if(go != NULL) 
             processEvent(go);
-
+        
         // Draw
         BeginDrawing();
         
@@ -71,6 +79,7 @@ int main(void)
     return 0;
 }
 
+// ve se o mouse ta em cima de algum objeto
 void CheckMouseHover(GameObject* objects, int objectCount)
 {
     Vector2 mousePos = GetMousePosition();
@@ -84,24 +93,10 @@ void CheckMouseHover(GameObject* objects, int objectCount)
     }
 }
 
-GameObject* GetClickedObject(GameObject* objects, int objectCount)
-{
-    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
-        Vector2 mousePos = GetMousePosition();
-        
-        for (int i = 0; i < objectCount; i++) {
-            if (CheckCollisionPointRec(mousePos, objects[i].bounds)) {
-                return &objects[i];
-            }
-        }
-    }
-    return NULL;
-}
-
 void LoadAssets(void)
 {
     // Load background
-    bedroomBackground = LoadTexture("BOTAR IMAGEM DO JOGO");
+    //background = LoadTexture("assets/menu.png");
     
     // Load font for subtitles
     gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
@@ -149,19 +144,7 @@ void DrawObjects(GameObject* objects, int objectCount)
     }
 }
 
-// ve se o mouse ta em cima de algum objeto
-void CheckMouseHover(GameObject* objects, int objectCount)
-{
-    Vector2 mousePos = GetMousePosition();
-    hoveredObjectName = NULL;
-    
-    for (int i = 0; i < objectCount; i++) {
-        if (CheckCollisionPointRec(mousePos, objects[i].bounds)) {
-            hoveredObjectName = objects[i].name;
-            break;
-        }
-    }
-}
+
 
 //faz aparecer o nome do objeto quando passa o mouse por cima dele
 void DrawSubtitle(void)

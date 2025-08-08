@@ -1,12 +1,12 @@
 #include "scenes/zoom/scenezoomgarrafa.h"
 
 //array de objects desta cena
-GameObject* objects;
+GameObject* objects_sceneGarrafa;
 //qtd de objetos desta cena
-int objectCount;
+int objectCount_sceneGarrafa;
 
 //imagem de fundo desta cena
-Texture2D background;
+Texture2D background_sceneGarrafa;
 
 void InitializeZoomGarrafaState() {
     

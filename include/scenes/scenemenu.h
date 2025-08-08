@@ -13,7 +13,8 @@ void InitializeMenuState();
 
 GameState processMenuEvent(GameObject* object);
 
-GameObject* GetMenuBackground(void);
+Texture2D GetMenuBackground(void);
 
 GameObject* GetMenuObjects(void);
+
 int GetMenuObjectCount(void);
