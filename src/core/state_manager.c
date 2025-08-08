@@ -16,13 +16,13 @@ GameContext InitializeState(GameContext context) {
 
 //funções atualizam o estado, o array de objetos e o fundo a ser desenhado no momento
 
-void processEvent(GameObject* clickedObject) {
+void processEvent(GameObject* clickedObject,GameContext context) {
     switch(state) {
         case STATE_MENU:
             state = processMenuEvent(clickedObject);
             break;
         case STATE_GAMEPLAY:
-            //state = processGameplayEvent(hand, clickedObject);
+            state = processGameplayEvent(hand, clickedObject, context);
             break;
         case STATE_ENDING:
             //state = processEndingEvent(clickedObject);

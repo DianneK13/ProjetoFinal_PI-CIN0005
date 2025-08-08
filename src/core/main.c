@@ -54,7 +54,7 @@ int main(void)
         GameObject* go = GetClickedObject(GetObjects(context), GetObjectCount(context));
 
         if(go != NULL) 
-            processEvent(go);
+            processEvent(go, context);
         
         // Draw
         BeginDrawing();
@@ -78,7 +78,7 @@ int main(void)
     
     return 0;
 }
-/*
+
 // ve se o mouse ta em cima de algum objeto
 void CheckMouseHover(GameObject* objects, int objectCount)
 {
@@ -92,7 +92,7 @@ void CheckMouseHover(GameObject* objects, int objectCount)
         }
     }
 }
-*/
+
 void LoadAssets(void)
 {
     // Load background
