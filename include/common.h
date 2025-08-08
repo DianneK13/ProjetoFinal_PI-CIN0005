@@ -58,4 +58,26 @@ typedef struct GameObject{
 
 } GameObject;
 
+typedef struct GameScene{
+    int objectCount;
+    GameObject *objects;
+    Texture2D background;
+    GameplaySubstate substate;
+}GameScene;
+//struct que armazenará todas as informações dos cenários do jogo.
+typedef struct GameContext{
+    GameScene menu;
+    GameScene gameplay;
+    GameScene creditos;
+    GameScene ending;
+    //as subcenas agr
+    GameScene bilhete;
+    GameScene caixa_armario;
+    GameScene diario;
+    GameScene estante;
+    GameScene garrafa;
+    GameScene pirata;
+}GameContext;
+
+
 #endif

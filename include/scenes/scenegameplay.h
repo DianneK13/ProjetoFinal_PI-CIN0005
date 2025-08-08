@@ -20,9 +20,9 @@
 //object in player's hand
 extern GameObject* hand;
 
-void InitializeGameplayState();
+GameContext InitializeGameplayState(GameContext context);
 
-GameState processGameplayEvent(GameObject* utility, GameObject* target);
+GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext context);
 
 Texture2D GetGameplayBackground(void);
 

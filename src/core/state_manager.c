@@ -7,10 +7,11 @@
 GameState state = STATE_MENU;
 
 
-void InitializeState() {
-    InitializeMenuState();
-    InitializeGameplayState();
-    InitializeEndingState();
+GameContext InitializeState(GameContext context) {
+    context = InitializeMenuState(context);
+    context = InitializeGameplayState(context);
+    context = InitializeEndingState(context);
+    return context;
 }
 
 //funções atualizam o estado, o array de objetos e o fundo a ser desenhado no momento
@@ -29,11 +30,11 @@ void processEvent(GameObject* clickedObject) {
     }
 }
 
-Texture2D GetBackground(void){
+Texture2D GetBackground(GameContext context){
     Texture2D background;
     switch(state){
         case STATE_MENU:
-            background = GetMenuBackground();
+            background = GetMenuBackground(context);
             background.height = SCREEN_HEIGHT;
             background.width = SCREEN_WIDTH;
             return background;
@@ -53,10 +54,10 @@ Texture2D GetBackground(void){
     }
 }
 
-GameObject* GetObjects(void){
+GameObject* GetObjects(GameContext context){
     switch(state){
         case STATE_MENU:
-            return GetMenuObjects();
+            return GetMenuObjects(context);
             break;
         case STATE_GAMEPLAY:
             //return GetGameplayObjects();
@@ -67,10 +68,10 @@ GameObject* GetObjects(void){
     }    
 }
 
-int GetObjectCount(void){
+int GetObjectCount(GameContext context){
     switch(state){
         case STATE_MENU:
-            return GetMenuObjectCount();
+            return GetMenuObjectCount(context);
             break;
         case STATE_GAMEPLAY:
             //return GetGameplayObjectCount();

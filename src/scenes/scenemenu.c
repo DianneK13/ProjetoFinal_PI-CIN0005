@@ -11,52 +11,51 @@ Texture2D background_menu;
 //subestado do menu (menu principal, creditos)
 MenuSubstate submenu;
 
-void InitializeMenuState() {
+GameContext InitializeMenuState(GameContext context) {
 
     // numero de objetos
     // SEMPRE ATUALIZAR ESSE NUMERO CASO ADICIONE NOVO OBJETO
-    objectCount_menu = 2;
-    objects_menu = (GameObject*)malloc(objectCount_menu * sizeof(GameObject));
+    context.menu.objectCount = 2;
+    context.menu.objects = (GameObject*)malloc(context.menu.objectCount * sizeof(GameObject));
     
-    if (objects_menu == NULL) {
+    if (context.menu.objects == NULL) {
         //printf("Failed to allocate memory for objects\n");
         return;
     }
     
     // Initialize objects with their properties
-    objects_menu[ID_MENU_BOTAO_START].name = "botao_start";
-    objects_menu[ID_MENU_BOTAO_START].id = ID_MENU_BOTAO_START;
-    objects_menu[ID_MENU_BOTAO_START].texture = LoadTexture("assets/jogar.png");
-    objects_menu[ID_MENU_BOTAO_START].position = (Vector2){700, 300};
-    objects_menu[ID_MENU_BOTAO_START].size = (Vector2){150, 120};
-    objects_menu[ID_MENU_BOTAO_START].bounds = (Rectangle){50, 100, 150, 120};  
-    objects_menu[ID_MENU_BOTAO_START].state = ORIGINAL;
-    objects_menu[ID_MENU_BOTAO_START].type = INTERACTIVE;
+    context.menu.objects[ID_MENU_BOTAO_START].name = "botao_start";
+    context.menu.objects[ID_MENU_BOTAO_START].id = ID_MENU_BOTAO_START;
+    context.menu.objects[ID_MENU_BOTAO_START].texture = LoadTexture("assets/jogar.png");
+    context.menu.objects[ID_MENU_BOTAO_START].position = (Vector2){700, 300};
+    context.menu.objects[ID_MENU_BOTAO_START].size = (Vector2){150, 120};
+    context.menu.objects[ID_MENU_BOTAO_START].bounds = (Rectangle){50, 100, 150, 120};  
+    context.menu.objects[ID_MENU_BOTAO_START].state = ORIGINAL;
+    context.menu.objects[ID_MENU_BOTAO_START].type = INTERACTIVE;
 
-    objects_menu[ID_MENU_BOTAO_CREDITOS].name = "botao_creditos";
-    objects_menu[ID_MENU_BOTAO_CREDITOS].id = ID_MENU_BOTAO_CREDITOS;
-    objects_menu[ID_MENU_BOTAO_CREDITOS].texture = LoadTexture("assets/jogar.png");
-    objects_menu[ID_MENU_BOTAO_CREDITOS].position = (Vector2){700, 100};
-    objects_menu[ID_MENU_BOTAO_CREDITOS].size = (Vector2){150, 120};
-    objects_menu[ID_MENU_BOTAO_CREDITOS].bounds = (Rectangle){50, 100, 150, 120};  
-    objects_menu[ID_MENU_BOTAO_CREDITOS].state = ORIGINAL;
-    objects_menu[ID_MENU_BOTAO_CREDITOS].type = INTERACTIVE;
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].name = "botao_creditos";
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].id = ID_MENU_BOTAO_CREDITOS;
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].texture = LoadTexture("assets/jogar.png");
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].position = (Vector2){700, 100};
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].size = (Vector2){150, 120};
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].bounds = (Rectangle){50, 100, 150, 120};  
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].state = ORIGINAL;
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].type = INTERACTIVE;
 
-    objects_menu[ID_MENU_BOTAO_START].texture.height = 120;
-    objects_menu[ID_MENU_BOTAO_START].texture.width = 150;
+    context.menu.objects[ID_MENU_BOTAO_START].texture.height = 120;
+    context.menu.objects[ID_MENU_BOTAO_START].texture.width = 150;
 
-    objects_menu[ID_MENU_BOTAO_CREDITOS].texture.height = 120;
-    objects_menu[ID_MENU_BOTAO_CREDITOS].texture.width = 150;
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].texture.height = 120;
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].texture.width = 150;
 
-    background_menu = LoadTexture("assets/menufodao.png");
+    context.menu.background = LoadTexture("assets/menufodao.png");
 
-    objectCount_menu = 2;
-
-    submenu = MENU_SUBSTATE_MAIN;
+    context.menu.substate = MENU_SUBSTATE_MAIN;
+    return context;
 }
 
-Texture2D GetMenuBackground(){
-    return background_menu;
+Texture2D GetMenuBackground(GameContext context){
+    return context.menu.background;
 }
 
 GameState processBotaoStartEvent(GameObject* target) {
@@ -83,10 +82,10 @@ GameState processMenuEvent(GameObject* clickedObject){
     
 }
 
-GameObject* GetMenuObjects(void){
-    return objects_menu;
+GameObject* GetMenuObjects(GameContext context){
+    return context.menu.objects;
 }
 
-int GetMenuObjectCount(void){
-    return objectCount_menu;
+int GetMenuObjectCount(GameContext context){
+    return context.menu.objectCount;
 }

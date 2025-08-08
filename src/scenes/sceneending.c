@@ -14,6 +14,8 @@ Texture2D background_ending;
 GameState processEndingEvent(GameObject* clickedObject){
 }
 
-void InitializeEndingState() {
+GameContext InitializeEndingState(GameContext context) {
+
+    return context;
 
 }
