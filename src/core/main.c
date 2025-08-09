@@ -36,7 +36,7 @@ GameObject* GetClickedObject(GameObject* objects, int objectCount)
 
 int main(void)
 {
-
+    GameContext context;
     // Initialize window
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
     SetTargetFPS(30);
@@ -45,26 +45,26 @@ int main(void)
     LoadAssets();
     
     // Setup objects
-    InitializeState();
+    context = InitializeState(context);
 
     // Main game loop
     while (!WindowShouldClose())
     {
         // retornar objeto que o player clicar
-        GameObject* go = GetClickedObject(GetObjects(), GetObjectCount());
+        GameObject* go = GetClickedObject(GetObjects(context), GetObjectCount(context));
 
         if(go != NULL) 
-            processEvent(go);
+            processEvent(go, context);
         
         // Draw
         BeginDrawing();
         
         ClearBackground(RAYWHITE);
         
-        DrawTexture(GetBackground(), 0, 0, WHITE);
+        DrawTexture(GetBackground(context), 0, 0, WHITE);
         
         // Draw all objects
-        DrawObjects(GetObjects(), GetObjectCount());
+        DrawObjects(GetObjects(context), GetObjectCount(context));
         
         // Draw subtitle if hovering over object
         DrawSubtitle();

@@ -18,11 +18,12 @@
 #define ID_GAMEPLAY_BILHETE 11
 
 //object in player's hand
-extern GameObject* hand;
 
-void InitializeGameplayState();
+GameObject* GetHand(void);
 
-GameState processGameplayEvent(GameObject* utility, GameObject* target);
+GameContext InitializeGameplayState(GameContext context);
+
+GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext context);
 
 Texture2D GetGameplayBackground(void);
 

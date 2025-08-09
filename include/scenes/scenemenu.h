@@ -9,12 +9,12 @@
 #define ID_MENU_BOTAO_CREDITOS 1
 
 
-void InitializeMenuState();
+GameContext InitializeMenuState(GameContext context);
 
 GameState processMenuEvent(GameObject* object);
 
-Texture2D GetMenuBackground(void);
+Texture2D GetMenuBackground(GameContext context);
 
-GameObject* GetMenuObjects(void);
+GameObject* GetMenuObjects(GameContext context);
 
-int GetMenuObjectCount(void);
+int GetMenuObjectCount(GameContext context);

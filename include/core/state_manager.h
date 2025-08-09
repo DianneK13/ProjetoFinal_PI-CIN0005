@@ -5,12 +5,12 @@
 #include "common.h"
 
 
-void InitializeState();
+GameContext InitializeState(GameContext context);
 
-void processEvent(GameObject* object);
+void processEvent(GameObject* object, GameContext);
 
-Texture2D GetBackground(void);
+Texture2D GetBackground(GameContext context);
 
-GameObject* GetObjects(void);
+GameObject* GetObjects(GameContext context);
 
-int GetObjectCount(void);
+int GetObjectCount(GameContext context);
