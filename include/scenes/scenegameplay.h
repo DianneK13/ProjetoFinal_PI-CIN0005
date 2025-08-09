@@ -25,8 +25,8 @@ GameContext InitializeGameplayState(GameContext context);
 
 GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext context);
 
-Texture2D GetGameplayBackground(void);
+Texture2D GetGameplayBackground(GameContext context);
 
-GameObject* GetGameplayObjects(void);
+GameObject* GetGameplayObjects(GameContext context);
 
-int GetGameplayObjectCount(void);
+int GetGameplayObjectCount(GameContext context);

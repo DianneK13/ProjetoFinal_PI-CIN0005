@@ -24,23 +24,23 @@ GameContext InitializeMenuState(GameContext context) {
     }
     
     // Initialize objects with their properties
-    context.menu.objects[ID_MENU_BOTAO_START].name = "botao_start";
-    context.menu.objects[ID_MENU_BOTAO_START].id = ID_MENU_BOTAO_START;
-    context.menu.objects[ID_MENU_BOTAO_START].texture = LoadTexture("assets/jogar.png");
-    context.menu.objects[ID_MENU_BOTAO_START].position = (Vector2){700, 300};
-    context.menu.objects[ID_MENU_BOTAO_START].size = (Vector2){150, 120};
-    context.menu.objects[ID_MENU_BOTAO_START].bounds = (Rectangle){50, 100, 150, 120};  
-    context.menu.objects[ID_MENU_BOTAO_START].state = ORIGINAL;
-    context.menu.objects[ID_MENU_BOTAO_START].type = INTERACTIVE;
+    objects_menu[ID_MENU_BOTAO_START].name = "botao_start";
+    objects_menu[ID_MENU_BOTAO_START].id = ID_MENU_BOTAO_START;
+    objects_menu[ID_MENU_BOTAO_START].texture = LoadTexture("assets/jogar.png");
+    objects_menu[ID_MENU_BOTAO_START].position = (Vector2){700, 300};
+    objects_menu[ID_MENU_BOTAO_START].size = (Vector2){150, 120};
+    objects_menu[ID_MENU_BOTAO_START].bounds = (Rectangle){700, 300, 150, 120};  
+    objects_menu[ID_MENU_BOTAO_START].state = ORIGINAL;
+    objects_menu[ID_MENU_BOTAO_START].type = INTERACTIVE;
 
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].name = "botao_creditos";
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].id = ID_MENU_BOTAO_CREDITOS;
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].texture = LoadTexture("assets/jogar.png");
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].position = (Vector2){700, 100};
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].size = (Vector2){150, 120};
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].bounds = (Rectangle){50, 100, 150, 120};  
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].state = ORIGINAL;
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].type = INTERACTIVE;
+    objects_menu[ID_MENU_BOTAO_CREDITOS].name = "botao_creditos";
+    objects_menu[ID_MENU_BOTAO_CREDITOS].id = ID_MENU_BOTAO_CREDITOS;
+    objects_menu[ID_MENU_BOTAO_CREDITOS].texture = LoadTexture("assets/creditosfodao.png");
+    objects_menu[ID_MENU_BOTAO_CREDITOS].position = (Vector2){700, 100};
+    objects_menu[ID_MENU_BOTAO_CREDITOS].size = (Vector2){150, 120};
+    objects_menu[ID_MENU_BOTAO_CREDITOS].bounds = (Rectangle){700, 100, 150, 120};  
+    objects_menu[ID_MENU_BOTAO_CREDITOS].state = ORIGINAL;
+    objects_menu[ID_MENU_BOTAO_CREDITOS].type = INTERACTIVE;
 
     context.menu.objects[ID_MENU_BOTAO_START].texture.height = 120;
     context.menu.objects[ID_MENU_BOTAO_START].texture.width = 150;
@@ -59,6 +59,7 @@ Texture2D GetMenuBackground(GameContext context){
 }
 
 GameState processBotaoStartEvent(GameObject* target) {
+    printf("trocou estado!!! \n");
     return STATE_GAMEPLAY;
 }
 
@@ -71,6 +72,7 @@ GameState processBotaoCreditosEvent(GameObject* target) {
 GameState processMenuEvent(GameObject* clickedObject){
     switch(clickedObject->id){
         case ID_MENU_BOTAO_START:
+            printf("process menu event \n");
             return processBotaoStartEvent(clickedObject);
             break;
         case ID_MENU_BOTAO_CREDITOS:

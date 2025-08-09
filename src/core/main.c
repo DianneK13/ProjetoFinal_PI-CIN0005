@@ -39,7 +39,7 @@ int main(void)
     GameContext context;
     // Initialize window
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
-    SetTargetFPS(30);
+    SetTargetFPS(60);
     
     // Load assets
     LoadAssets();
@@ -53,9 +53,11 @@ int main(void)
         // retornar objeto que o player clicar
         GameObject* go = GetClickedObject(GetObjects(context), GetObjectCount(context));
 
-        if(go != NULL) 
+        if(go != NULL){
+            printf("clicou no botao \n");
             processEvent(go, context);
-        
+        } 
+            
         // Draw
         BeginDrawing();
         

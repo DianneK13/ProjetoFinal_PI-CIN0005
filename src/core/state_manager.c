@@ -41,13 +41,14 @@ Texture2D GetBackground(GameContext context){
             return background;
             break;
         case STATE_GAMEPLAY:
-            background = GetGameplayBackground();
+            printf("foi buscar background gameplay\n");
+            background = GetGameplayBackground(context);
             background.height = SCREEN_HEIGHT;
             background.width = SCREEN_WIDTH;
             return background;
             break;
         case STATE_ENDING:
-            //background = GetEndingBackground();
+            //background = GetEndingBackground(context);
             background.height = SCREEN_HEIGHT;
             background.width = SCREEN_WIDTH;
             return background;
@@ -61,10 +62,10 @@ GameObject* GetObjects(GameContext context){
             return GetMenuObjects(context);
             break;
         case STATE_GAMEPLAY:
-            //return GetGameplayObjects();
+            return GetGameplayObjects(context);
             break;
         case STATE_ENDING:
-            //return GetEndingObjects();
+            //return GetEndingObjects(context);
             break;
     }    
 }
@@ -75,10 +76,10 @@ int GetObjectCount(GameContext context){
             return GetMenuObjectCount(context);
             break;
         case STATE_GAMEPLAY:
-            //return GetGameplayObjectCount();
+            return GetGameplayObjectCount(context);
             break;
         case STATE_ENDING:
-            //return GetEndingObjectCount();
+            //return GetEndingObjectCount(context);
             break;
     }   
 }
