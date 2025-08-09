@@ -1,16 +1,5 @@
 #include "scenes/scenemenu.h"
 
-//array de objects_menu desta cena
-GameObject* objects_menu;
-//qtd de objetos desta cena
-int objectCount_menu;
-
-//imagem de fundo desta cena
-Texture2D background_menu;
-
-//subestado do menu (menu principal, creditos)
-MenuSubstate submenu;
-
 GameContext InitializeMenuState(GameContext context) {
 
     // numero de objetos
@@ -29,16 +18,16 @@ GameContext InitializeMenuState(GameContext context) {
     context.menu.objects[ID_MENU_BOTAO_START].texture = LoadTexture("assets/jogar.png");
     context.menu.objects[ID_MENU_BOTAO_START].position = (Vector2){700, 300};
     context.menu.objects[ID_MENU_BOTAO_START].size = (Vector2){150, 120};
-    context.menu.objects[ID_MENU_BOTAO_START].bounds = (Rectangle){50, 100, 150, 120};  
+    context.menu.objects[ID_MENU_BOTAO_START].bounds = (Rectangle){700, 300, 150, 120};  
     context.menu.objects[ID_MENU_BOTAO_START].state = ORIGINAL;
     context.menu.objects[ID_MENU_BOTAO_START].type = INTERACTIVE;
 
     context.menu.objects[ID_MENU_BOTAO_CREDITOS].name = "botao_creditos";
     context.menu.objects[ID_MENU_BOTAO_CREDITOS].id = ID_MENU_BOTAO_CREDITOS;
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].texture = LoadTexture("assets/jogar.png");
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].texture = LoadTexture("assets/creditosfodao.png");
     context.menu.objects[ID_MENU_BOTAO_CREDITOS].position = (Vector2){700, 100};
     context.menu.objects[ID_MENU_BOTAO_CREDITOS].size = (Vector2){150, 120};
-    context.menu.objects[ID_MENU_BOTAO_CREDITOS].bounds = (Rectangle){50, 100, 150, 120};  
+    context.menu.objects[ID_MENU_BOTAO_CREDITOS].bounds = (Rectangle){700, 100, 150, 120};  
     context.menu.objects[ID_MENU_BOTAO_CREDITOS].state = ORIGINAL;
     context.menu.objects[ID_MENU_BOTAO_CREDITOS].type = INTERACTIVE;
 
@@ -59,22 +48,24 @@ Texture2D GetMenuBackground(GameContext context){
 }
 
 GameState processBotaoStartEvent(GameObject* target) {
+    printf("trocou estado!!! \n");
     return STATE_GAMEPLAY;
 }
 
-GameState processBotaoCreditosEvent(GameObject* target) {
-    submenu = MENU_SUBSTATE_CREDITOS;
+GameState processBotaoCreditosEvent(GameObject* target, GameContext context) {
+    context.menu.substate = MENU_SUBSTATE_CREDITOS;
     return STATE_MENU;
 }
 
 //processa ações do menu
-GameState processMenuEvent(GameObject* clickedObject){
+GameState processMenuEvent(GameObject* clickedObject, GameContext context){
     switch(clickedObject->id){
         case ID_MENU_BOTAO_START:
+            printf("process menu event \n");
             return processBotaoStartEvent(clickedObject);
             break;
         case ID_MENU_BOTAO_CREDITOS:
-            return processBotaoCreditosEvent(clickedObject);
+            return processBotaoCreditosEvent(clickedObject, context);
             break;
     }
     

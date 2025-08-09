@@ -7,7 +7,7 @@
 
 GameContext InitializeState(GameContext context);
 
-void processEvent(GameObject* object, GameContext);
+GameContext processEvent(GameObject* object, GameContext);
 
 Texture2D GetBackground(GameContext context);
 

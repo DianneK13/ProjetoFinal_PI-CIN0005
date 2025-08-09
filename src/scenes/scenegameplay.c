@@ -60,10 +60,12 @@ GameContext InitializeGameplayState(GameContext context) {
     context.gameplay.objectCount = 12;
     context.gameplay.objects = (GameObject*)malloc(context.gameplay.objectCount * sizeof(GameObject));
     
+    /*
     if (context.gameplay.objects == NULL) {
         //printf("Failed to allocate memory for objects\n");
         return;
     }
+    */
     
     // Initialize objects with their properties
     context.gameplay.objects[ID_GAMEPLAY_ARMARIO].name = "armario";
@@ -175,7 +177,7 @@ GameContext InitializeGameplayState(GameContext context) {
     context.gameplay.objects[ID_GAMEPLAY_BILHETE].type = INTERACTIVE;
 
     context.gameplay.background = LoadTexture("assets/fundofodao.png");
-    context.gameplay.substate = -1;
+    context.gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
     return context;
 }
 
@@ -233,18 +235,72 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
     }
 }
 
-
-
-Texture2D GetGameplayBackground(void) {
-
+Texture2D GetGameplayBackground(GameContext context) {
+    //printf("procurano o fundo...\n");
+    switch(context.gameplay.substate){
+        case GAMEPLAY_SUBSTATE_MAIN:
+            //printf("pegou fundo gameplay\n");
+            return context.gameplay.background;
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
+            break;        
+        case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
+            break;
+    }
 }
 
-GameObject* GetgameplayObjects(void){
-    return NULL;
+GameObject* GetGameplayObjects(GameContext context){
+    switch(context.gameplay.substate){
+        case GAMEPLAY_SUBSTATE_MAIN:
+            return context.gameplay.objects;
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
+            break;        
+        case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
+            break;
+    }
 }
 
-int GetGameplayObjectCount(void) {
-    return 0;
+int GetGameplayObjectCount(GameContext context) {
+    switch(context.gameplay.substate){
+        case GAMEPLAY_SUBSTATE_MAIN:
+            return context.gameplay.objectCount;
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
+            break;
+        case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
+            break;        
+        case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
+            break;
+    }
 }
 
 

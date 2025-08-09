@@ -39,7 +39,7 @@ int main(void)
     GameContext context;
     // Initialize window
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
-    SetTargetFPS(30);
+    SetTargetFPS(60);
     
     // Load assets
     LoadAssets();
@@ -53,9 +53,11 @@ int main(void)
         // retornar objeto que o player clicar
         GameObject* go = GetClickedObject(GetObjects(context), GetObjectCount(context));
 
-        if(go != NULL) 
-            processEvent(go, context);
-        
+        if(go != NULL){
+            printf("clicou no botao \n");
+            context = processEvent(go, context);
+        } 
+            
         // Draw
         BeginDrawing();
         
@@ -99,7 +101,7 @@ void LoadAssets(void)
     //background = LoadTexture("assets/menu.png");
     
     // Load font for subtitles
-    gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
+    //gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
     if (gameFont.texture.id == 0) {
         // Fallback to default font if custom font not found
         gameFont = GetFontDefault();
