@@ -37,7 +37,7 @@ make
 ### 4o - Rode o projeto
 
 ```bash
-./main.c
+./main
 ```
 
 ---
