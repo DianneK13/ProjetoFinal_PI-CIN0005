@@ -60,10 +60,12 @@ GameContext InitializeGameplayState(GameContext context) {
     context.gameplay.objectCount = 12;
     context.gameplay.objects = (GameObject*)malloc(context.gameplay.objectCount * sizeof(GameObject));
     
+    /*
     if (context.gameplay.objects == NULL) {
         //printf("Failed to allocate memory for objects\n");
         return;
     }
+    */
     
     // Initialize objects with their properties
     context.gameplay.objects[ID_GAMEPLAY_ARMARIO].name = "armario";
@@ -237,7 +239,7 @@ Texture2D GetGameplayBackground(GameContext context) {
     //printf("procurano o fundo...\n");
     switch(context.gameplay.substate){
         case GAMEPLAY_SUBSTATE_MAIN:
-            printf("pegou fundo gameplay\n");
+            //printf("pegou fundo gameplay\n");
             return context.gameplay.background;
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:

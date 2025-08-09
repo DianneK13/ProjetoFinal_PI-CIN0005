@@ -55,7 +55,7 @@ int main(void)
 
         if(go != NULL){
             printf("clicou no botao \n");
-            processEvent(go, context);
+            context = processEvent(go, context);
         } 
             
         // Draw
@@ -101,7 +101,7 @@ void LoadAssets(void)
     //background = LoadTexture("assets/menu.png");
     
     // Load font for subtitles
-    gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
+    //gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
     if (gameFont.texture.id == 0) {
         // Fallback to default font if custom font not found
         gameFont = GetFontDefault();

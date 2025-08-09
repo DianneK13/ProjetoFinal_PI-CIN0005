@@ -4,9 +4,6 @@
 #include "scenes/scenegameplay.h"
 #include "scenes/sceneending.h"
 
-
-
-
 GameContext InitializeState(GameContext context) {
     context.state = STATE_MENU;
     context = InitializeMenuState(context);
@@ -17,10 +14,10 @@ GameContext InitializeState(GameContext context) {
 
 //funções atualizam o estado, o array de objetos e o fundo a ser desenhado no momento
 
-void processEvent(GameObject* clickedObject,GameContext context) {
+GameContext processEvent(GameObject* clickedObject,GameContext context) {
     switch(context.state) {
         case STATE_MENU:
-            context.state = processMenuEvent(clickedObject);
+            context.state = processMenuEvent(clickedObject, context);
             break;
         case STATE_GAMEPLAY:
             context.state = processGameplayEvent(GetHand(), clickedObject, context);
@@ -29,6 +26,7 @@ void processEvent(GameObject* clickedObject,GameContext context) {
             //state = processEndingEvent(clickedObject);
             break;
     }
+    return context;
 }
 
 Texture2D GetBackground(GameContext context){
@@ -41,7 +39,7 @@ Texture2D GetBackground(GameContext context){
             return background;
             break;
         case STATE_GAMEPLAY:
-            printf("foi buscar background gameplay\n");
+            //printf("foi buscar background gameplay\n");
             background = GetGameplayBackground(context);
             background.height = SCREEN_HEIGHT;
             background.width = SCREEN_WIDTH;
