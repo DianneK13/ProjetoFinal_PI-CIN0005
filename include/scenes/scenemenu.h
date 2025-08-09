@@ -12,7 +12,7 @@
 
 GameContext InitializeMenuState(GameContext context);
 
-GameState processMenuEvent(GameObject* object, GameContext context);
+GameState processMenuEvent(GameObject* object, GameContext *context);
 
 Texture2D GetMenuBackground(GameContext context);
 
