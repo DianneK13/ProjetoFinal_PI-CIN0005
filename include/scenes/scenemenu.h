@@ -4,10 +4,11 @@
 
 #include "common.h"
 
-
-#define ID_MENU_BOTAO_START 0
-#define ID_MENU_BOTAO_CREDITOS 1
-
+// IDs dos botões
+#define ID_MENU_BOTAO_START      0
+#define ID_MENU_BOTAO_CREDITOS   1
+#define ID_MENU_BOTAO_SAIR       2
+#define ID_MENU_BOTAO_VOLTAR     3
 
 GameContext InitializeMenuState(GameContext context);
 

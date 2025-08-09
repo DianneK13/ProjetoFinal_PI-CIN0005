@@ -17,7 +17,7 @@ GameContext InitializeState(GameContext context) {
 GameContext processEvent(GameObject* clickedObject,GameContext context) {
     switch(context.state) {
         case STATE_MENU:
-            context.state = processMenuEvent(clickedObject, context);
+            context.state = processMenuEvent(clickedObject, &context);
             break;
         case STATE_GAMEPLAY:
             context.state = processGameplayEvent(GetHand(), clickedObject, context);
