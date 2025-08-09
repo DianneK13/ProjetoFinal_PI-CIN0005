@@ -4,6 +4,7 @@
 *.exe
 *.dll
 *.so
+main
 
 # Drietórios do build
 /build/
@@ -22,3 +23,4 @@
 # Sistema operacional
 .DS_Store
 Thumbs.db
+*Zone.Identifier
