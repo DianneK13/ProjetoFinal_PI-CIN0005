@@ -14,6 +14,7 @@ main
 # Cache de IDEs
 .vscode/
 .idea/
+.idea/vcs.xml
 *.swp
 
 # Logs e temporários
@@ -24,4 +25,3 @@ main
 .DS_Store
 Thumbs.db
 *Zone.Identifier
-main
