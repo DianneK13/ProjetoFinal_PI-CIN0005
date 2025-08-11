@@ -23,7 +23,6 @@ GameContext InitializeState(GameContext context) {
     context = InitializeZoomGarrafaState(context);
     context = InitializeZoomPirataState(context);
     context = InitializeEndingState(context);
-    context = InitializeZoomCaixaArmarioState(context);
     return context;
 }
 
