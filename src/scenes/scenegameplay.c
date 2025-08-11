@@ -1,12 +1,15 @@
 #include "scenes/scenegameplay.h"
+#include "scenes/zoom/scenezoombilhete.h"
 #include "scenes/zoom/scenezoomcaixaarmario.h"
+#include "scenes/zoom/scenezoomcaixacama.h"
+#include "scenes/zoom/scenezoomdiario.h"
+#include "scenes/zoom/scenezoomestante.h"
+#include "scenes/zoom/scenezoomgarrafa.h"
+#include "scenes/zoom/scenezoompirata.h"
 GameObject* hand;
 
 GameplaySubstate processArmarioEvent(GameObject* utility, GameObject* target, GameContext* context){
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[ID_GAMEPLAY_ARMARIO].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//algo;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
+    //return 0; //PLACEHOLDER
 }
 
 GameplaySubstate processCaixaArmarioEvent(GameObject* utility, GameObject* target, GameContext* context){
@@ -15,69 +18,45 @@ GameplaySubstate processCaixaArmarioEvent(GameObject* utility, GameObject* targe
 }
 
 GameplaySubstate processCaixaCamaEvent(GameObject* utility, GameObject* target, GameContext* context){
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
+    return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
 }
 
 GameplaySubstate processBuracoEvent(GameObject* utility, GameObject* target, GameContext* context){
-
+    //return 0; //PLACEHOLDER
 }
 
 GameplaySubstate processDiarioEvent(GameObject* utility, GameObject* target, GameContext* context){
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[ID_GAMEPLAY_DIARIO].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
+    //return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+}   
 
 GameplaySubstate processVitrolaEvent(GameObject* utility, GameObject* target, GameContext* context){
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[ID_GAMEPLAY_VITROLA].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//ALGO;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
+    //return 0; //PLACEHOLDER
 }
 
 GameplaySubstate processGarrafaEvent(GameObject* utility, GameObject* target, GameContext* context){
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[ID_GAMEPLAY_VITROLA].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//ALGO;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
+    //return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
 }
 
 GameplaySubstate processEstanteEvent(GameObject* utility, GameObject* target, GameContext* context){
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[ID_GAMEPLAY_ESTANTE].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
+    //return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
 }
 
 GameplaySubstate processPirataEvent(GameObject* utility, GameObject* target, GameContext* context){
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[ID_GAMEPLAY_PIRATA].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
+    //return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
 }
 
 GameplaySubstate processPescaEvent(GameObject* utility, GameObject* target, GameContext* context){
-
+    //return 0; //PLACEHOLDER
 }
 
 GameplaySubstate processChaveEvent(GameObject* utility, GameObject* target, GameContext* context){
-    //PUZZLE
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[0].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
+    //puzzle
+    //return 0; //PLACEHOLDER
 }
 
 GameplaySubstate processBilheteEvent(GameObject* utility, GameObject* target, GameContext* context){
     //puzzle
-    if (CheckCollisionPointRec(GetMousePosition(), context->gameplay.objects[0].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
+    //return GAMEPLAY_SUBSTATE_ZOOM_BILHETE;
 }
 
 GameObject* GetHand(void){
@@ -278,16 +257,22 @@ Texture2D GetGameplayBackground(GameContext context) {
             return GetZoomCaixaArmarioBackground(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
+            return GetZoomCaixaCamaBackground(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
+            return GetZoomGarrafaBackground(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
+            return GetZoomPirataBackground(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
+            return GetZoomBilheteBackground(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
+            return GetZoomDiarioBackground(context);
             break;        
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
+            return GetZoomEstanteBackground(context);
             break;
     }
 }
@@ -301,16 +286,22 @@ GameObject* GetGameplayObjects(GameContext context){
             return GetZoomCaixaArmarioObjects(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
+            return GetZoomCaixaArmarioObjects(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
+            return GetZoomGarrafaObjects(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
+            return GetZoomPirataObjects(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
+            return GetZoomBilheteObjects(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
+            return GetZoomDiarioObjects(context);
             break;        
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
+            return GetZoomEstanteObjects(context);
             break;
     }
 }
@@ -324,16 +315,22 @@ int GetGameplayObjectCount(GameContext context) {
             return GetZoomCaixaArmarioObjectCount(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
+            return GetZoomCaixaArmarioObjectCount(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
+            return GetZoomGarrafaObjectCount(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
+            return GetZoomPirataObjectCount(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
+            return GetZoomBilheteObjectCount(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
-            break;        
+            return GetZoomDiarioObjectCount(context);
+            break;
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
+            return GetZoomEstanteObjectCount(context);
             break;
     }
 }

@@ -3,13 +3,25 @@
 #include "scenes/scenemenu.h"
 #include "scenes/scenegameplay.h"
 #include "scenes/sceneending.h"
+#include "scenes/zoom/scenezoombilhete.h"
 #include "scenes/zoom/scenezoomcaixaarmario.h"
+#include "scenes/zoom/scenezoomcaixacama.h"
+#include "scenes/zoom/scenezoomdiario.h"
+#include "scenes/zoom/scenezoomestante.h"
+#include "scenes/zoom/scenezoomgarrafa.h"
+#include "scenes/zoom/scenezoompirata.h"
 
 GameContext InitializeState(GameContext context) {
     context.state = STATE_MENU;
     context = InitializeMenuState(context);
     context = InitializeGameplayState(context);
+    context = InitializeZoomBilheteState(context);
     context = InitializeZoomCaixaArmarioState(context);
+    context = InitializeZoomCaixaCamaState(context);
+    context = InitializeZoomDiarioState(context);
+    context = InitializeZoomEstanteState(context);
+    context = InitializeZoomGarrafaState(context);
+    context = InitializeZoomPirataState(context);
     context = InitializeEndingState(context);
     return context;
 }
