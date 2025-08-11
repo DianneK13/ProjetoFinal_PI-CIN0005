@@ -14,7 +14,8 @@
 GameContext InitializeState(GameContext context) {
     context.state = STATE_MENU;
     context = InitializeMenuState(context);
-    context = InitializeGameplayState(context);
+    context = InitializeGameplayState(&context);
+    context = InitializeEndingState(context);
     context = InitializeZoomBilheteState(context);
     context = InitializeZoomCaixaArmarioState(context);
     context = InitializeZoomCaixaCamaState(context);
@@ -22,7 +23,6 @@ GameContext InitializeState(GameContext context) {
     context = InitializeZoomEstanteState(context);
     context = InitializeZoomGarrafaState(context);
     context = InitializeZoomPirataState(context);
-    context = InitializeEndingState(context);
     context.should_close = false;
     return context;
 }
@@ -63,7 +63,6 @@ Texture2D GetBackground(GameContext context){
             background.height = SCREEN_HEIGHT;
             background.width = SCREEN_WIDTH;
             return background;
-            break;
     }
 }
 

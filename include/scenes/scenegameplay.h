@@ -18,7 +18,7 @@
 // object in player's hand
 GameObject* GetHand(void);
 
-GameContext InitializeGameplayState(GameContext context);
+GameContext InitializeGameplayState(GameContext *context);
 
 GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext *context);
 
