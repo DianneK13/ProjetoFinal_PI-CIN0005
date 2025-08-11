@@ -4,6 +4,7 @@
 
 #include "common.h"
 
+#define ID_GARRAFA_VOLTAR 0
 
 GameContext InitializeZoomGarrafaState(GameContext context);
 

@@ -15,7 +15,7 @@ GameContext InitializeZoomBilheteState(GameContext context) {
 }
 
 GameplaySubstate processZoomBilheteEvent(GameObject* object) {
-    
+    return GAMEPLAY_SUBSTATE_ZOOM_BILHETE;
 }
 
 Texture2D GetZoomBilheteBackground(GameContext) {

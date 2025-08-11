@@ -11,21 +11,34 @@ Texture2D background_scenePirata;
 */
 
 GameContext InitializeZoomPirataState(GameContext context) {
+    context.pirata.objectCount = 1;
+    context.pirata.objects = (GameObject*)malloc(context.pirata.objectCount * sizeof(GameObject));
 
+    context.pirata.objects[ID_PIRATA_VOLTAR].name = "voltar";
+    context.pirata.objects[ID_PIRATA_VOLTAR].id = ID_PIRATA_VOLTAR;
+    context.pirata.objects[ID_PIRATA_VOLTAR].texture = LoadTexture("assets/jill.png");
+    context.pirata.objects[ID_PIRATA_VOLTAR].position = (Vector2){0, 0};
+    context.pirata.objects[ID_PIRATA_VOLTAR].size = (Vector2){100, 50};
+    context.pirata.objects[ID_PIRATA_VOLTAR].bounds = (Rectangle){0, 0, 100, 50};
+    context.pirata.objects[ID_PIRATA_VOLTAR].state = ORIGINAL;
+    context.pirata.objects[ID_PIRATA_VOLTAR].type = INTERACTIVE;
+
+    context.pirata.background = LoadTexture("assets/zoomPirata/ZoomPirata.png");
+    return context;
 }
 
 GameplaySubstate processZoomPirataEvent(GameObject* object) {
-
+    return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
 }
 
 Texture2D GetZoomPirataBackground(GameContext context) {
-
+    return context.pirata.background;
 }
 
 GameObject* GetZoomPirataObjects(GameContext context) {
-
+    return context.pirata.objects;
 }
 
 int GetZoomPirataObjectCount(GameContext context) {
-    
+    return context.pirata.objectCount;
 }

@@ -4,6 +4,7 @@
 
 #include "common.h"
 
+#define ID_DIARIO_VOLTAR 0
 
 GameContext InitializeZoomDiarioState(GameContext context);
 

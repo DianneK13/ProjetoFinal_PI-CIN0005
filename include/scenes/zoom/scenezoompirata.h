@@ -4,6 +4,7 @@
 
 #include "common.h"
 
+#define ID_PIRATA_VOLTAR 0
 
 GameContext InitializeZoomPirataState(GameContext context);
 

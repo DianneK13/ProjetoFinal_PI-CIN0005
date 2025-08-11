@@ -64,7 +64,7 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
 }
 
 GameplaySubstate processZoomCaixaCamaEvent(GameObject* object) {
-
+    return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
 }
 
 Texture2D GetZoomCaixaCamaBackground(GameContext context) {

@@ -4,6 +4,7 @@
 
 #include "common.h"
 
+#define ID_ESTANTE_VOLTAR 0
 
 GameContext InitializeZoomEstanteState(GameContext context);
 

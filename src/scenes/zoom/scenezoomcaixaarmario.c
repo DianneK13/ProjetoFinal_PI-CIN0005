@@ -60,12 +60,11 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_BOTAO].type = INTERACTIVE;
 
     context.caixa_armario.background = LoadTexture("assets/zoomCaixaArmario/ZoomCaixaArmario.png");
-    context.caixa_armario.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
     return context;
 }
 
 GameplaySubstate processZoomCaixaArmarioEvent(GameObject* object) {
-    
+    return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
 }
 
 Texture2D GetZoomCaixaArmarioBackground(GameContext context) {
