@@ -60,6 +60,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_BOTAO].type = INTERACTIVE;
 
     context.caixa_armario.background = LoadTexture("assets/zoomCaixaArmario/ZoomCaixaArmario.png");
+    context.caixa_armario.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
     return context;
 }
 
@@ -68,16 +69,13 @@ GameplaySubstate processZoomCaixaArmarioEvent(GameObject* object) {
 }
 
 Texture2D GetZoomCaixaArmarioBackground(GameContext context) {
-    printf("pegou fundo caixa armario\n");
     return context.caixa_armario.background;
 }
 
 GameObject* GetZoomCaixaArmarioObjects(GameContext context) {
-    printf("pegou objetos caixa armario\n");
     return context.caixa_armario.objects;
 }
 
 int GetZoomCaixaArmarioObjectCount(GameContext context) {
-    printf("pegou obj count caixa armario\n");
     return context.caixa_armario.objectCount;
 }

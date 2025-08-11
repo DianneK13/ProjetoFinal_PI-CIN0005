@@ -23,6 +23,7 @@ GameContext InitializeState(GameContext context) {
     context = InitializeZoomGarrafaState(context);
     context = InitializeZoomPirataState(context);
     context = InitializeEndingState(context);
+    context = InitializeZoomCaixaArmarioState(context);
     return context;
 }
 
@@ -44,54 +45,48 @@ GameContext processEvent(GameObject* clickedObject,GameContext context) {
 }
 
 Texture2D GetBackground(GameContext context){
-    Texture2D background;
+    Texture2D background = {};
     switch(context.state){
         case STATE_MENU:
             background = GetMenuBackground(context);
             background.height = SCREEN_HEIGHT;
             background.width = SCREEN_WIDTH;
             return background;
-            break;
         case STATE_GAMEPLAY:
             //printf("foi buscar background gameplay\n");
-            background = GetGameplayBackground(context);
+            background = GetGameplayBackground(&context);
             background.height = SCREEN_HEIGHT;
             background.width = SCREEN_WIDTH;
             return background;
-            break;
         case STATE_ENDING:
             //background = GetEndingBackground(context);
-            background.height = SCREEN_HEIGHT;
-            background.width = SCREEN_WIDTH;
-            return background;
             break;
     }
+    return background;
 }
 
 GameObject* GetObjects(GameContext context){
     switch(context.state){
         case STATE_MENU:
             return GetMenuObjects(context);
-            break;
         case STATE_GAMEPLAY:
-            return GetGameplayObjects(context);
-            break;
+            return GetGameplayObjects(&context);
         case STATE_ENDING:
             //return GetEndingObjects(context);
-            break;
-    }    
+            return NULL;
+    }
+    return NULL;
 }
 
 int GetObjectCount(GameContext context){
     switch(context.state){
         case STATE_MENU:
             return GetMenuObjectCount(context);
-            break;
         case STATE_GAMEPLAY:
-            return GetGameplayObjectCount(context);
-            break;
+            return GetGameplayObjectCount(&context);
         case STATE_ENDING:
             //return GetEndingObjectCount(context);
-            break;
-    }   
+            return 0;
+    }
+    return 0;
 }
