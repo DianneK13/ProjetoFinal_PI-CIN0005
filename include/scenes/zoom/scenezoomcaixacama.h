@@ -5,10 +5,12 @@
 #include "common.h"
 
 
-void InitializeZoomCaixaCamaState();
+GameContext InitializeZoomCaixaCamaState(GameContext context);
 
 GameplaySubstate processZoomCaixaCamaEvent(GameObject* object);
 
-GameObject* GetZoomCaixaCamaBackground(void);
+Texture2D GetZoomCaixaCamaBackground(GameContext context);
 
-GameObject* GetZoomCaixaCamaObjects(void);
+GameObject* GetZoomCaixaCamaObjects(GameContext context);
+
+int GetZoomCaixaCamaObjectCount(GameContext context);

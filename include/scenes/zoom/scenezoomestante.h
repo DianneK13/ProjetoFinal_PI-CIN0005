@@ -5,10 +5,12 @@
 #include "common.h"
 
 
-void InitializeZoomEstanteState();
+GameContext InitializeZoomEstanteState(GameContext context);
 
 GameplaySubstate processZoomEstanteEvent(GameObject* object);
 
-GameObject* GetZoomEstanteBackground(void);
+Texture2D GetZoomEstanteBackground(GameContext context);
 
-GameObject* GetZoomEstanteObjects(void);
+GameObject* GetZoomEstanteObjects(GameContext context);
+
+int GetZoomEstanteObjectCount(GameContext context);

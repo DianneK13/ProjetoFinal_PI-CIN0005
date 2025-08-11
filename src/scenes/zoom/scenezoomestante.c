@@ -1,5 +1,6 @@
 #include "scenes/zoom/scenezoomestante.h"
 
+/*
 //array de objects desta cena
 GameObject* objects_sceneEstante;
 //qtd de objetos desta cena
@@ -7,19 +8,24 @@ int objectCount_sceneEstante;
 
 //imagem de fundo desta cena
 Texture2D background_sceneEstante;
+*/
 
-void InitializeZoomEstanteState() {
+GameContext InitializeZoomEstanteState(GameContext context) {
     
 }
 
 GameplaySubstate processZoomEstanteEvent(GameObject* object) {
-    
+
 }
 
-GameObject* GetZoomEstanteBackground(void) {
-    
+Texture2D GetZoomEstanteBackground(GameContext context) {
+
 }
 
-GameObject* GetZoomEstanteObjects(void) {
+GameObject* GetZoomEstanteObjects(GameContext context) {
+
+}
+
+int GetZoomEstanteObjectCount(GameContext context) {
     
 }

@@ -5,10 +5,12 @@
 #include "common.h"
 
 
-void InitializeZoomGarrafaState();
+GameContext InitializeZoomGarrafaState(GameContext context);
 
 GameplaySubstate processZoomGarrafaEvent(GameObject* object);
 
-GameObject* GetZoomGarrafaBackground(void);
+Texture2D GetZoomGarrafaBackground(GameContext context);
 
-GameObject* GetZoomGarrafaObjects(void);
+GameObject* GetZoomGarrafaObjects(GameContext context);
+
+int GetZoomGarrafaObjectCount(GameContext context);

@@ -5,10 +5,12 @@
 #include "common.h"
 
 
-void InitializeZoomBilheteState();
+GameContext InitializeZoomBilheteState(GameContext context);
 
 GameplaySubstate processZoomBilheteEvent(GameObject* object);
 
-GameObject* GetZoomBilheteBackground(void);
+Texture2D GetZoomBilheteBackground(GameContext context);
 
-GameObject* GetZoomBilheteObjects(void);
+GameObject* GetZoomBilheteObjects(GameContext context);
+
+int GetZoomBilheteObjectCount(GameContext context);

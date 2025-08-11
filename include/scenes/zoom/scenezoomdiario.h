@@ -5,10 +5,12 @@
 #include "common.h"
 
 
-void InitializeZoomDiarioState();
+GameContext InitializeZoomDiarioState(GameContext context);
 
 GameplaySubstate processZoomDiarioEvent(GameObject* object);
 
-GameObject* GetZoomDiarioBackground(void);
+Texture2D GetZoomDiarioBackground(GameContext context);
 
-GameObject* GetZoomDiarioObjects(void);
+GameObject* GetZoomDiarioObjects(GameContext context);
+
+int GetZoomDiarioObjectCount(GameContext context);

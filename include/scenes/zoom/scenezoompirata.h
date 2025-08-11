@@ -5,10 +5,12 @@
 #include "common.h"
 
 
-void InitializeZoomPirataState();
+GameContext InitializeZoomPirataState(GameContext context);
 
 GameplaySubstate processZoomPirataEvent(GameObject* object);
 
-GameObject* GetZoomPirataBackground(void);
+Texture2D GetZoomPirataBackground(GameContext context);
 
-GameObject* GetZoomPirataObjects(void);
+GameObject* GetZoomPirataObjects(GameContext context);
+
+int GetZoomPirataObjectCount(GameContext context);
