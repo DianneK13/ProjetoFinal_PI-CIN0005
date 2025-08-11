@@ -1,343 +1,213 @@
 #include "scenes/scenegameplay.h"
 #include "scenes/zoom/scenezoomcaixaarmario.h"
-GameObject* hand;
+#include "scenes/zoom/scenezoombilhete.h"
+#include "scenes/zoom/scenezoomcaixacama.h"
+#include "scenes/zoom/scenezoomdiario.h"
+#include "scenes/zoom/scenezoomestante.h"
+#include "scenes/zoom/scenezoomgarrafa.h"
+#include "scenes/zoom/scenezoompirata.h"
+#include <stdlib.h>
 
-GameplaySubstate processArmarioEvent(GameObject* utility, GameObject* target, GameContext context){
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_ARMARIO].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//algo;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
+static void SetupGameplayMain(GameContext *ctx);
+// static void GameplayFreeObjects(GameContext *ctx);
 
-GameplaySubstate processCaixaArmarioEvent(GameObject* utility, GameObject* target, GameContext context){
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameplaySubstate processCaixaCamaEvent(GameObject* utility, GameObject* target, GameContext context){
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameplaySubstate processBuracoEvent(GameObject* utility, GameObject* target, GameContext context){
-
-}
-
-GameplaySubstate processDiarioEvent(GameObject* utility, GameObject* target, GameContext context){
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_DIARIO].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameplaySubstate processVitrolaEvent(GameObject* utility, GameObject* target, GameContext context){
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_VITROLA].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//ALGO;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameplaySubstate processGarrafaEvent(GameObject* utility, GameObject* target, GameContext context){
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_VITROLA].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//ALGO;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameplaySubstate processEstanteEvent(GameObject* utility, GameObject* target, GameContext context){
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_ESTANTE].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameplaySubstate processPirataEvent(GameObject* utility, GameObject* target, GameContext context){
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_PIRATA].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameplaySubstate processPescaEvent(GameObject* utility, GameObject* target, GameContext context){
-
-}
-
-GameplaySubstate processChaveEvent(GameObject* utility, GameObject* target, GameContext context){
-    //PUZZLE
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[0].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameplaySubstate processBilheteEvent(GameObject* utility, GameObject* target, GameContext context){
-    //puzzle
-    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[0].bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;
-        else return GAMEPLAY_SUBSTATE_MAIN;
-    }
-}
-
-GameObject* GetHand(void){
-    return hand;
-}
+static GameObject* hand = NULL;
+GameObject* GetHand(void) { return hand; }
 
 GameContext InitializeGameplayState(GameContext context) {
-
-    // numero de objetos
-    // SEMPRE ATUALIZAR ESSE NUMERO CASO ADICIONE NOVO OBJETO
-    context.gameplay.objectCount = 12;
-    context.gameplay.objects = (GameObject*)malloc(context.gameplay.objectCount * sizeof(GameObject));
-    
-    /*
-    if (context.gameplay.objects == NULL) {
-        //printf("Failed to allocate memory for objects\n");
-        return;
-    }
-    */
-    
-    // Initialize objects with their properties
-    context.gameplay.objects[ID_GAMEPLAY_ARMARIO].name = "armario";
-    context.gameplay.objects[ID_GAMEPLAY_ARMARIO].id = ID_GAMEPLAY_ARMARIO;
-    context.gameplay.objects[ID_GAMEPLAY_ARMARIO].texture = LoadTexture("assets/objetosMainGameplay/Armario.png");
-    context.gameplay.objects[ID_GAMEPLAY_ARMARIO].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_ARMARIO].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_ARMARIO].bounds = (Rectangle){0, 180, 242, 455};
-    context.gameplay.objects[ID_GAMEPLAY_ARMARIO].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_ARMARIO].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].name = "caixaArmario";
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].id = ID_GAMEPLAY_CAIXA_ARMARIO;    
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].texture = LoadTexture("assets/objetosMainGameplay/CaixaArmario.png");
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].bounds = (Rectangle){66, 100, 140, 73};
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].name = "caixaCama";
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].id = ID_GAMEPLAY_CAIXA_CAMA;
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].texture = LoadTexture("assets/objetosMainGameplay/CaixaCama.png");
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].bounds = (Rectangle){957, 710, 118, 75};
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].type = INTERACTIVE;    
-
-    context.gameplay.objects[ID_GAMEPLAY_BURACO].name = "buraco";
-    context.gameplay.objects[ID_GAMEPLAY_BURACO].id = ID_GAMEPLAY_BURACO;
-    context.gameplay.objects[ID_GAMEPLAY_BURACO].texture = LoadTexture("assets/.png"); //tá sem textura ainda
-    context.gameplay.objects[ID_GAMEPLAY_BURACO].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_BURACO].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_BURACO].bounds = (Rectangle){321, 739, 22, 22};
-    context.gameplay.objects[ID_GAMEPLAY_BURACO].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_BURACO].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_DIARIO].name = "diario";
-    context.gameplay.objects[ID_GAMEPLAY_DIARIO].id = ID_GAMEPLAY_DIARIO;
-    context.gameplay.objects[ID_GAMEPLAY_DIARIO].texture = LoadTexture("assets/objetosMainGameplay/Diario.png");
-    context.gameplay.objects[ID_GAMEPLAY_DIARIO].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_DIARIO].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_DIARIO].bounds = (Rectangle){563, 417, 58, 54};
-    context.gameplay.objects[ID_GAMEPLAY_DIARIO].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_DIARIO].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_VITROLA].name = "vitrola";
-    context.gameplay.objects[ID_GAMEPLAY_VITROLA].id = ID_GAMEPLAY_VITROLA;
-    context.gameplay.objects[ID_GAMEPLAY_VITROLA].texture = LoadTexture("assets/objetosMainGameplay/Vitrola_.png");
-    context.gameplay.objects[ID_GAMEPLAY_VITROLA].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_VITROLA].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_VITROLA].bounds = (Rectangle){390, 313, 105, 153};
-    context.gameplay.objects[ID_GAMEPLAY_VITROLA].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_VITROLA].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_GARRAFA].name = "garrafa";
-    context.gameplay.objects[ID_GAMEPLAY_GARRAFA].id = ID_GAMEPLAY_GARRAFA;
-    context.gameplay.objects[ID_GAMEPLAY_GARRAFA].texture = LoadTexture("assets/objetosMainGameplay/Garrafa.png");
-    context.gameplay.objects[ID_GAMEPLAY_GARRAFA].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_GARRAFA].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_GARRAFA].bounds = (Rectangle){725, 393, 45, 79};
-    context.gameplay.objects[ID_GAMEPLAY_GARRAFA].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_GARRAFA].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_ESTANTE].name = "estante";
-    context.gameplay.objects[ID_GAMEPLAY_ESTANTE].id = ID_GAMEPLAY_ESTANTE;
-    context.gameplay.objects[ID_GAMEPLAY_ESTANTE].texture = LoadTexture("assets/objetosMainGameplay/Estante.png");
-    context.gameplay.objects[ID_GAMEPLAY_ESTANTE].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_ESTANTE].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_ESTANTE].bounds = (Rectangle){905, 191, 157, 101};
-    context.gameplay.objects[ID_GAMEPLAY_ESTANTE].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_ESTANTE].type = INTERACTIVE;    
-
-    context.gameplay.objects[ID_GAMEPLAY_PIRATA].name = "pirata";
-    context.gameplay.objects[ID_GAMEPLAY_PIRATA].id = ID_GAMEPLAY_PIRATA;
-    context.gameplay.objects[ID_GAMEPLAY_PIRATA].texture = LoadTexture("assets/objetosMainGameplay/Pirata.png");
-    context.gameplay.objects[ID_GAMEPLAY_PIRATA].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_PIRATA].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_PIRATA].bounds = (Rectangle){873, 377, 156, 183};     
-    context.gameplay.objects[ID_GAMEPLAY_PIRATA].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_PIRATA].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_VARA_PESCA].name = "varaPesca";
-    context.gameplay.objects[ID_GAMEPLAY_VARA_PESCA].id = ID_GAMEPLAY_VARA_PESCA;
-    context.gameplay.objects[ID_GAMEPLAY_VARA_PESCA].texture = LoadTexture("assets/objetosMainGameplay/VaraPesca.png");
-    context.gameplay.objects[ID_GAMEPLAY_VARA_PESCA].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_VARA_PESCA].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-    context.gameplay.objects[ID_GAMEPLAY_VARA_PESCA].bounds = (Rectangle){0, 0, 0, 0};   //preciso pegar a imagem com todas as camadas com malu
-    context.gameplay.objects[ID_GAMEPLAY_VARA_PESCA].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_VARA_PESCA].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_CHAVE].name = "chave";
-    context.gameplay.objects[ID_GAMEPLAY_CHAVE].id = ID_GAMEPLAY_CHAVE;
-    context.gameplay.objects[ID_GAMEPLAY_CHAVE].texture = LoadTexture("assets/jill.png");
-    context.gameplay.objects[ID_GAMEPLAY_CHAVE].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_CHAVE].size = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_CHAVE].bounds = (Rectangle){0, 0, 0, 0};  
-    context.gameplay.objects[ID_GAMEPLAY_CHAVE].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_CHAVE].type = INTERACTIVE;
-
-    context.gameplay.objects[ID_GAMEPLAY_BILHETE].name = "bilhete";
-    context.gameplay.objects[ID_GAMEPLAY_BILHETE].id = ID_GAMEPLAY_BILHETE;
-    context.gameplay.objects[ID_GAMEPLAY_BILHETE].texture = LoadTexture("assets/jill.png");
-    context.gameplay.objects[ID_GAMEPLAY_BILHETE].position = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_BILHETE].size = (Vector2){0, 0};
-    context.gameplay.objects[ID_GAMEPLAY_BILHETE].bounds = (Rectangle){0, 0, 0, 0};         
-    context.gameplay.objects[ID_GAMEPLAY_BILHETE].state = ORIGINAL;
-    context.gameplay.objects[ID_GAMEPLAY_BILHETE].type = INTERACTIVE;
-
-    context.gameplay.background = LoadTexture("assets/MainGameplayBG.png");
+    context.gameplay.objects = NULL;
+    context.gameplay.objectCount = 0;
     context.gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
+    context.gameplay.background = LoadTexture("assets/fundofodao.png");
+    SetupGameplayMain(&context);
     return context;
 }
 
-//processa ações entre o objeto na mão do jogador e o objeto em que ele clicou
-GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext context){
-    switch(target->id){
-        case ID_GAMEPLAY_ARMARIO:
-            context.gameplay.substate = processArmarioEvent(utility, target, context);
-            return STATE_GAMEPLAY;
-            break;
+//processa ações entre o item na mão (utility) e o alvo clicado (target)
+GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext *context){
+    if (!target || !context) return STATE_GAMEPLAY;
+    printf("process menu event: %s\n", target->name);
+
+    switch(target->id) {
         case ID_GAMEPLAY_CAIXA_ARMARIO:
-            printf("entrou zoom caixa armario\n");
-            context.gameplay.substate = processCaixaArmarioEvent(utility, target, context);
+            context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
             return STATE_GAMEPLAY;
-            break;
+
         case ID_GAMEPLAY_CAIXA_CAMA:
-            context.gameplay.substate = processCaixaCamaEvent(utility, target, context);
+            context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
             return STATE_GAMEPLAY;
-            break;
-        case ID_GAMEPLAY_BURACO:
-            context.gameplay.substate = processBuracoEvent(utility, target, context);
-            return STATE_GAMEPLAY;
-            break;
-        case ID_GAMEPLAY_DIARIO:
-            context.gameplay.substate = processDiarioEvent(utility, target, context);
-            return STATE_GAMEPLAY;
-            break;
-        case ID_GAMEPLAY_VITROLA:
-            context.gameplay.substate = processVitrolaEvent(utility, target, context);
-            return STATE_GAMEPLAY;
-            break;
+
         case ID_GAMEPLAY_GARRAFA:
-            context.gameplay.substate = processGarrafaEvent(utility, target, context);
+            context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
             return STATE_GAMEPLAY;
-            break;
+
+        case ID_GAMEPLAY_DIARIO:
+            context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+            return STATE_GAMEPLAY;
+
         case ID_GAMEPLAY_ESTANTE:
-            context.gameplay.substate = processEstanteEvent(utility, target, context);
+            context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
             return STATE_GAMEPLAY;
-            break;
-        case ID_GAMEPLAY_PIRATA: 
-            context.gameplay.substate = processPirataEvent(utility, target, context);
-            return STATE_GAMEPLAY;
-            break;
-        case ID_GAMEPLAY_VARA_PESCA:
-            context.gameplay.substate = processPescaEvent(utility, target, context);
-            return STATE_GAMEPLAY;
-            break;
-        case ID_GAMEPLAY_CHAVE:
-            context.gameplay.substate = processChaveEvent(utility, target, context);
-            return STATE_GAMEPLAY;
-            break;
+
         case ID_GAMEPLAY_BILHETE:
-            context.gameplay.substate = processBilheteEvent(utility, target, context);
+            context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_BILHETE;
             return STATE_GAMEPLAY;
-            break;
+
+        case ID_GAMEPLAY_PIRATA:
+            context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
+            return STATE_GAMEPLAY;
+
+        // itens "normais" /sem zoom
+        case ID_GAMEPLAY_VITROLA:
+        case ID_GAMEPLAY_ARMARIO:
+        case ID_GAMEPLAY_CHAVE:
+        default:
+            context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
+        return STATE_GAMEPLAY;
     }
 }
 
-Texture2D GetGameplayBackground(GameContext context) {
-    //printf("procurano o fundo...\n");
-    switch(context.gameplay.substate){
-        case GAMEPLAY_SUBSTATE_MAIN:
-            //printf("pegou fundo gameplay\n");
-            return context.gameplay.background;
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
-            return GetZoomCaixaArmarioBackground(context);
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
-            break;        
-        case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
-            break;
+Texture2D GetGameplayBackground(GameContext *context) {
+    switch (context->gameplay.substate) {
+        case GAMEPLAY_SUBSTATE_MAIN:               return context->gameplay.background;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO: return GetZoomCaixaArmarioBackground(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:    return GetZoomCaixaCamaBackground(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:       return GetZoomGarrafaBackground(context);  //AINDA TEM QUE ARRUMAR
+        // case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        return GetZoomPirataBackground(context);   //AINDA TEM QUE ARRUMAR
+        // case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:       return GetZoomBilheteBackground(context);  //AINDA TEM QUE ARRUMAR
+        // case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:        return GetZoomDiarioBackground(context);   //AINDA TEM QUE ARRUMAR
+        // case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:       return GetZoomEstanteBackground(context);  //AINDA TEM QUE ARRUMAR
+        default:                                   return context->gameplay.background; // fallback
     }
 }
 
-GameObject* GetGameplayObjects(GameContext context){
-    switch(context.gameplay.substate){
-        case GAMEPLAY_SUBSTATE_MAIN:
-            return context.gameplay.objects;
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
-            return GetZoomCaixaArmarioObjects(context);
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
-            break;        
-        case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
-            break;
+GameObject* GetGameplayObjects(GameContext *context){
+    switch (context->gameplay.substate) {
+        case GAMEPLAY_SUBSTATE_MAIN:               return context->gameplay.objects;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO: return GetZoomCaixaArmarioObjects(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:    return GetZoomCaixaCamaObjects(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:       return GetZoomGarrafaObjects(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        return GetZoomPirataObjects(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:       return GetZoomBilheteObjects(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:        return GetZoomDiarioObjects(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:       return GetZoomEstanteObjects(*context);
+        default:                                   return context->gameplay.objects;
     }
 }
 
-int GetGameplayObjectCount(GameContext context) {
-    switch(context.gameplay.substate){
-        case GAMEPLAY_SUBSTATE_MAIN:
-            return context.gameplay.objectCount;
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
-            return GetZoomCaixaArmarioObjectCount(context);
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
-            break;
-        case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
-            break;        
-        case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
-            break;
+int GetGameplayObjectCount(GameContext *context) {
+    switch (context->gameplay.substate) {
+        case GAMEPLAY_SUBSTATE_MAIN:               return context->gameplay.objectCount;
+        case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO: return GetZoomCaixaArmarioObjectCount(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:    return GetZoomCaixaCamaObjectCount(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:       return GetZoomGarrafaObjectCount(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        return GetZoomPirataObjectCount(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:       return GetZoomBilheteObjectCount(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:        return GetZoomDiarioObjectCount(*context);
+        // case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:       return GetZoomEstanteObjectCount(*context);
+        default:                                   return context->gameplay.objectCount;
     }
 }
 
+// static void GameplayFreeObjects(GameContext *ctx) {
+//     if (!ctx->gameplay.objects) return;
+//     for (int i = 0; i < ctx->gameplay.objectCount; i++) {
+//         if (ctx->gameplay.objects[i].texture.id != 0) {
+//             UnloadTexture(ctx->gameplay.objects[i].texture);
+//         }
+//     }
+//     free(ctx->gameplay.objects);
+//     ctx->gameplay.objects = NULL;
+//     ctx->gameplay.objectCount = 0;
+// }
 
+static void SetupGameplayMain(GameContext *ctx) {
+    // GameplayFreeObjects(ctx);
+
+    ctx->gameplay.objectCount = 10;
+    ctx->gameplay.objects = (GameObject*)malloc(sizeof(GameObject) * ctx->gameplay.objectCount);
+    if (!ctx->gameplay.objects) { ctx->gameplay.objectCount = 0; return; }
+
+    // ARMÁRIO
+    ctx->gameplay.objects[ID_GAMEPLAY_ARMARIO] = (GameObject){
+        .name="armario", .id=ID_GAMEPLAY_ARMARIO, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture=LoadTexture("assets/objetosMainGameplay/Armario.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds=(Rectangle){0, 180, 242, 455}
+    };
+
+    // CAIXA ARMÁRIO
+    ctx->gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO] = (GameObject){
+        .name="caixaArmario", .id=ID_GAMEPLAY_CAIXA_ARMARIO, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/objetosMainGameplay/CaixaArmario.png"),
+        .position=(Vector2){0, 0}, .size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds = (Rectangle){66, 100, 140, 73},
+    };
+
+    // CAIXA CAMA
+    ctx->gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA] = (GameObject){
+        .name="caixaCama", .id=ID_GAMEPLAY_CAIXA_CAMA, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/objetosMainGameplay/CaixaCama.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds = (Rectangle){957, 710, 118, 75},
+    };
+
+    // DIARIO
+    ctx->gameplay.objects[ID_GAMEPLAY_DIARIO] = (GameObject){
+        .name="diario", .id=ID_GAMEPLAY_DIARIO, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/objetosMainGameplay/Diario.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds = (Rectangle){563, 417, 58, 54},
+    };
+
+    // VITROLA
+    ctx->gameplay.objects[ID_GAMEPLAY_VITROLA] = (GameObject){
+        .name="vitrola", .id=ID_GAMEPLAY_VITROLA, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/objetosMainGameplay/Vitrola.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds = (Rectangle){390, 313, 105, 153},
+    };
+
+    // GARRAFA
+    ctx->gameplay.objects[ID_GAMEPLAY_GARRAFA] = (GameObject){
+        .name="garrafa", .id=ID_GAMEPLAY_GARRAFA, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/objetosMainGameplay/Garrafa.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds = (Rectangle){725, 393, 45, 79}
+    };
+
+    // ESTANTE
+    ctx->gameplay.objects[ID_GAMEPLAY_ESTANTE] = (GameObject){
+        .name="estante", .id=ID_GAMEPLAY_ESTANTE, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/objetosMainGameplay/Estante.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds = (Rectangle){905, 191, 157, 101},
+    };
+
+    // PIRATA
+    ctx->gameplay.objects[ID_GAMEPLAY_PIRATA] = (GameObject){
+        .name="pirata", .id=ID_GAMEPLAY_PIRATA, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/objetosMainGameplay/Pirata.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds = (Rectangle){873, 377, 156, 183}
+    };
+
+    // CHAVE
+    ctx->gameplay.objects[ID_GAMEPLAY_CHAVE] = (GameObject){
+        .name="chave", .id=ID_GAMEPLAY_CHAVE, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture=LoadTexture("assets/jill.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
+        .bounds=(Rectangle){0, 0, 0, 0}
+    };
+
+    // BILHETE
+    ctx->gameplay.objects[ID_GAMEPLAY_BILHETE] = (GameObject){
+        .name="bilhete", .id=ID_GAMEPLAY_BILHETE, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/jill.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
+        .bounds=(Rectangle){0, 0, 0, 0}
+    };
+
+    if (ctx->gameplay.background.id) UnloadTexture(ctx->gameplay.background);
+    ctx->gameplay.background = LoadTexture("assets/fundofodao.png");
+}
