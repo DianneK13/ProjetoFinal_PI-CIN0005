@@ -4,11 +4,18 @@
 
 #include "common.h"
 
+#define ID_CAIXA_ARMARIO_SIMBOLO_1 0
+#define ID_CAIXA_ARMARIO_SIMBOLO_2 1
+#define ID_CAIXA_ARMARIO_SIMBOLO_3 2
+#define ID_CAIXA_ARMARIO_SIMBOLO_4 3
+#define ID_CAIXA_ARMARIO_BOTAO 4
 
-void InitializeZoomCaixaArmarioState();
+GameContext InitializeZoomCaixaArmarioState(GameContext context);
 
 GameplaySubstate processZoomCaixaArmarioEvent(GameObject* object);
 
-GameObject* GetZoomCaixaArmarioBackground(void);
+Texture2D GetZoomCaixaArmarioBackground(GameContext context);
 
-GameObject* GetZoomCaixaArmarioObjects(void);
+GameObject* GetZoomCaixaArmarioObjects(GameContext context);
+
+int GetZoomCaixaArmarioObjectCount(GameContext context);

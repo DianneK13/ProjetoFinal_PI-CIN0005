@@ -3,11 +3,13 @@
 #include "scenes/scenemenu.h"
 #include "scenes/scenegameplay.h"
 #include "scenes/sceneending.h"
+#include "scenes/zoom/scenezoomcaixaarmario.h"
 
 GameContext InitializeState(GameContext context) {
     context.state = STATE_MENU;
     context = InitializeMenuState(context);
     context = InitializeGameplayState(context);
+    context = InitializeZoomCaixaArmarioState(context);
     context = InitializeEndingState(context);
     return context;
 }
@@ -20,7 +22,7 @@ GameContext processEvent(GameObject* clickedObject,GameContext context) {
             context.state = processMenuEvent(clickedObject, &context);
             break;
         case STATE_GAMEPLAY:
-            context.state = processGameplayEvent(GetHand(), clickedObject, context);
+            context.state = processGameplayEvent(GetHand(), clickedObject, &context);
             break;
         case STATE_ENDING:
             //state = processEndingEvent(clickedObject);

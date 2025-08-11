@@ -23,7 +23,7 @@ GameObject* GetHand(void);
 
 GameContext InitializeGameplayState(GameContext context);
 
-GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext context);
+GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext* context);
 
 Texture2D GetGameplayBackground(GameContext context);
 
