@@ -1,52 +1,85 @@
 #include "scenes/scenegameplay.h"
+#include "scenes/zoom/scenezoomcaixaarmario.h"
 GameObject* hand;
 
-GameplaySubstate processArmarioEvent(GameObject* utility, GameObject* target){
+GameplaySubstate processArmarioEvent(GameObject* utility, GameObject* target, GameContext context){
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_ARMARIO].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//algo;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
+}
+
+GameplaySubstate processCaixaArmarioEvent(GameObject* utility, GameObject* target, GameContext context){
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
+}
+
+GameplaySubstate processCaixaCamaEvent(GameObject* utility, GameObject* target, GameContext context){
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
+}
+
+GameplaySubstate processBuracoEvent(GameObject* utility, GameObject* target, GameContext context){
 
 }
 
-GameplaySubstate processCaixaArmarioEvent(GameObject* utility, GameObject* target){
+GameplaySubstate processDiarioEvent(GameObject* utility, GameObject* target, GameContext context){
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_DIARIO].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
+}
+
+GameplaySubstate processVitrolaEvent(GameObject* utility, GameObject* target, GameContext context){
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_VITROLA].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//ALGO;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
+}
+
+GameplaySubstate processGarrafaEvent(GameObject* utility, GameObject* target, GameContext context){
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_VITROLA].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;//ALGO;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
+}
+
+GameplaySubstate processEstanteEvent(GameObject* utility, GameObject* target, GameContext context){
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_ESTANTE].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
+}
+
+GameplaySubstate processPirataEvent(GameObject* utility, GameObject* target, GameContext context){
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[ID_GAMEPLAY_PIRATA].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
+}
+
+GameplaySubstate processPescaEvent(GameObject* utility, GameObject* target, GameContext context){
 
 }
 
-GameplaySubstate processCaixaCamaEvent(GameObject* utility, GameObject* target){
-
+GameplaySubstate processChaveEvent(GameObject* utility, GameObject* target, GameContext context){
+    //PUZZLE
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[0].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
 }
 
-GameplaySubstate processBuracoEvent(GameObject* utility, GameObject* target){
-
-}
-
-GameplaySubstate processDiarioEvent(GameObject* utility, GameObject* target){
-
-}
-
-GameplaySubstate processVitrolaEvent(GameObject* utility, GameObject* target){
-
-}
-
-GameplaySubstate processGarrafaEvent(GameObject* utility, GameObject* target){
-
-}
-
-GameplaySubstate processEstanteEvent(GameObject* utility, GameObject* target){
-
-}
-
-GameplaySubstate processPirataEvent(GameObject* utility, GameObject* target){
-
-}
-
-GameplaySubstate processPescaEvent(GameObject* utility, GameObject* target){
-
-}
-
-GameplaySubstate processChaveEvent(GameObject* utility, GameObject* target){
-
-}
-
-GameplaySubstate processBilheteEvent(GameObject* utility, GameObject* target){
-
+GameplaySubstate processBilheteEvent(GameObject* utility, GameObject* target, GameContext context){
+    //puzzle
+    if (CheckCollisionPointRec(GetMousePosition(), context.gameplay.objects[0].bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) return 0;
+        else return GAMEPLAY_SUBSTATE_MAIN;
+    }
 }
 
 GameObject* GetHand(void){
@@ -185,52 +218,53 @@ GameContext InitializeGameplayState(GameContext context) {
 GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext context){
     switch(target->id){
         case ID_GAMEPLAY_ARMARIO:
-            context.gameplay.substate = processArmarioEvent(utility, target);
-
+            context.gameplay.substate = processArmarioEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_CAIXA_ARMARIO:
-            context.gameplay.substate = processCaixaArmarioEvent(utility, target);
-
+            printf("entrou zoom caixa armario\n");
+            context.gameplay.substate = processCaixaArmarioEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_CAIXA_CAMA:
-            context.gameplay.substate = processCaixaCamaEvent(utility, target);
-
+            context.gameplay.substate = processCaixaCamaEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_BURACO:
-            context.gameplay.substate = processBuracoEvent(utility, target);
-
+            context.gameplay.substate = processBuracoEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_DIARIO:
-            context.gameplay.substate = processDiarioEvent(utility, target);
-
+            context.gameplay.substate = processDiarioEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_VITROLA:
-            context.gameplay.substate = processVitrolaEvent(utility, target);
-
+            context.gameplay.substate = processVitrolaEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_GARRAFA:
-            context.gameplay.substate = processGarrafaEvent(utility, target);
-
+            context.gameplay.substate = processGarrafaEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_ESTANTE:
-            context.gameplay.substate = processEstanteEvent(utility, target);
-
+            context.gameplay.substate = processEstanteEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_PIRATA: 
-            context.gameplay.substate = processPirataEvent(utility, target);
-
+            context.gameplay.substate = processPirataEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_VARA_PESCA:
-            context.gameplay.substate = processPescaEvent(utility, target);
-
+            context.gameplay.substate = processPescaEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_CHAVE:
-            context.gameplay.substate = processChaveEvent(utility, target);
-
+            context.gameplay.substate = processChaveEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
         case ID_GAMEPLAY_BILHETE:
-            context.gameplay.substate = processBilheteEvent(utility, target);
-
+            context.gameplay.substate = processBilheteEvent(utility, target, context);
+            return STATE_GAMEPLAY;
             break;
     }
 }
@@ -243,6 +277,7 @@ Texture2D GetGameplayBackground(GameContext context) {
             return context.gameplay.background;
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
+            return GetZoomCaixaArmarioBackground(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
             break;
@@ -265,6 +300,7 @@ GameObject* GetGameplayObjects(GameContext context){
             return context.gameplay.objects;
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
+            return GetZoomCaixaArmarioObjects(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
             break;
@@ -287,6 +323,7 @@ int GetGameplayObjectCount(GameContext context) {
             return context.gameplay.objectCount;
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
+            return GetZoomCaixaArmarioObjectCount(context);
             break;
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
             break;

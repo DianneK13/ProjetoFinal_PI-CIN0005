@@ -3,12 +3,14 @@
 #include "scenes/scenemenu.h"
 #include "scenes/scenegameplay.h"
 #include "scenes/sceneending.h"
+#include "scenes/zoom/scenezoomcaixaarmario.h"
 
 GameContext InitializeState(GameContext context) {
     context.state = STATE_MENU;
     context = InitializeMenuState(context);
     context = InitializeGameplayState(context);
     context = InitializeEndingState(context);
+    context = InitializeZoomCaixaArmarioState(context);
     return context;
 }
 
