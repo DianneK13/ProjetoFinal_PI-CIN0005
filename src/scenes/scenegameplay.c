@@ -28,11 +28,89 @@ GameContext InitializeGameplayState(GameContext context) {
     return context;
 }
 
+void ProcessFlags(GameContext* context, GameObject* target)
+{
+    if (context->state == STATE_GAMEPLAY && context->flags[HISTORIA_INIT] == 0)
+    {
+        //dialogo começo
+        printf("comeco\n");
+        context->flags[0] = 1;
+    }
+    else if (context->gameplay.substate == ID_GAMEPLAY_CAIXA_ARMARIO && context->flags[CAIXA_ARMARIO] == 0)
+    {
+        //dialogo caixa_armario
+        printf("dialogo caixa armario\n");
+        context->flags[CAIXA_ARMARIO] = 1;
+    }
+    else if (context->gameplay.substate == ID_GAMEPLAY_CAIXA_CAMA && context->flags[CAIXA_CAMA] == 0)
+    {
+        //dialogo cama
+        printf("dialogo caixa cama\n");
+        context->flags[CAIXA_CAMA] = 1;
+    }
+    else if (context->gameplay.substate == ID_GAMEPLAY_GARRAFA && context->flags[GARRAFA] == 0)
+    {
+        //dialogo garrafa
+        printf("dialogo garrafa\n");
+        context->flags[GARRAFA] = 1;
+    }
+    else if (context->gameplay.substate == ID_GAMEPLAY_PIRATA && context->flags[PIRATA] == 0)
+    {
+        //dialogo pirata
+        printf("dialogo pirata\n");
+        context->flags[PIRATA] = 1;
+    }
+    else if (context->gameplay.substate == ID_GAMEPLAY_ESTANTE && context->flags[ESTANTE] == 0)
+    {
+        //dialogo estante
+        printf("dialogo estante\n");
+        context->flags[ESTANTE] == 1;
+    }
+    else if (context->flags[DIADO_N_CHAVE] == 0 && context->state == STATE_GAMEPLAY && temChave == 0 && target->id == ID_GAMEPLAY_DIARIO)
+    {
+        //dialogo n chave
+        //context->flags[DIADO_N_CHAVE] = 1;
+        printf("dialogo sem chave\n");
+    }
+    else if (context->gameplay.substate == ID_GAMEPLAY_DIARIO && context->flags[DIARIO] == 0)
+    {
+        //dialogo diario
+        printf("dialogo diario\n");
+        context->flags[DIARIO] = 1;
+    }
+    else if (context->flags[CHAVE] == 0 && temChave == 1)
+    {
+        //dialogo chave
+        printf("dialogo chave\n");
+        context->flags[CHAVE] = 1;
+    }
+    else if (context->flags[VITROLA] == 0 && target->id == ID_GAMEPLAY_VITROLA)
+    {
+        //dialogo vitrola
+        printf("dialogo vitrola\n");
+        context->flags[VITROLA] = 1;
+    }
+    else if (context->gameplay.substate == ID_GAMEPLAY_BILHETE && context->flags[BILHETE] == 0)
+    {
+        //dialogo bilhete
+        printf("dialogo bilhete\n");
+        context->flags[BILHETE] = 1;
+    }
+    else if (context->estante.objects[ID_ESTANTE_LETRA_1].state == ALTERED && context->estante.objects[ID_ESTANTE_LETRA_1].state == ALTERED &&context->estante.objects[ID_ESTANTE_LETRA_2].state == ALTERED &&context->estante.objects[ID_ESTANTE_LETRA_3].state == ALTERED &&context->estante.objects[ID_ESTANTE_LETRA_4].state == ALTERED && context->estante.objects[ID_ESTANTE_LETRA_5].state == ALTERED && context->estante.objects[ID_ESTANTE_LETRA_6].state == ALTERED && context->flags[FINAL] == 0)
+    {
+        //dialogo final
+        printf("dialogo final\n");
+        context->flags[FINAL] == 1;
+    }  
+}
+
+
 //processa ações entre o objeto na mão do jogador e o objeto em que ele clicou
 GameState processGameplayEvent(GameObject* utility, GameObject* target, GameContext* context){
-    if (!target || !context) return STATE_GAMEPLAY;
-    printf("process menu event: %s\n", target->name);
 
+    if (!target || !context) return STATE_GAMEPLAY;
+    ProcessFlags(context, target);
+    printf("process menu event: %s\n", target->name);
     switch(context->gameplay.substate){
         case GAMEPLAY_SUBSTATE_MAIN:
             switch(target->id) {
