@@ -4,11 +4,14 @@
 
 #include "common.h"
 
+#define ID_DIARIO_VOLTAR 0
 
-void InitializeZoomDiarioState();
+GameContext InitializeZoomDiarioState(GameContext context);
 
-GameplaySubstate processZoomDiarioEvent(GameObject* object);
+GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context);
 
-GameObject* GetZoomDiarioBackground(void);
+Texture2D GetZoomDiarioBackground(GameContext context);
 
-GameObject* GetZoomDiarioObjects(void);
+GameObject* GetZoomDiarioObjects(GameContext context);
+
+int GetZoomDiarioObjectCount(GameContext context);

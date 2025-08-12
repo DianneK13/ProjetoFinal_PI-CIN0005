@@ -4,11 +4,14 @@
 
 #include "common.h"
 
+#define ID_GARRAFA_VOLTAR 0
 
-void InitializeZoomGarrafaState();
+GameContext InitializeZoomGarrafaState(GameContext context);
 
-GameplaySubstate processZoomGarrafaEvent(GameObject* object);
+GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* context);
 
-GameObject* GetZoomGarrafaBackground(void);
+Texture2D GetZoomGarrafaBackground(GameContext context);
 
-GameObject* GetZoomGarrafaObjects(void);
+GameObject* GetZoomGarrafaObjects(GameContext context);
+
+int GetZoomGarrafaObjectCount(GameContext context);

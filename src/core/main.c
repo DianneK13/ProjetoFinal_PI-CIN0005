@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "raylib.h"
 
@@ -47,7 +46,7 @@ int main(void) {
     context = InitializeState(context);
 
     // Main game loop
-    while (!WindowShouldClose())
+    while (!WindowShouldClose() && !context.should_close)
     {
         GameObject *objs = GetObjects(context);
         int count = GetObjectCount(context);
@@ -58,6 +57,8 @@ int main(void) {
         if(go != NULL){
             printf("clicou no botao \n");
             context = processEvent(go, context);
+            objs = GetObjects(context);
+            count = GetObjectCount(context);
         }
 
         // Atualiza qual objeto está sob o mouse

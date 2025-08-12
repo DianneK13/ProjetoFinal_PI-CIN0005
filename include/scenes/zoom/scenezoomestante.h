@@ -4,11 +4,20 @@
 
 #include "common.h"
 
+#define ID_ESTANTE_VOLTAR 0
+#define ID_ESTANTE_LETRA_1 1
+#define ID_ESTANTE_LETRA_2 2
+#define ID_ESTANTE_LETRA_3 3
+#define ID_ESTANTE_LETRA_4 4
+#define ID_ESTANTE_LETRA_5 5
+#define ID_ESTANTE_LETRA_6 6
 
-void InitializeZoomEstanteState();
+GameContext InitializeZoomEstanteState(GameContext context);
 
-GameplaySubstate processZoomEstanteEvent(GameObject* object);
+GameplaySubstate processZoomEstanteEvent(GameObject* target, GameContext* context, int* leuBilhete);
 
-GameObject* GetZoomEstanteBackground(void);
+Texture2D GetZoomEstanteBackground(GameContext context);
 
-GameObject* GetZoomEstanteObjects(void);
+GameObject* GetZoomEstanteObjects(GameContext context);
+
+int GetZoomEstanteObjectCount(GameContext context);

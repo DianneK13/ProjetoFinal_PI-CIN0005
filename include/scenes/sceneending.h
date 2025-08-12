@@ -5,7 +5,7 @@
 #include "common.h"
 
 
-GameContext InitializeEndingState();
+GameContext InitializeEndingState(GameContext context);
 
 GameState processEndingEvent(GameObject* object);
 

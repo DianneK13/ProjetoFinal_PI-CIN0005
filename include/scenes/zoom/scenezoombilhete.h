@@ -4,11 +4,14 @@
 
 #include "common.h"
 
+#define ID_BILHETE_VOLTAR 0
 
-void InitializeZoomBilheteState();
+GameContext InitializeZoomBilheteState(GameContext context);
 
-GameplaySubstate processZoomBilheteEvent(GameObject* object);
+GameplaySubstate processZoomBilheteEvent(GameObject* target, GameContext* context);
 
-GameObject* GetZoomBilheteBackground(void);
+Texture2D GetZoomBilheteBackground(GameContext context);
 
-GameObject* GetZoomBilheteObjects(void);
+GameObject* GetZoomBilheteObjects(GameContext context);
+
+int GetZoomBilheteObjectCount(GameContext context);

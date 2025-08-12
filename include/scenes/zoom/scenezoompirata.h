@@ -4,11 +4,14 @@
 
 #include "common.h"
 
+#define ID_PIRATA_VOLTAR 0
 
-void InitializeZoomPirataState();
+GameContext InitializeZoomPirataState(GameContext context);
 
-GameplaySubstate processZoomPirataEvent(GameObject* object);
+GameplaySubstate processZoomPirataEvent(GameObject* target, GameContext* context);
 
-GameObject* GetZoomPirataBackground(void);
+Texture2D GetZoomPirataBackground(GameContext context);
 
-GameObject* GetZoomPirataObjects(void);
+GameObject* GetZoomPirataObjects(GameContext context);
+
+int GetZoomPirataObjectCount(GameContext context);

@@ -74,10 +74,13 @@ typedef struct GameContext{
     //as subcenas agr
     GameScene bilhete;
     GameScene caixa_armario;
+    GameScene caixa_cama;
     GameScene diario;
     GameScene estante;
     GameScene garrafa;
     GameScene pirata;
+
+    bool should_close;
 }GameContext;
 
 
