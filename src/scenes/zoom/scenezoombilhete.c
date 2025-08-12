@@ -23,7 +23,7 @@ GameContext InitializeZoomBilheteState(GameContext context) {
     context.bilhete.objects[ID_BILHETE_VOLTAR].state = ORIGINAL;
     context.bilhete.objects[ID_BILHETE_VOLTAR].type = INTERACTIVE;
 
-    context.bilhete.background = LoadTexture("assets/jill.png");
+    context.bilhete.background = LoadTexture("assets/zoomBilhete/ZoomBilhete.png");
     return context;
 }
 

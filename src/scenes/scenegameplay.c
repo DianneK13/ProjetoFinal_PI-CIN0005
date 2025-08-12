@@ -8,6 +8,10 @@
 #include "scenes/zoom/scenezoompirata.h"
 #include <stdlib.h>
 
+int counterSimbolos[4] = {1, 1, 1, 1};
+int counterNumeros[4] = {0, 0, 0, 0};
+int temChave=0, leuBilhete=0;
+
 static void SetupGameplayMain(GameContext *ctx);
 // static void GameplayFreeObjects(GameContext *ctx);
 
@@ -20,6 +24,7 @@ GameContext InitializeGameplayState(GameContext context) {
     context.gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
     context.gameplay.background = LoadTexture("assets/fundofodao.png");
     SetupGameplayMain(&context);
+
     return context;
 }
 
@@ -41,7 +46,8 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_DIARIO:
-                    context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+                    if(temChave == 0) context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
+                    else context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_ESTANTE:
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
@@ -63,11 +69,11 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
             }
 
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
-            context->gameplay.substate = processZoomCaixaArmarioEvent(target, context);
+            context->gameplay.substate = processZoomCaixaArmarioEvent(target, context, counterSimbolos, &temChave);
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
-            context->gameplay.substate = processZoomCaixaCamaEvent(target, context);
+            context->gameplay.substate = processZoomCaixaCamaEvent(target, context, counterNumeros, &leuBilhete);
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
@@ -87,7 +93,7 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
-            context->gameplay.substate = processZoomEstanteEvent(target, context);
+            context->gameplay.substate = processZoomEstanteEvent(target, context, &leuBilhete);
             return STATE_GAMEPLAY;
         default:
             context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
@@ -156,15 +162,13 @@ static void SetupGameplayMain(GameContext *ctx) {
     ctx->gameplay.objects = (GameObject*)malloc(sizeof(GameObject) * ctx->gameplay.objectCount);
     if (!ctx->gameplay.objects) { ctx->gameplay.objectCount = 0; return; }
 
-    /*
     // ARMÁRIO
     ctx->gameplay.objects[ID_GAMEPLAY_ARMARIO] = (GameObject){
         .name="armario", .id=ID_GAMEPLAY_ARMARIO, .type=INTERACTIVE, .state=ORIGINAL,
         .texture=LoadTexture("assets/objetosMainGameplay/Armario.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
-        .bounds=(Rectangle){0, 180, 242, 455}
+        .bounds=(Rectangle){0, 0, 0, 0}
     };
-    */
 
     // CAIXA ARMÁRIO
     ctx->gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO] = (GameObject){

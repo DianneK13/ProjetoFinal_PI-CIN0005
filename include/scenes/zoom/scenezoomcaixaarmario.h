@@ -11,9 +11,18 @@
 #define ID_CAIXA_ARMARIO_SIMBOLO_4 4
 #define ID_CAIXA_ARMARIO_BOTAO 5
 
+#define ID_CAIXA_ARMARIO_ANCORA 6
+#define ID_CAIXA_ARMARIO_CIFRAO 7
+#define ID_CAIXA_ARMARIO_ESPADA 8
+#define ID_CAIXA_ARMARIO_GANCHO 9
+#define ID_CAIXA_ARMARIO_LULA 10
+#define ID_CAIXA_ARMARIO_ROSA 11
+#define ID_CAIXA_ARMARIO_TUBARAO 12
+#define ID_CAIXA_ARMARIO_X 13
+
 GameContext InitializeZoomCaixaArmarioState(GameContext context);
 
-GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* context);
+GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* context, int* counterSimbolos, int* temChave);
 
 Texture2D GetZoomCaixaArmarioBackground(GameContext context);
 

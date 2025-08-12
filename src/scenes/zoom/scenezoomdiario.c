@@ -23,7 +23,7 @@ GameContext InitializeZoomDiarioState(GameContext context) {
     context.diario.objects[ID_DIARIO_VOLTAR].state = ORIGINAL;
     context.diario.objects[ID_DIARIO_VOLTAR].type = INTERACTIVE;
 
-    context.diario.background = LoadTexture("assets/jill.png");
+    context.diario.background = LoadTexture("assets/zoomDiario/ZoomDiario.png");
     return context;
 }
 

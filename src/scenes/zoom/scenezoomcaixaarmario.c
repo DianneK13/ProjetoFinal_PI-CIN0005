@@ -11,7 +11,7 @@ Texture2D background_sceneCaixaArmario;
 */
 
 GameContext InitializeZoomCaixaArmarioState(GameContext context) {
-    context.caixa_armario.objectCount = 6;
+    context.caixa_armario.objectCount = 14;
     context.caixa_armario.objects = (GameObject*)malloc(context.caixa_armario.objectCount * sizeof(GameObject));
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].name = "voltar";
@@ -44,7 +44,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].name = "simbolo3";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].id = ID_CAIXA_ARMARIO_SIMBOLO_3;
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].position = (Vector2){356, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].position = (Vector2){370, 0};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].bounds = (Rectangle){576, 360, 178, 265};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].state = ORIGINAL;
@@ -53,7 +53,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].name = "simbolo4";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].id = ID_CAIXA_ARMARIO_SIMBOLO_4;
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].position = (Vector2){534, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].position = (Vector2){560, 0};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].bounds = (Rectangle){754, 360, 178, 265};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].state = ORIGINAL;
@@ -67,15 +67,153 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_BOTAO].bounds = (Rectangle){520, 114, 110, 100};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_BOTAO].state = ORIGINAL;
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_BOTAO].type = INTERACTIVE;
+    
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].name = "ancora";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].id = ID_CAIXA_ARMARIO_ANCORA;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].type = INTERACTIVE;
 
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].name = "cifrao";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].id = ID_CAIXA_ARMARIO_CIFRAO;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture = LoadTexture("assets/zoomCaixaArmario/SimboloCifrao.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].type = INTERACTIVE;
+
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].name = "espada";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].id = ID_CAIXA_ARMARIO_ESPADA;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloEspada.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].type = INTERACTIVE;
+
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].name = "gancho";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].id = ID_CAIXA_ARMARIO_GANCHO;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].texture = LoadTexture("assets/zoomCaixaArmario/SimboloGancho.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].type = INTERACTIVE;
+
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].name = "lula";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].id = ID_CAIXA_ARMARIO_LULA;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloLula.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].type = INTERACTIVE;
+
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].name = "rosa";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].id = ID_CAIXA_ARMARIO_ROSA;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloRosa.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].type = INTERACTIVE;
+
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].name = "tubarao";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].id = ID_CAIXA_ARMARIO_TUBARAO;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].texture = LoadTexture("assets/zoomCaixaArmario/SimboloTubarao.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].type = INTERACTIVE;
+
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].name = "X";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].id = ID_CAIXA_ARMARIO_X;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].texture = LoadTexture("assets/zoomCaixaArmario/SimboloX.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].type = INTERACTIVE;
+    
+    
     context.caixa_armario.background = LoadTexture("assets/zoomCaixaArmario/ZoomCaixaArmario.png");
     return context;
 }
 
-GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* context) {
+GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* context, int* counterSimbolos, int* temChave) {
     switch(target->id) {
         case ID_CAIXA_ARMARIO_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+        
+        case ID_CAIXA_ARMARIO_SIMBOLO_1:
+            counterSimbolos[0]++;
+
+            if(counterSimbolos[0]%8 == 0) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture;
+            else if(counterSimbolos[0]%8 == 1) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture;
+            else if(counterSimbolos[0]%8 == 2) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].texture;
+            else if(counterSimbolos[0]%8 == 3) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].texture;
+            else if(counterSimbolos[0]%8 == 4) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].texture;
+            else if(counterSimbolos[0]%8 == 5) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].texture;
+            else if(counterSimbolos[0]%8 == 6) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].texture;
+            else if(counterSimbolos[0]%8 == 7) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_X].texture;
+
+            return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+
+        case ID_CAIXA_ARMARIO_SIMBOLO_2:
+            counterSimbolos[1]++;
+
+            if(counterSimbolos[1]%8 == 0) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture;
+            else if(counterSimbolos[1]%8 == 1) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture;
+            else if(counterSimbolos[1]%8 == 2) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].texture;
+            else if(counterSimbolos[1]%8 == 3) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].texture;
+            else if(counterSimbolos[1]%8 == 4) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].texture;
+            else if(counterSimbolos[1]%8 == 5) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].texture;
+            else if(counterSimbolos[1]%8 == 6) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].texture;
+            else if(counterSimbolos[1]%8 == 7) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_X].texture;
+
+            return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+
+        case ID_CAIXA_ARMARIO_SIMBOLO_3:
+            counterSimbolos[2]++;
+
+            if(counterSimbolos[2]%8 == 0) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture;
+            else if(counterSimbolos[2]%8 == 1) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture;
+            else if(counterSimbolos[2]%8 == 2) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].texture;
+            else if(counterSimbolos[2]%8 == 3) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].texture;
+            else if(counterSimbolos[2]%8 == 4) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].texture;
+            else if(counterSimbolos[2]%8 == 5) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].texture;
+            else if(counterSimbolos[2]%8 == 6) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].texture;
+            else if(counterSimbolos[2]%8 == 7) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_X].texture;
+
+            return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+
+        case ID_CAIXA_ARMARIO_SIMBOLO_4:
+            counterSimbolos[3]++;
+
+            if(counterSimbolos[3]%8 == 0) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture;
+            else if(counterSimbolos[3]%8 == 1) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture;
+            else if(counterSimbolos[3]%8 == 2) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].texture;
+            else if(counterSimbolos[3]%8 == 3) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].texture;
+            else if(counterSimbolos[3]%8 == 4) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].texture;
+            else if(counterSimbolos[3]%8 == 5) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].texture;
+            else if(counterSimbolos[3]%8 == 6) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].texture;
+            else if(counterSimbolos[3]%8 == 7) target->texture = context->caixa_armario.objects[ID_CAIXA_ARMARIO_X].texture;
+
+            return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+        
+        case ID_CAIXA_ARMARIO_BOTAO:
+            if(counterSimbolos[0]%8 == 7 && counterSimbolos[1]%8 == 4 && counterSimbolos[2]%8 == 6 && counterSimbolos[3]%8 == 0) {
+                *temChave = 1;
+                printf("receba\n");
+                return GAMEPLAY_SUBSTATE_MAIN;
+            }
+            else return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+        
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
     }
