@@ -42,7 +42,7 @@ static void SetupMenuMain(GameContext *ctx) {
     };
 
     if (ctx->menu.background.id != 0) UnloadTexture(ctx->menu.background);
-    ctx->menu.background = LoadTexture("assets/menufodao.png");
+    ctx->menu.background = LoadTexture("assets/menu_background.png");
 }
 
 
@@ -93,7 +93,7 @@ GameState processMenuEvent(GameObject* clickedObject, GameContext *context) {
                     SetupMenuCreditos(context);
                     return STATE_MENU;
             case ID_MENU_BOTAO_SAIR:
-                    CloseWindow();
+                    context->should_close = true;
                     return STATE_MENU;
             default:
                     break;

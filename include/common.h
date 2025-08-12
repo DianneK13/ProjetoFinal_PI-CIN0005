@@ -79,6 +79,8 @@ typedef struct GameContext{
     GameScene estante;
     GameScene garrafa;
     GameScene pirata;
+
+    bool should_close;
 }GameContext;
 
 

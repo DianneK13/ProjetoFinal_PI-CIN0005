@@ -24,7 +24,7 @@ void FreeObjects(GameObject **objects, int *count) {
     if (count) *count = 0;
 }
 
-void FreeScene(GameScene *scene, bool freeBackground) {
+void FreeScene(GameScene *scene, const bool freeBackground) {
     if (!scene) return;
     // objetos da cena
     if (scene->objects) {
