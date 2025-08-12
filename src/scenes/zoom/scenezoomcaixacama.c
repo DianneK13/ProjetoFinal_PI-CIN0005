@@ -77,7 +77,7 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
     context.caixa_cama.objects[ID_CAIXA_CAMA_7].texture = LoadTexture("assets/zoomCaixaCama/7.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_8].texture = LoadTexture("assets/zoomCaixaCama/8.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_9].texture = LoadTexture("assets/zoomCaixaCama/9.png");
-    context.caixa_cama.objects[ID_CAIXA_BILHETE].texture = LoadTexture("assets/zoomBilhete/ZoomBilhete.png");
+    context.caixa_cama.objects[ID_CAIXA_BILHETE].texture = LoadTexture("assets/zoomCaixaCama/ZoomBilhete.png");
 
     context.caixa_cama.background = LoadTexture("assets/zoomCaixaCama/ZoomCaixaCama.png");
     return context;
@@ -106,14 +106,14 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
         case ID_CAIXA_CAMA_SIMBOLO_2:
             counterNumeros[1]++;
 
-            if(counterNumeros[1]%8 == 0) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_1].texture;
-            else if(counterNumeros[1]%8 == 1) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_2].texture;
-            else if(counterNumeros[1]%8 == 2) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_3].texture;
-            else if(counterNumeros[1]%8 == 3) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_4].texture;
-            else if(counterNumeros[1]%8 == 4) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_5].texture;
-            else if(counterNumeros[1]%8 == 5) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_6].texture;
-            else if(counterNumeros[1]%8 == 6) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_7].texture;
-            else if(counterNumeros[1]%8 == 7) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_8].texture;
+            if(counterNumeros[1]%9 == 0) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_1].texture;
+            else if(counterNumeros[1]%9 == 1) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_2].texture;
+            else if(counterNumeros[1]%9 == 2) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_3].texture;
+            else if(counterNumeros[1]%9 == 3) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_4].texture;
+            else if(counterNumeros[1]%9 == 4) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_5].texture;
+            else if(counterNumeros[1]%9 == 5) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_6].texture;
+            else if(counterNumeros[1]%9 == 6) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_7].texture;
+            else if(counterNumeros[1]%9 == 7) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_8].texture;
             else if(counterNumeros[1]%9 == 8) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_9].texture;
 
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
@@ -121,14 +121,14 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
         case ID_CAIXA_CAMA_SIMBOLO_3:
             counterNumeros[2]++;
 
-            if(counterNumeros[2]%8 == 0) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_1].texture;
-            else if(counterNumeros[2]%8 == 1) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_2].texture;
-            else if(counterNumeros[2]%8 == 2) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_3].texture;
-            else if(counterNumeros[2]%8 == 3) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_4].texture;
-            else if(counterNumeros[2]%8 == 4) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_5].texture;
-            else if(counterNumeros[2]%8 == 5) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_6].texture;
-            else if(counterNumeros[2]%8 == 6) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_7].texture;
-            else if(counterNumeros[2]%8 == 7) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_8].texture;
+            if(counterNumeros[2]%9 == 0) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_1].texture;
+            else if(counterNumeros[2]%9 == 1) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_2].texture;
+            else if(counterNumeros[2]%9 == 2) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_3].texture;
+            else if(counterNumeros[2]%9 == 3) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_4].texture;
+            else if(counterNumeros[2]%9 == 4) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_5].texture;
+            else if(counterNumeros[2]%9 == 5) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_6].texture;
+            else if(counterNumeros[2]%9 == 6) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_7].texture;
+            else if(counterNumeros[2]%9 == 7) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_8].texture;
             else if(counterNumeros[2]%9 == 8) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_9].texture;
 
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
@@ -136,20 +136,20 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
         case ID_CAIXA_CAMA_SIMBOLO_4:
             counterNumeros[3]++;
 
-            if(counterNumeros[3]%8 == 0) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_1].texture;
-            else if(counterNumeros[3]%8 == 1) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_2].texture;
-            else if(counterNumeros[3]%8 == 2) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_3].texture;
-            else if(counterNumeros[3]%8 == 3) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_4].texture;
-            else if(counterNumeros[3]%8 == 4) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_5].texture;
-            else if(counterNumeros[3]%8 == 5) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_6].texture;
-            else if(counterNumeros[3]%8 == 6) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_7].texture;
-            else if(counterNumeros[3]%8 == 7) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_8].texture;
+            if(counterNumeros[3]%9 == 0) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_1].texture;
+            else if(counterNumeros[3]%9 == 1) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_2].texture;
+            else if(counterNumeros[3]%9 == 2) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_3].texture;
+            else if(counterNumeros[3]%9 == 3) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_4].texture;
+            else if(counterNumeros[3]%9 == 4) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_5].texture;
+            else if(counterNumeros[3]%9 == 5) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_6].texture;
+            else if(counterNumeros[3]%9 == 6) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_7].texture;
+            else if(counterNumeros[3]%9 == 7) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_8].texture;
             else if(counterNumeros[3]%9 == 8) target->texture = context->caixa_cama.objects[ID_CAIXA_CAMA_9].texture;
 
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
         
         case ID_CAIXA_CAMA_BOTAO:
-            if(counterNumeros[0]%8 == 0 && counterNumeros[1]%8 == 0 && counterNumeros[2]%8 == 0 && counterNumeros[3]%8 == 0) {
+            if(counterNumeros[0]%9 == 0 && counterNumeros[1]%9 == 0 && counterNumeros[2]%9 == 0 && counterNumeros[3]%9 == 0) {
                 printf("receba\n");
                 *leuBilhete = 1;
 
