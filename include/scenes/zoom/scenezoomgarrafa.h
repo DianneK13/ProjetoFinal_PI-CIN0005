@@ -8,7 +8,7 @@
 
 GameContext InitializeZoomGarrafaState(GameContext context);
 
-GameplaySubstate processZoomGarrafaEvent(GameObject* object);
+GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* context);
 
 Texture2D GetZoomGarrafaBackground(GameContext context);
 

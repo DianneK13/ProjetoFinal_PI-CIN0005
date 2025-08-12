@@ -11,8 +11,17 @@ Texture2D background_sceneCaixaArmario;
 */
 
 GameContext InitializeZoomCaixaArmarioState(GameContext context) {
-    context.caixa_armario.objectCount = 5;
+    context.caixa_armario.objectCount = 6;
     context.caixa_armario.objects = (GameObject*)malloc(context.caixa_armario.objectCount * sizeof(GameObject));
+
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].name = "voltar";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].id = ID_CAIXA_ARMARIO_VOLTAR;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].type = INTERACTIVE;
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].name = "simbolo1";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].id = ID_CAIXA_ARMARIO_SIMBOLO_1;
@@ -63,8 +72,13 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     return context;
 }
 
-GameplaySubstate processZoomCaixaArmarioEvent(GameObject* object) {
-    return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* context) {
+    switch(target->id) {
+        case ID_CAIXA_ARMARIO_VOLTAR:
+            return GAMEPLAY_SUBSTATE_MAIN;
+        default:
+            return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+    }
 }
 
 Texture2D GetZoomCaixaArmarioBackground(GameContext context) {

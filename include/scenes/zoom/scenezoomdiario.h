@@ -8,7 +8,7 @@
 
 GameContext InitializeZoomDiarioState(GameContext context);
 
-GameplaySubstate processZoomDiarioEvent(GameObject* object);
+GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context);
 
 Texture2D GetZoomDiarioBackground(GameContext context);
 

@@ -4,15 +4,16 @@
 
 #include "common.h"
 
-#define ID_CAIXA_CAMA_SIMBOLO_1 0
-#define ID_CAIXA_CAMA_SIMBOLO_2 1
-#define ID_CAIXA_CAMA_SIMBOLO_3 2
-#define ID_CAIXA_CAMA_SIMBOLO_4 3
-#define ID_CAIXA_CAMA_BOTAO 4
+#define ID_CAIXA_CAMA_VOLTAR 0
+#define ID_CAIXA_CAMA_SIMBOLO_1 1
+#define ID_CAIXA_CAMA_SIMBOLO_2 2
+#define ID_CAIXA_CAMA_SIMBOLO_3 3
+#define ID_CAIXA_CAMA_SIMBOLO_4 4
+#define ID_CAIXA_CAMA_BOTAO 5
 
 GameContext InitializeZoomCaixaCamaState(GameContext context);
 
-GameplaySubstate processZoomCaixaCamaEvent(GameObject* object);
+GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* context);
 
 Texture2D GetZoomCaixaCamaBackground(GameContext context);
 

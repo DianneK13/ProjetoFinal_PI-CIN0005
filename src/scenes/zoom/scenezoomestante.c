@@ -16,19 +16,24 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 
     context.estante.objects[ID_ESTANTE_VOLTAR].name = "voltar";
     context.estante.objects[ID_ESTANTE_VOLTAR].id = ID_ESTANTE_VOLTAR;
-    context.estante.objects[ID_ESTANTE_VOLTAR].texture = LoadTexture("assets/jill.png");
+    context.estante.objects[ID_ESTANTE_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
     context.estante.objects[ID_ESTANTE_VOLTAR].position = (Vector2){0, 0};
-    context.estante.objects[ID_ESTANTE_VOLTAR].size = (Vector2){100, 50};
-    context.estante.objects[ID_ESTANTE_VOLTAR].bounds = (Rectangle){0, 0, 100, 50};
+    context.estante.objects[ID_ESTANTE_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+    context.estante.objects[ID_ESTANTE_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
     context.estante.objects[ID_ESTANTE_VOLTAR].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_VOLTAR].type = INTERACTIVE;
 
-    context.estante.background = LoadTexture("assets/jill.png");
+    context.estante.background = LoadTexture("assets/zoomEstante/ZoomEstante.png");
     return context;
 }
 
-GameplaySubstate processZoomEstanteEvent(GameObject* object) {
-    return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
+GameplaySubstate processZoomEstanteEvent(GameObject* target, GameContext* context) {
+    switch(target->id) {
+        case ID_ESTANTE_VOLTAR:
+            return GAMEPLAY_SUBSTATE_MAIN;
+        default:
+            return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
+    }
 }
 
 Texture2D GetZoomEstanteBackground(GameContext context) {

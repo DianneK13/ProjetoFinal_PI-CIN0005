@@ -14,7 +14,7 @@
 GameContext InitializeState(GameContext context) {
     context.state = STATE_MENU;
     context = InitializeMenuState(context);
-    context = InitializeGameplayState(&context);
+    context = InitializeGameplayState(context);
     context = InitializeEndingState(context);
     context = InitializeZoomBilheteState(context);
     context = InitializeZoomCaixaArmarioState(context);

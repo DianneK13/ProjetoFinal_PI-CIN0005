@@ -16,10 +16,10 @@ GameContext InitializeZoomDiarioState(GameContext context) {
 
     context.diario.objects[ID_DIARIO_VOLTAR].name = "voltar";
     context.diario.objects[ID_DIARIO_VOLTAR].id = ID_DIARIO_VOLTAR;
-    context.diario.objects[ID_DIARIO_VOLTAR].texture = LoadTexture("assets/jill.png");
+    context.diario.objects[ID_DIARIO_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
     context.diario.objects[ID_DIARIO_VOLTAR].position = (Vector2){0, 0};
-    context.diario.objects[ID_DIARIO_VOLTAR].size = (Vector2){100, 50};
-    context.diario.objects[ID_DIARIO_VOLTAR].bounds = (Rectangle){0, 0, 100, 50};
+    context.diario.objects[ID_DIARIO_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+    context.diario.objects[ID_DIARIO_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
     context.diario.objects[ID_DIARIO_VOLTAR].state = ORIGINAL;
     context.diario.objects[ID_DIARIO_VOLTAR].type = INTERACTIVE;
 
@@ -27,8 +27,13 @@ GameContext InitializeZoomDiarioState(GameContext context) {
     return context;
 }
 
-GameplaySubstate processZoomDiarioEvent(GameObject* object) {
-    return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context) {
+    switch(target->id) {
+        case ID_DIARIO_VOLTAR:
+            return GAMEPLAY_SUBSTATE_MAIN;
+        default:
+            return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+    }
 }
 
 Texture2D GetZoomDiarioBackground(GameContext context) {

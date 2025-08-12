@@ -51,7 +51,6 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_PIRATA:
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
-                    printf("entrou estado pirata\n");
                     return STATE_GAMEPLAY;
 
                 // itens "normais" /sem zoom
@@ -64,31 +63,31 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
             }
 
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO:
-            context->gameplay.substate = processZoomCaixaArmarioEvent(target);
+            context->gameplay.substate = processZoomCaixaArmarioEvent(target, context);
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:
-            context->gameplay.substate = processZoomCaixaCamaEvent(target);
+            context->gameplay.substate = processZoomCaixaCamaEvent(target, context);
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:
-            context->gameplay.substate = processZoomGarrafaEvent(target);
+            context->gameplay.substate = processZoomGarrafaEvent(target, context);
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:
-            context->gameplay.substate = processZoomPirataEvent(target);
+            context->gameplay.substate = processZoomPirataEvent(target, context);
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:
-            context->gameplay.substate = processZoomBilheteEvent(target);
+            context->gameplay.substate = processZoomBilheteEvent(target, context);
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
-            context->gameplay.substate = processZoomDiarioEvent(target);
+            context->gameplay.substate = processZoomDiarioEvent(target, context);
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
-            context->gameplay.substate = processZoomEstanteEvent(target);
+            context->gameplay.substate = processZoomEstanteEvent(target, context);
             return STATE_GAMEPLAY;
         default:
             context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
@@ -102,7 +101,7 @@ Texture2D GetGameplayBackground(GameContext *context) {
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO: return GetZoomCaixaArmarioBackground(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:    return GetZoomCaixaCamaBackground(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:       return GetZoomGarrafaBackground(*context);
-        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        printf("pegou fundo pirata\n"); return GetZoomPirataBackground(*context);
+        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        return GetZoomPirataBackground(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:       return GetZoomBilheteBackground(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:        return GetZoomDiarioBackground(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:       return GetZoomEstanteBackground(*context);
@@ -116,7 +115,7 @@ GameObject* GetGameplayObjects(GameContext *context){
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO: return GetZoomCaixaArmarioObjects(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:    return GetZoomCaixaCamaObjects(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:       return GetZoomGarrafaObjects(*context);
-        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        printf("pegou objetos pirata\n"); return GetZoomPirataObjects(*context);
+        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        return GetZoomPirataObjects(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:       return GetZoomBilheteObjects(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:        return GetZoomDiarioObjects(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:       return GetZoomEstanteObjects(*context);
@@ -130,7 +129,7 @@ int GetGameplayObjectCount(GameContext *context) {
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO: return GetZoomCaixaArmarioObjectCount(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA:    return GetZoomCaixaCamaObjectCount(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_GARRAFA:       return GetZoomGarrafaObjectCount(*context);
-        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        printf("pegou obj count pirata\n"); return GetZoomPirataObjectCount(*context);
+        case GAMEPLAY_SUBSTATE_ZOOM_PIRATA:        return GetZoomPirataObjectCount(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_BILHETE:       return GetZoomBilheteObjectCount(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:        return GetZoomDiarioObjectCount(*context);
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:       return GetZoomEstanteObjectCount(*context);
@@ -157,6 +156,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     ctx->gameplay.objects = (GameObject*)malloc(sizeof(GameObject) * ctx->gameplay.objectCount);
     if (!ctx->gameplay.objects) { ctx->gameplay.objectCount = 0; return; }
 
+    /*
     // ARMÁRIO
     ctx->gameplay.objects[ID_GAMEPLAY_ARMARIO] = (GameObject){
         .name="armario", .id=ID_GAMEPLAY_ARMARIO, .type=INTERACTIVE, .state=ORIGINAL,
@@ -164,10 +164,11 @@ static void SetupGameplayMain(GameContext *ctx) {
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds=(Rectangle){0, 180, 242, 455}
     };
+    */
 
     // CAIXA ARMÁRIO
     ctx->gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO] = (GameObject){
-        .name="caixaArmario", .id=ID_GAMEPLAY_CAIXA_ARMARIO, .type=INTERACTIVE, .state=ORIGINAL,
+        .name="caixa", .id=ID_GAMEPLAY_CAIXA_ARMARIO, .type=INTERACTIVE, .state=ORIGINAL,
         .texture = LoadTexture("assets/objetosMainGameplay/CaixaArmario.png"),
         .position=(Vector2){0, 0}, .size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){66, 100, 140, 73},
@@ -175,7 +176,7 @@ static void SetupGameplayMain(GameContext *ctx) {
 
     // CAIXA CAMA
     ctx->gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA] = (GameObject){
-        .name="caixaCama", .id=ID_GAMEPLAY_CAIXA_CAMA, .type=INTERACTIVE, .state=ORIGINAL,
+        .name="cofre", .id=ID_GAMEPLAY_CAIXA_CAMA, .type=INTERACTIVE, .state=ORIGINAL,
         .texture = LoadTexture("assets/objetosMainGameplay/CaixaCama.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){957, 710, 118, 75},

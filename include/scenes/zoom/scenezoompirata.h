@@ -8,7 +8,7 @@
 
 GameContext InitializeZoomPirataState(GameContext context);
 
-GameplaySubstate processZoomPirataEvent(GameObject* object);
+GameplaySubstate processZoomPirataEvent(GameObject* target, GameContext* context);
 
 Texture2D GetZoomPirataBackground(GameContext context);
 

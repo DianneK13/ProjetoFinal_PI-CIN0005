@@ -11,8 +11,17 @@ Texture2D background_sceneCaixaCama;
 */
 
 GameContext InitializeZoomCaixaCamaState(GameContext context) {
-    context.caixa_cama.objectCount = 5;
+    context.caixa_cama.objectCount = 6;
     context.caixa_cama.objects = (GameObject*)malloc(context.caixa_cama.objectCount * sizeof(GameObject));
+
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].name = "voltar";
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].id = ID_CAIXA_CAMA_VOLTAR;
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].position = (Vector2){0, 0};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].state = ORIGINAL;
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].type = INTERACTIVE;
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].name = "simbolo1";
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].id = ID_CAIXA_CAMA_SIMBOLO_1;
@@ -63,8 +72,13 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
     return context;
 }
 
-GameplaySubstate processZoomCaixaCamaEvent(GameObject* object) {
-    return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
+GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* context) {
+    switch(target->id) {
+        case ID_CAIXA_CAMA_VOLTAR:
+            return GAMEPLAY_SUBSTATE_MAIN;
+        default:
+            return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
+    }
 }
 
 Texture2D GetZoomCaixaCamaBackground(GameContext context) {

@@ -16,10 +16,10 @@ GameContext InitializeZoomGarrafaState(GameContext context) {
 
     context.garrafa.objects[ID_GARRAFA_VOLTAR].name = "voltar";
     context.garrafa.objects[ID_GARRAFA_VOLTAR].id = ID_GARRAFA_VOLTAR;
-    context.garrafa.objects[ID_GARRAFA_VOLTAR].texture = LoadTexture("assets/jill.png");
+    context.garrafa.objects[ID_GARRAFA_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
     context.garrafa.objects[ID_GARRAFA_VOLTAR].position = (Vector2){0, 0};
-    context.garrafa.objects[ID_GARRAFA_VOLTAR].size = (Vector2){100, 50};
-    context.garrafa.objects[ID_GARRAFA_VOLTAR].bounds = (Rectangle){0, 0, 100, 50};
+    context.garrafa.objects[ID_GARRAFA_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+    context.garrafa.objects[ID_GARRAFA_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
     context.garrafa.objects[ID_GARRAFA_VOLTAR].state = ORIGINAL;
     context.garrafa.objects[ID_GARRAFA_VOLTAR].type = INTERACTIVE;
 
@@ -27,8 +27,13 @@ GameContext InitializeZoomGarrafaState(GameContext context) {
     return context;
 }
 
-GameplaySubstate processZoomGarrafaEvent(GameObject* object) {
-    return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
+GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* context) {
+    switch(target->id) {
+        case ID_GARRAFA_VOLTAR:
+            return GAMEPLAY_SUBSTATE_MAIN;
+        default:
+            return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
+    }
 }
 
 Texture2D GetZoomGarrafaBackground(GameContext context) {
