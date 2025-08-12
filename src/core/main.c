@@ -48,6 +48,11 @@ int main(void) {
     // Main game loop
     while (!WindowShouldClose() && !context.should_close)
     {
+        if (context.state == STATE_GAMEPLAY && context.flags[HISTORIA_INIT] == 0) {
+            printf("comeco\n");
+            context.flags[HISTORIA_INIT] = 1;
+        }
+
         GameObject *objs = GetObjects(context);
         int count = GetObjectCount(context);
 
