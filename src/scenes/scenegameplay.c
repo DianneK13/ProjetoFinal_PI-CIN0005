@@ -79,9 +79,9 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_CAIXA_ARMARIO:
                 if (context->flags[CAIXA_ARMARIO] == 0) {
                     printf("dialogo caixa armario\n");
-                    context->gameplay.objects[ID_GAMEPLAY_ESPACO_FALA].texture = context->gameplay.objects[ID_CAIXA_ARMARIO_FALA].texture;
-                    context->gameplay.objects[ID_CAIXA_ARMARIO_FALA].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
-                    context->gameplay.objects[ID_CAIXA_ARMARIO_FALA].bounds = (Rectangle){211, 576, 778, 209};
+                    context->caixa_armario.objects[14].texture = context->gameplay.objects[ID_CAIXA_ARMARIO_FALA].texture;
+                    context->caixa_armario.objects[14].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->caixa_armario.objects[14].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[CAIXA_ARMARIO] = 1;
                 }
                 return;
