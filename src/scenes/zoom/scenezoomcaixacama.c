@@ -1,15 +1,5 @@
 #include "scenes/zoom/scenezoomcaixacama.h"
 
-/*
-//array de objects desta cena
-GameObject* objects_sceneCaixaCama;
-//qtd de objetos desta cena
-int objectCount_sceneCaixaCama;
-
-//imagem de fundo desta cena
-Texture2D background_sceneCaixaCama;
-*/
-
 GameContext InitializeZoomCaixaCamaState(GameContext context) {
     context.caixa_cama.objectCount = 16;
     context.caixa_cama.objects = (GameObject*)malloc(context.caixa_cama.objectCount * sizeof(GameObject));
@@ -149,7 +139,7 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
         
         case ID_CAIXA_CAMA_BOTAO:
-            if(counterNumeros[0]%9 == 0 && counterNumeros[1]%9 == 0 && counterNumeros[2]%9 == 0 && counterNumeros[3]%9 == 0) {
+            if(counterNumeros[0]%9 == 4 && counterNumeros[1]%9 == 2 && counterNumeros[2]%9 == 7 && counterNumeros[3]%9 == 6) {
                 printf("receba\n");
                 *leuBilhete = 1;
 

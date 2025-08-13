@@ -5,13 +5,10 @@
 
 #include "core/state_manager.h"
 
-// Global variables
-//Texture2D background;
 const char* hoveredObjectName = NULL;
 Font gameFont;
 GameObject* objects;
 
-// Function prototypes
 void LoadAssets(void);
 //void UnloadAssets(void);
 void DrawObjects(GameObject* objects, int objectCount);
@@ -35,19 +32,24 @@ GameObject* GetClickedObject(GameObject* objects, int objectCount) {
 
 int main(void) {
     GameContext context = {};
-    // Initialize window
+    
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
     SetTargetFPS(60);
     
-    // Load assets
+   
     LoadAssets();
     
-    // Setup objects
+    
     context = InitializeState(context);
 
-    // Main game loop
+    //Loop principal
     while (!WindowShouldClose() && !context.should_close)
     {
+        if(IsKeyDown(KEY_M) && context.state == STATE_GAMEPLAY) {
+            context.state = STATE_MENU;
+            context.menu.substate = MENU_SUBSTATE_MAIN;
+        }
+
         if (context.state == STATE_GAMEPLAY && context.flags[HISTORIA_INIT] == 0) {
             printf("comeco\n");
             context.flags[HISTORIA_INIT] = 1;
@@ -83,16 +85,16 @@ int main(void) {
             DrawTexturePro(bg, sourceRec, destRec, (Vector2){0, 0}, 0.0f, WHITE);
         }
         
-        // Draw all objects
+        
         if (objs && count > 0) DrawObjects(GetObjects(context), GetObjectCount(context));
         
-        // Draw subtitle if hovering over object
+        
         DrawSubtitle();
         
         EndDrawing();
     }
     
-    // Cleanup
+    
     //UnloadAssets();
     CloseWindow();
     
@@ -116,13 +118,11 @@ void CheckMouseHover(GameObject* objects, int objectCount)
 
 void LoadAssets(void)
 {
-    // Load background
+    
     //background = LoadTexture("assets/menu.png");
     
-    // Load font for subtitles
     //gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
     if (gameFont.texture.id == 0) {
-        // Fallback to default font if custom font not found
         gameFont = GetFontDefault();
     }
 }
@@ -131,15 +131,12 @@ void LoadAssets(void)
 /*
 void UnloadAssets(GameObject* objects, int objectCount)
 {
-    // Unload background
     UnloadTexture("assets/botarfundo");
     
-    // Unload object textures
     for (int i = 0; i < objectCount; i++) {
         UnloadTexture(objects[i].texture);
     }
     
-    // Free objects array
     if (objects != NULL) {
         free(objects);
         objects = NULL;
@@ -149,12 +146,11 @@ void UnloadAssets(GameObject* objects, int objectCount)
 
 void DrawObjects(GameObject* objects, int objectCount)
 {
-    // Vector2 const m = GetMousePosition(); //uncomment for debugging
+    // Vector2 const m = GetMousePosition();
 
     for (int i = 0; i < objectCount; i++) {
-        // uncomment for debugging
         //bool isHovered = CheckCollisionPointRec(m, objects[i].bounds);
-        // Draw object texture
+        
         DrawTexturePro(
             objects[i].texture,
             (Rectangle){0, 0, objects[i].texture.width, objects[i].texture.height},
@@ -164,7 +160,7 @@ void DrawObjects(GameObject* objects, int objectCount)
             WHITE
         );
         
-        // Debug: Draw bounds (uncomment for debugging)
+        // Debug
         //if (isHovered) {
         //    DrawRectangleLinesEx(objects[i].bounds,2, YELLOW);
         //}
@@ -187,7 +183,6 @@ void DrawCenteredText(const char* text, const int y, const Color color)
     const int textWidth = MeasureText(text, 24);
     const int x = (SCREEN_WIDTH - textWidth) / 2;
     
-    // Draw background rectangle for better readability
     DrawRectangle(x - 10, y - 5, textWidth + 20, 34, (Color){255, 255, 255, 200});
     DrawRectangleLines(x - 10, y - 5, textWidth + 20, 34, BLACK);
     

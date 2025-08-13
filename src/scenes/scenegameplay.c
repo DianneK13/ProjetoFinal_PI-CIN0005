@@ -8,7 +8,7 @@
 #include "scenes/zoom/scenezoompirata.h"
 #include <stdlib.h>
 
-int counterSimbolos[4] = {1, 1, 1, 1};
+int counterSimbolos[4] = {0, 0, 0, 0};
 int counterNumeros[4] = {0, 0, 0, 0};
 int temChave=0, leuBilhete=0;
 
@@ -41,12 +41,14 @@ void ProcessFlags(GameContext* context, GameObject* target)
 
     // 1) Eventos quando já está no zoom
     switch (context->gameplay.substate) {
+        /*
         case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
             if (context->flags[DIARIO] == 0) {
                 printf("dialogo diario\n");
                 context->flags[DIARIO] = 1;
             }
             break;
+            */
 
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
             if (HasEstanteLetters(context)) {
@@ -120,6 +122,10 @@ void ProcessFlags(GameContext* context, GameObject* target)
                 if (context->flags[DIADO_N_CHAVE] == 0 && temChave == 0) {
                     printf("dialogo sem chave\n");
                     context->flags[DIADO_N_CHAVE] = 1;
+                }
+                else if (context->flags[DIARIO] == 0 && temChave == 1) {
+                    printf("dialogo diario\n");
+                    context->flags[DIARIO] = 1;
                 }
                 return;
 

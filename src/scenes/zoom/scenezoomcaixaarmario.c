@@ -1,15 +1,5 @@
 #include "scenes/zoom/scenezoomcaixaarmario.h"
 
-/*
-//array de objects desta cena
-GameObject* objects_sceneCaixaArmario;
-//qtd de objetos desta cena
-int objectCount_sceneCaixaArmario;
-
-//imagem de fundo desta cena
-Texture2D background_sceneCaixaArmario;
-*/
-
 GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objectCount = 14;
     context.caixa_armario.objects = (GameObject*)malloc(context.caixa_armario.objectCount * sizeof(GameObject));

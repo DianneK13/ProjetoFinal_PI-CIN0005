@@ -1,15 +1,5 @@
 #include "scenes/zoom/scenezoomdiario.h"
 
-/*
-//array de objects desta cena
-GameObject* objects_sceneDiario;
-//qtd de objetos desta cena
-int objectCount_sceneDiario;
-
-//imagem de fundo desta cena
-Texture2D background_sceneDiario;
-*/
-
 GameContext InitializeZoomDiarioState(GameContext context) {
     context.diario.objectCount = 1;
     context.diario.objects = (GameObject*)malloc(context.diario.objectCount * sizeof(GameObject));

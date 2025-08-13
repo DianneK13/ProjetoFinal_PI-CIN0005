@@ -1,15 +1,5 @@
 #include "scenes/zoom/scenezoomgarrafa.h"
 
-/*
-//array de objects desta cena
-GameObject* objects_sceneGarrafa;
-//qtd de objetos desta cena
-int objectCount_sceneGarrafa;
-
-//imagem de fundo desta cena
-Texture2D background_sceneGarrafa;
-*/
-
 GameContext InitializeZoomGarrafaState(GameContext context) {
     context.garrafa.objectCount = 1;
     context.garrafa.objects = (GameObject*)malloc(context.garrafa.objectCount * sizeof(GameObject));

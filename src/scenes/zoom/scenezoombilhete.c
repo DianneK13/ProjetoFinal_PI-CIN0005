@@ -1,15 +1,5 @@
 #include "scenes/zoom/scenezoombilhete.h"
 
-/*
-//array de objects desta cena
-GameObject* objects_sceneBilhete;
-//qtd de objetos desta cena
-int objectCount_sceneBilhete;
-
-//imagem de fundo desta cena
-Texture2D background_sceneBilhete;
-*/
-
 GameContext InitializeZoomBilheteState(GameContext context) {
     context.bilhete.objectCount = 1;
     context.bilhete.objects = (GameObject*)malloc(context.bilhete.objectCount * sizeof(GameObject));

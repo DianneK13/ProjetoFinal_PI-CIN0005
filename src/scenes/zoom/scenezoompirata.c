@@ -1,15 +1,5 @@
 #include "scenes/zoom/scenezoompirata.h"
 
-/*
-//array de objects desta cena
-GameObject* objects_scenePirata;
-//qtd de objetos desta cena
-int objectCount_scenePirata;
-
-//imagem de fundo desta cena
-Texture2D background_scenePirata;
-*/
-
 GameContext InitializeZoomPirataState(GameContext context) {
     context.pirata.objectCount = 1;
     context.pirata.objects = (GameObject*)malloc(context.pirata.objectCount * sizeof(GameObject));
