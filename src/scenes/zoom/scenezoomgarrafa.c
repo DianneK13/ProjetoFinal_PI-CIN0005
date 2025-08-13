@@ -1,7 +1,7 @@
 #include "scenes/zoom/scenezoomgarrafa.h"
 
 GameContext InitializeZoomGarrafaState(GameContext context) {
-    context.garrafa.objectCount = 1;
+    context.garrafa.objectCount = 2;
     context.garrafa.objects = (GameObject*)malloc(context.garrafa.objectCount * sizeof(GameObject));
 
     context.garrafa.objects[ID_GARRAFA_VOLTAR].name = "voltar";
@@ -13,6 +13,15 @@ GameContext InitializeZoomGarrafaState(GameContext context) {
     context.garrafa.objects[ID_GARRAFA_VOLTAR].state = ORIGINAL;
     context.garrafa.objects[ID_GARRAFA_VOLTAR].type = INTERACTIVE;
 
+    context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].name = "continuar";
+    context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].id = ID_GARRAFA_ESPACO_FALA;
+    context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].texture = LoadTexture("assets/.png");
+    context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].position = (Vector2){0, 0};
+    context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].size = (Vector2){0, 0};
+    context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].bounds = (Rectangle){0, 0, 0, 0};
+    context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].state = ORIGINAL;
+    context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].type = INTERACTIVE;
+
     context.garrafa.background = LoadTexture("assets/zoomGarrafa/ZoomGarrafa.png");
     return context;
 }
@@ -21,6 +30,12 @@ GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* contex
     switch(target->id) {
         case ID_GARRAFA_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_GARRAFA_ESPACO_FALA:
+            target->size = (Vector2){0, 0};
+            target->bounds = (Rectangle){0, 0, 0, 0};
+            return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;  
+            
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
     }

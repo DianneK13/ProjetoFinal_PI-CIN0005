@@ -59,7 +59,6 @@ typedef enum Flags{
 typedef struct GameObject{
     //atributos que podem mudar
     GameObjectState state;
-
     Texture2D texture;
     Rectangle bounds;
     Vector2 position;
@@ -68,7 +67,7 @@ typedef struct GameObject{
     //atributos estáticos
     GameObjectType type;
     int id;
-    const char* name;
+    char* name;
 
 } GameObject;
 

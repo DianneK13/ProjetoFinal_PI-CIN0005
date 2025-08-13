@@ -1,7 +1,7 @@
 #include "scenes/zoom/scenezoomdiario.h"
 
 GameContext InitializeZoomDiarioState(GameContext context) {
-    context.diario.objectCount = 1;
+    context.diario.objectCount = 2;
     context.diario.objects = (GameObject*)malloc(context.diario.objectCount * sizeof(GameObject));
 
     context.diario.objects[ID_DIARIO_VOLTAR].name = "voltar";
@@ -13,6 +13,15 @@ GameContext InitializeZoomDiarioState(GameContext context) {
     context.diario.objects[ID_DIARIO_VOLTAR].state = ORIGINAL;
     context.diario.objects[ID_DIARIO_VOLTAR].type = INTERACTIVE;
 
+    context.diario.objects[ID_DIARIO_ESPACO_FALA].name = "continuar";
+    context.diario.objects[ID_DIARIO_ESPACO_FALA].id = ID_DIARIO_ESPACO_FALA;
+    context.diario.objects[ID_DIARIO_ESPACO_FALA].texture = LoadTexture("assets/.png");
+    context.diario.objects[ID_DIARIO_ESPACO_FALA].position = (Vector2){0, 0};
+    context.diario.objects[ID_DIARIO_ESPACO_FALA].size = (Vector2){0, 0};
+    context.diario.objects[ID_DIARIO_ESPACO_FALA].bounds = (Rectangle){0, 0, 0, 0};
+    context.diario.objects[ID_DIARIO_ESPACO_FALA].state = ORIGINAL;
+    context.diario.objects[ID_DIARIO_ESPACO_FALA].type = INTERACTIVE;
+
     context.diario.background = LoadTexture("assets/zoomDiario/ZoomDiario.png");
     return context;
 }
@@ -21,6 +30,12 @@ GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context
     switch(target->id) {
         case ID_DIARIO_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_DIARIO_ESPACO_FALA:
+            target->size = (Vector2){0, 0};
+            target->bounds = (Rectangle){0, 0, 0, 0};
+            return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+        
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
     }

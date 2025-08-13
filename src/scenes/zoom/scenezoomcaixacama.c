@@ -1,7 +1,7 @@
 #include "scenes/zoom/scenezoomcaixacama.h"
 
 GameContext InitializeZoomCaixaCamaState(GameContext context) {
-    context.caixa_cama.objectCount = 16;
+    context.caixa_cama.objectCount = 17;
     context.caixa_cama.objects = (GameObject*)malloc(context.caixa_cama.objectCount * sizeof(GameObject));
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].name = "voltar";
@@ -58,6 +58,15 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
     context.caixa_cama.objects[ID_CAIXA_CAMA_BOTAO].state = ORIGINAL;
     context.caixa_cama.objects[ID_CAIXA_CAMA_BOTAO].type = INTERACTIVE;
 
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].name = "continuar";
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].id = ID_CAIXA_CAMA_ESPACO_FALA;
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].texture = LoadTexture("assets/.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].position = (Vector2){0, 0};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].size = (Vector2){0, 0};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].state = ORIGINAL;
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].type = INTERACTIVE;
+
     context.caixa_cama.objects[ID_CAIXA_CAMA_1].texture = LoadTexture("assets/zoomCaixaCama/1.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_2].texture = LoadTexture("assets/zoomCaixaCama/2.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_3].texture = LoadTexture("assets/zoomCaixaCama/3.png");
@@ -77,6 +86,11 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
     switch(target->id) {
         case ID_CAIXA_CAMA_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_CAIXA_CAMA_ESPACO_FALA:
+            target->size = (Vector2){0, 0};
+            target->bounds = (Rectangle){0, 0, 0, 0};
+            return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
         
         case ID_CAIXA_CAMA_SIMBOLO_1:
             counterNumeros[0]++;
@@ -161,7 +175,12 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
                 context->estante.objects[5].bounds = (Rectangle){683, 223, 28, 40}; // R
                 context->estante.objects[6].bounds = (Rectangle){891, 427, 38, 45}; // A
 
-                context->caixa_cama.background = context->caixa_cama.objects[ID_CAIXA_BILHETE].texture;
+                context->estante.objects[7].texture = context->gameplay.objects[26].texture;
+                context->estante.objects[7].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                context->estante.objects[7].bounds = (Rectangle){211, 576, 778, 209};
+
+                context->caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].texture = context->caixa_cama.objects[22].texture;
+
 
                 return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
             }

@@ -1,7 +1,7 @@
 #include "scenes/zoom/scenezoompirata.h"
 
 GameContext InitializeZoomPirataState(GameContext context) {
-    context.pirata.objectCount = 1;
+    context.pirata.objectCount = 2;
     context.pirata.objects = (GameObject*)malloc(context.pirata.objectCount * sizeof(GameObject));
 
     context.pirata.objects[ID_PIRATA_VOLTAR].name = "voltar";
@@ -13,6 +13,15 @@ GameContext InitializeZoomPirataState(GameContext context) {
     context.pirata.objects[ID_PIRATA_VOLTAR].state = ORIGINAL;
     context.pirata.objects[ID_PIRATA_VOLTAR].type = INTERACTIVE;
 
+    context.pirata.objects[ID_PIRATA_ESPACO_FALA].name = "continuar";
+    context.pirata.objects[ID_PIRATA_ESPACO_FALA].id = ID_PIRATA_ESPACO_FALA;
+    context.pirata.objects[ID_PIRATA_ESPACO_FALA].texture = LoadTexture("assets/.png");
+    context.pirata.objects[ID_PIRATA_ESPACO_FALA].position = (Vector2){0, 0};
+    context.pirata.objects[ID_PIRATA_ESPACO_FALA].size = (Vector2){0, 0};
+    context.pirata.objects[ID_PIRATA_ESPACO_FALA].bounds = (Rectangle){0, 0, 0, 0};
+    context.pirata.objects[ID_PIRATA_ESPACO_FALA].state = ORIGINAL;
+    context.pirata.objects[ID_PIRATA_ESPACO_FALA].type = INTERACTIVE;
+
     context.pirata.background = LoadTexture("assets/zoomPirata/ZoomPirata.png");
     return context;
 }
@@ -21,6 +30,12 @@ GameplaySubstate processZoomPirataEvent(GameObject* target, GameContext* context
     switch(target->id) {
         case ID_PIRATA_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_PIRATA_ESPACO_FALA:
+            target->size = (Vector2){0, 0};
+            target->bounds = (Rectangle){0, 0, 0, 0};
+            return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
+
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
     }

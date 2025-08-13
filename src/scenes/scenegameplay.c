@@ -10,7 +10,7 @@
 
 int counterSimbolos[4] = {0, 0, 0, 0};
 int counterNumeros[4] = {0, 0, 0, 0};
-int temChave=0, leuBilhete=0;
+int temChave=0, leuBilhete=0, flagInicio=0, flagFinal=0;
 
 static void SetupGameplayMain(GameContext *ctx);
 // static void GameplayFreeObjects(GameContext *ctx);
@@ -61,7 +61,33 @@ void ProcessFlags(GameContext* context, GameObject* target)
                     context->estante.objects[ID_ESTANTE_LETRA_6].state == ALTERED;
 
                 if (todasAlteradas && context->flags[FINAL] == 0) {
-                    printf("dialogo final\n");
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_FINAL_FALA_1].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
+
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_FINAL_FALA_2].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
+
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_FINAL_FALA_3].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
+
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_FINAL_FALA_4].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
+
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_FINAL_FALA_5].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
+
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_FINAL_FALA_6].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
+
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_FINAL_FALA_7].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[FINAL] = 1;
                 }
             }
@@ -79,6 +105,9 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_CAIXA_ARMARIO:
                 if (context->flags[CAIXA_ARMARIO] == 0) {
                     printf("dialogo caixa armario\n");
+                    context->caixa_armario.objects[14].texture = context->gameplay.objects[ID_CAIXA_ARMARIO_FALA].texture;
+                    context->caixa_armario.objects[14].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->caixa_armario.objects[14].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[CAIXA_ARMARIO] = 1;
                 }
                 return;
@@ -86,6 +115,9 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_CAIXA_CAMA:
                 if (context->flags[CAIXA_CAMA] == 0) {
                     printf("dialogo caixa cama\n");
+                    context->caixa_cama.objects[16].texture = context->gameplay.objects[ID_CAIXA_CAMA_FALA].texture;
+                    context->caixa_cama.objects[16].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->caixa_cama.objects[16].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[CAIXA_CAMA] = 1;
                 }
                 return;
@@ -93,6 +125,9 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_GARRAFA:
                 if (context->flags[GARRAFA] == 0) {
                     printf("dialogo garrafa\n");
+                    context->garrafa.objects[1].texture = context->gameplay.objects[ID_GARRAFA_FALA].texture;
+                    context->garrafa.objects[1].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->garrafa.objects[1].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[GARRAFA] = 1;
                 }
                 return;
@@ -100,6 +135,9 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_PIRATA:
                 if (context->flags[PIRATA] == 0) {
                     printf("dialogo pirata\n");
+                    context->pirata.objects[1].texture = context->gameplay.objects[ID_PIRATA_FALA].texture;
+                    context->pirata.objects[1].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->pirata.objects[1].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[PIRATA] = 1;
                 }
                 return;
@@ -107,6 +145,9 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_ESTANTE:
                 if (context->flags[ESTANTE] == 0) {
                     printf("dialogo estante\n");
+                    context->estante.objects[7].texture = context->gameplay.objects[ID_ESTANTE_FALA].texture;
+                    context->estante.objects[7].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->estante.objects[7].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[ESTANTE] = 1;
                 }
                 return;
@@ -114,6 +155,9 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_VITROLA:
                 if (context->flags[VITROLA] == 0) {
                     printf("dialogo vitrola\n");
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_VITROLA_FALA].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[VITROLA] = 1;
                 }
                 return;
@@ -121,10 +165,16 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_DIARIO:
                 if (context->flags[DIADO_N_CHAVE] == 0 && temChave == 0) {
                     printf("dialogo sem chave\n");
+                    context->gameplay.objects[10].texture = context->gameplay.objects[ID_DIARIO_SEM_CHAVE_FALA].texture;
+                    context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[DIADO_N_CHAVE] = 1;
                 }
                 else if (context->flags[DIARIO] == 0 && temChave == 1) {
                     printf("dialogo diario\n");
+                    context->diario.objects[1].texture = context->gameplay.objects[ID_DIARIO_COM_CHAVE_FALA].texture;
+                    context->diario.objects[1].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->diario.objects[1].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[DIARIO] = 1;
                 }
                 return;
@@ -132,6 +182,17 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_BILHETE:
                 if (context->flags[BILHETE] == 0) {
                     printf("dialogo bilhete\n");
+                    context->caixa_cama.objects[16].texture = context->gameplay.objects[ID_BILHETE_FALA_1].texture;
+                    context->caixa_cama.objects[16].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->caixa_cama.objects[16].bounds = (Rectangle){211, 576, 778, 209};
+
+                    context->caixa_cama.objects[16].texture = context->gameplay.objects[ID_BILHETE_FALA_2].texture;
+                    context->caixa_cama.objects[16].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->caixa_cama.objects[16].bounds = (Rectangle){211, 576, 778, 209};
+
+                    context->caixa_cama.objects[16].texture = context->gameplay.objects[ID_BILHETE_FALA_3].texture;
+                    context->caixa_cama.objects[16].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->caixa_cama.objects[16].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[BILHETE] = 1;
                 }
                 return;
@@ -160,6 +221,9 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                 case ID_GAMEPLAY_CAIXA_ARMARIO:
                     if(temChave == 1) {
                         printf("ja tenho chave\n");
+                        context->gameplay.objects[10].texture = context->gameplay.objects[ID_PEGOU_CHAVE_FALA].texture;
+                        context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                        context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
                         return STATE_GAMEPLAY;
                     }
                     else context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
@@ -186,8 +250,59 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
 
                 // itens "normais" /sem zoom
                 case ID_GAMEPLAY_VITROLA:
+                    
                 case ID_GAMEPLAY_ARMARIO:
                 case ID_GAMEPLAY_CHAVE:
+
+                case ID_GAMEPLAY_ESPACO_FALA:
+                
+                    if(flagInicio == 0) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[12].texture;
+                        flagInicio++;
+                    }
+
+                    else if(flagInicio == 1) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[13].texture;
+                        flagInicio++;
+                    }
+
+                    else if(flagFinal == 1) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[28].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 2) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[29].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 3) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[30].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 4) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[31].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 5) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[32].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 6) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[33].texture;
+                        flagFinal++;
+                    }
+
+                    else {
+                        target->size = (Vector2){0, 0};
+                        target->bounds = (Rectangle){0, 0, 0, 0};
+                    }
+                    
+                    return STATE_GAMEPLAY;
+
                 default:
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
                 return STATE_GAMEPLAY;
@@ -218,7 +333,7 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
-            context->gameplay.substate = processZoomEstanteEvent(target, context, &leuBilhete);
+            context->gameplay.substate = processZoomEstanteEvent(target, context, &leuBilhete, &flagFinal);
             return STATE_GAMEPLAY;
         default:
             context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
@@ -283,7 +398,7 @@ int GetGameplayObjectCount(GameContext *context) {
 static void SetupGameplayMain(GameContext *ctx) {
     // GameplayFreeObjects(ctx);
 
-    ctx->gameplay.objectCount = 10;
+    ctx->gameplay.objectCount = 34;
     ctx->gameplay.objects = (GameObject*)malloc(sizeof(GameObject) * ctx->gameplay.objectCount);
     if (!ctx->gameplay.objects) { ctx->gameplay.objectCount = 0; return; }
 
@@ -366,6 +481,40 @@ static void SetupGameplayMain(GameContext *ctx) {
         .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
         .bounds=(Rectangle){0, 0, 0, 0}
     };
+
+     ctx->gameplay.objects[ID_GAMEPLAY_ESPACO_FALA] = (GameObject){
+        .name="continuar.", .id=ID_GAMEPLAY_ESPACO_FALA, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_1.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds=(Rectangle){211, 576, 778, 209}
+    };
+
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_1].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_1.png");
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_2].texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_2.png");
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_3].texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_3.png");
+    ctx->gameplay.objects[ID_CAIXA_ARMARIO_FALA].texture = LoadTexture("assets/falas/FALAS/CAIXA_ARMARIO_FALA.png");
+    ctx->gameplay.objects[ID_VITROLA_FALA].texture = LoadTexture("assets/falas/FALAS/VITROLA_FALA.png");
+    ctx->gameplay.objects[ID_PEGOU_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/PEGOU_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_CAIXA_CAMA_FALA].texture = LoadTexture("assets/falas/FALAS/CAIXA_CAMA_FALA.png");
+    ctx->gameplay.objects[ID_DIARIO_SEM_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/DIARIO_SEM_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_DIARIO_COM_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/DIARIO_COM_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_PIRATA_FALA].texture = LoadTexture("assets/falas/FALAS/PIRATA_FALA.png");
+    ctx->gameplay.objects[ID_GARRAFA_FALA].texture = LoadTexture("assets/falas/FALAS/GARRAFA_FALA.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_1].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_1.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_2].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_2.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_3].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_3.png");
+    ctx->gameplay.objects[ID_ESTANTE_FALA].texture = LoadTexture("assets/falas/FALAS/ESTANTE_FALA.png");
+    ctx->gameplay.objects[ID_ESTANTE_POS_BILHETE_FALA].texture = LoadTexture("assets/falas/FALAS/ESTANTE_POS_BILHETE_FALA.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_1].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_1.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_2].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_2.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_3].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_3.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_4].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_4.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_5].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_5.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_6].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_6.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_7].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_7.png");
+
+
+
 
     if (ctx->gameplay.background.id) UnloadTexture(ctx->gameplay.background);
     ctx->gameplay.background = LoadTexture("assets/fundofodao.png");
