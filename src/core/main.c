@@ -11,8 +11,6 @@
 Music bgm;
 const char* currentMusic = NULL;
 
-// Global variables
-//Texture2D background;
 const char* hoveredObjectName = NULL;
 Font gameFont;
 GameObject* objects;
@@ -49,13 +47,11 @@ int main(void) {
     bgm = (Music){0};
     currentMusic = NULL;
 
-    // Load assets
     LoadAssets();
 
-    // Setup objects
     context = InitializeState(context);
 
-    // Main game loop
+    //Loop principal
     while (!WindowShouldClose() && !context.should_close)
     {
     // Troca automática da música de fundo conforme o estado do jogo
@@ -165,7 +161,7 @@ void CheckMouseHover(GameObject* objects, int objectCount)
 
 void LoadAssets(void)
 {
-    // Load background
+
     //background = LoadTexture("assets/menu.png");
 
     //gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
@@ -198,7 +194,7 @@ void DrawObjects(GameObject* objects, int objectCount)
     for (int i = 0; i < objectCount; i++) {
         // uncomment for debugging
         //bool isHovered = CheckCollisionPointRec(m, objects[i].bounds);
-        // Draw object texture
+
         DrawTexturePro(
             objects[i].texture,
             (Rectangle){0, 0, objects[i].texture.width, objects[i].texture.height},
