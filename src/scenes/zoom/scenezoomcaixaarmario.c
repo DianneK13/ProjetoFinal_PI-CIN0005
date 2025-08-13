@@ -147,9 +147,12 @@ GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* c
             if(counterSimbolos[0]%8 == 7 && counterSimbolos[1]%8 == 4 && counterSimbolos[2]%8 == 6 && counterSimbolos[3]%8 == 0) {
                 *temChave = 1;
                 printf("receba\n");
+                printf("dialogo chave\n");
+                context->flags[CHAVE] = 1;
                 return GAMEPLAY_SUBSTATE_MAIN;
             }
-            else return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+
+            return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
         
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;

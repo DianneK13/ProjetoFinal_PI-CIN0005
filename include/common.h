@@ -40,6 +40,21 @@ typedef enum GameObjectType {
 } GameObjectType;
 
 
+typedef enum Flags{
+    HISTORIA_INIT,
+    CAIXA_ARMARIO,
+    CAIXA_CAMA,
+    GARRAFA,
+    PIRATA,
+    ESTANTE,
+    DIADO_N_CHAVE,
+    DIARIO,
+    CHAVE,
+    VITROLA,
+    BILHETE,
+    FINAL
+}Flags;
+
 // Object structure
 // TUDO que der pra clicar no jogo é um GameObject
 typedef struct GameObject{
@@ -79,7 +94,7 @@ typedef struct GameContext{
     GameScene estante;
     GameScene garrafa;
     GameScene pirata;
-
+    int flags[12];
     bool should_close;
 }GameContext;
 

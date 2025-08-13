@@ -24,6 +24,10 @@ GameContext InitializeState(GameContext context) {
     context = InitializeZoomGarrafaState(context);
     context = InitializeZoomPirataState(context);
     context.should_close = false;
+    for (int i = 0; i < 12; i++)
+    {
+        context.flags[i] = 0;
+    }
     return context;
 }
 
