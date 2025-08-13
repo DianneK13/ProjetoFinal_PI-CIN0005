@@ -39,11 +39,35 @@ void ProcessFlags(GameContext* context, GameObject* target)
 {
     if (!context) return;
 
-    // 1) Flag de início de história (uma vez só)
-    // if (context->state == STATE_GAMEPLAY && context->flags[HISTORIA_INIT] == 0) {
-    //     printf("comeco\n");
-    //     context->flags[HISTORIA_INIT] = 1;
-    // }
+    // 1) Eventos quando já está no zoom
+    switch (context->gameplay.substate) {
+        case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
+            if (context->flags[DIARIO] == 0) {
+                printf("dialogo diario\n");
+                context->flags[DIARIO] = 1;
+            }
+            break;
+
+        case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
+            if (HasEstanteLetters(context)) {
+                bool todasAlteradas =
+                    context->estante.objects[ID_ESTANTE_LETRA_1].state == ALTERED &&
+                    context->estante.objects[ID_ESTANTE_LETRA_2].state == ALTERED &&
+                    context->estante.objects[ID_ESTANTE_LETRA_3].state == ALTERED &&
+                    context->estante.objects[ID_ESTANTE_LETRA_4].state == ALTERED &&
+                    context->estante.objects[ID_ESTANTE_LETRA_5].state == ALTERED &&
+                    context->estante.objects[ID_ESTANTE_LETRA_6].state == ALTERED;
+
+                if (todasAlteradas && context->flags[FINAL] == 0) {
+                    printf("dialogo final\n");
+                    context->flags[FINAL] = 1;
+                }
+            }
+            break;
+
+        default:
+            break;
+    }
 
     if (!target) return;
 
@@ -110,37 +134,7 @@ void ProcessFlags(GameContext* context, GameObject* target)
         }
     }
 
-    // 3) Eventos quando já está NO ZOOM
-    switch (context->gameplay.substate) {
-        case GAMEPLAY_SUBSTATE_ZOOM_DIARIO:
-            if (context->flags[DIARIO] == 0) {
-                printf("dialogo diario\n");
-                context->flags[DIARIO] = 1;
-            }
-            break;
-
-        case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
-            if (HasEstanteLetters(context)) {
-                bool todasAlteradas =
-                    context->estante.objects[ID_ESTANTE_LETRA_1].state == ALTERED &&
-                    context->estante.objects[ID_ESTANTE_LETRA_2].state == ALTERED &&
-                    context->estante.objects[ID_ESTANTE_LETRA_3].state == ALTERED &&
-                    context->estante.objects[ID_ESTANTE_LETRA_4].state == ALTERED &&
-                    context->estante.objects[ID_ESTANTE_LETRA_5].state == ALTERED &&
-                    context->estante.objects[ID_ESTANTE_LETRA_6].state == ALTERED;
-
-                if (todasAlteradas && context->flags[FINAL] == 0) {
-                    printf("dialogo final\n");
-                    context->flags[FINAL] = 1;
-                }
-            }
-            break;
-
-        default:
-            break;
-    }
-
-    // 4) Chave adquirida (flag solta)
+    // 3) Chave adquirida (flag solta)
     if (context->flags[CHAVE] == 0 && temChave == 1) {
         printf("dialogo chave\n");
         context->flags[CHAVE] = 1;
