@@ -56,12 +56,12 @@ static void SetupMenuCreditos(GameContext *ctx) {
     ctx->menu.objects[0] = (GameObject) {
         .name="botao_voltar", .id=ID_MENU_BOTAO_VOLTAR, .type=INTERACTIVE, .state=ORIGINAL,
         .texture=LoadTexture("assets/voltar.png"),
-        .position=(Vector2){30, 30}, .size=(Vector2){150, 120},
-        .bounds=(Rectangle){30, 30, 150, 120}
+        .position=(Vector2){1050, 680}, .size=(Vector2){150, 120},
+        .bounds=(Rectangle){1050, 680, 150, 120}
     };
 
     if (ctx->menu.background.id != 0) UnloadTexture(ctx->menu.background);
-    ctx->menu.background = LoadTexture("assets/creditosfodao.png");
+    ctx->menu.background = LoadTexture("assets/créditos_background.png");
 }
 
 
