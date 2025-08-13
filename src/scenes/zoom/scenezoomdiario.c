@@ -30,6 +30,12 @@ GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context
     switch(target->id) {
         case ID_DIARIO_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_DIARIO_ESPACO_FALA:
+            target->size = (Vector2){0, 0};
+            target->bounds = (Rectangle){0, 0, 0, 0};
+            return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+        
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
     }

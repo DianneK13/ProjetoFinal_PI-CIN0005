@@ -10,7 +10,7 @@
 
 int counterSimbolos[4] = {0, 0, 0, 0};
 int counterNumeros[4] = {0, 0, 0, 0};
-int temChave=0, leuBilhete=0;
+int temChave=0, leuBilhete=0, flagInicio=0, flagFinal=0;
 
 static void SetupGameplayMain(GameContext *ctx);
 // static void GameplayFreeObjects(GameContext *ctx);
@@ -250,8 +250,59 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
 
                 // itens "normais" /sem zoom
                 case ID_GAMEPLAY_VITROLA:
+                    
                 case ID_GAMEPLAY_ARMARIO:
                 case ID_GAMEPLAY_CHAVE:
+
+                case ID_GAMEPLAY_ESPACO_FALA:
+                
+                    if(flagInicio == 0) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[12].texture;
+                        flagInicio++;
+                    }
+
+                    else if(flagInicio == 1) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[13].texture;
+                        flagInicio++;
+                    }
+
+                    else if(flagFinal == 1) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[28].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 2) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[29].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 3) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[30].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 4) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[31].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 5) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[32].texture;
+                        flagFinal++;
+                    }
+
+                    else if(flagFinal == 6) {
+                        context->gameplay.objects[10].texture = context->gameplay.objects[33].texture;
+                        flagFinal++;
+                    }
+
+                    else {
+                        target->size = (Vector2){0, 0};
+                        target->bounds = (Rectangle){0, 0, 0, 0};
+                    }
+                    
+                    return STATE_GAMEPLAY;
+
                 default:
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
                 return STATE_GAMEPLAY;
@@ -282,7 +333,7 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
             return STATE_GAMEPLAY;
 
         case GAMEPLAY_SUBSTATE_ZOOM_ESTANTE:
-            context->gameplay.substate = processZoomEstanteEvent(target, context, &leuBilhete);
+            context->gameplay.substate = processZoomEstanteEvent(target, context, &leuBilhete, &flagFinal);
             return STATE_GAMEPLAY;
         default:
             context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
@@ -432,10 +483,10 @@ static void SetupGameplayMain(GameContext *ctx) {
     };
 
      ctx->gameplay.objects[ID_GAMEPLAY_ESPACO_FALA] = (GameObject){
-        .name="continuar", .id=ID_GAMEPLAY_ESPACO_FALA, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/.png"),
-        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
-        .bounds=(Rectangle){0, 0, 0, 0}
+        .name="continuar.", .id=ID_GAMEPLAY_ESPACO_FALA, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_1.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds=(Rectangle){211, 576, 778, 209}
     };
 
     ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_1].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_1.png");

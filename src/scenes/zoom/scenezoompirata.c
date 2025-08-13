@@ -30,6 +30,12 @@ GameplaySubstate processZoomPirataEvent(GameObject* target, GameContext* context
     switch(target->id) {
         case ID_PIRATA_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_PIRATA_ESPACO_FALA:
+            target->size = (Vector2){0, 0};
+            target->bounds = (Rectangle){0, 0, 0, 0};
+            return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
+
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
     }

@@ -30,6 +30,12 @@ GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* contex
     switch(target->id) {
         case ID_GARRAFA_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_GARRAFA_ESPACO_FALA:
+            target->size = (Vector2){0, 0};
+            target->bounds = (Rectangle){0, 0, 0, 0};
+            return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;  
+            
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
     }

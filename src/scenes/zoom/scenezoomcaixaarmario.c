@@ -147,7 +147,7 @@ GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* c
                 *temChave = 1;
                 printf("receba\n");
                 printf("dialogo chave\n");
-                context->gameplay.objects[10].texture = context->gameplay.objects[ID_PEGOU_CHAVE_FALA].texture;
+                context->gameplay.objects[10].texture = context->gameplay.objects[16].texture;
                 context->gameplay.objects[10].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
                 context->gameplay.objects[10].bounds = (Rectangle){211, 576, 778, 209};
                 context->flags[CHAVE] = 1;

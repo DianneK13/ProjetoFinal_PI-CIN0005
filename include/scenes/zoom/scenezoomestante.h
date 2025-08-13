@@ -15,7 +15,7 @@
 
 GameContext InitializeZoomEstanteState(GameContext context);
 
-GameplaySubstate processZoomEstanteEvent(GameObject* target, GameContext* context, int* leuBilhete);
+GameplaySubstate processZoomEstanteEvent(GameObject* target, GameContext* context, int* leuBilhete, int* flagFinal);
 
 Texture2D GetZoomEstanteBackground(GameContext context);
 
