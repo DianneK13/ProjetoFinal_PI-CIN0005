@@ -170,6 +170,10 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
                 context->estante.objects[5].bounds = (Rectangle){683, 223, 28, 40}; // R
                 context->estante.objects[6].bounds = (Rectangle){891, 427, 38, 45}; // A
 
+                context->estante.objects[7].texture = context->gameplay.objects[ID_ESTANTE_POS_BILHETE_FALA].texture;
+                context->estante.objects[7].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                context->estante.objects[7].bounds = (Rectangle){211, 576, 778, 209};
+
                 context->caixa_cama.background = context->caixa_cama.objects[ID_CAIXA_BILHETE].texture;
 
                 return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
