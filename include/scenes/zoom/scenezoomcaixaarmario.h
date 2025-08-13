@@ -19,6 +19,7 @@
 #define ID_CAIXA_ARMARIO_ROSA 11
 #define ID_CAIXA_ARMARIO_TUBARAO 12
 #define ID_CAIXA_ARMARIO_X 13
+#define ID_CAIXA_ARMARIO_ESPACO_FALA 14
 
 GameContext InitializeZoomCaixaArmarioState(GameContext context);
 

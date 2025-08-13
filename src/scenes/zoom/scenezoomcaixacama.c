@@ -1,7 +1,7 @@
 #include "scenes/zoom/scenezoomcaixacama.h"
 
 GameContext InitializeZoomCaixaCamaState(GameContext context) {
-    context.caixa_cama.objectCount = 16;
+    context.caixa_cama.objectCount = 17;
     context.caixa_cama.objects = (GameObject*)malloc(context.caixa_cama.objectCount * sizeof(GameObject));
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].name = "voltar";
@@ -57,6 +57,15 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
     context.caixa_cama.objects[ID_CAIXA_CAMA_BOTAO].bounds = (Rectangle){888, 321, 112, 111};
     context.caixa_cama.objects[ID_CAIXA_CAMA_BOTAO].state = ORIGINAL;
     context.caixa_cama.objects[ID_CAIXA_CAMA_BOTAO].type = INTERACTIVE;
+
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].name = "continuar";
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].id = ID_CAIXA_CAMA_ESPACO_FALA;
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].texture = LoadTexture("assets/.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].position = (Vector2){0, 0};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].size = (Vector2){0, 0};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].state = ORIGINAL;
+    context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].type = INTERACTIVE;
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_1].texture = LoadTexture("assets/zoomCaixaCama/1.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_2].texture = LoadTexture("assets/zoomCaixaCama/2.png");

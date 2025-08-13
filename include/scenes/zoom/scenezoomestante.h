@@ -11,6 +11,7 @@
 #define ID_ESTANTE_LETRA_4 4
 #define ID_ESTANTE_LETRA_5 5
 #define ID_ESTANTE_LETRA_6 6
+#define ID_ESTANTE_ESPACO_FALA 7
 
 GameContext InitializeZoomEstanteState(GameContext context);
 

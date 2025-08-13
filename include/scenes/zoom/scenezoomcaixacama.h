@@ -22,6 +22,7 @@
 #define ID_CAIXA_CAMA_9 14
 
 #define ID_CAIXA_BILHETE 15
+#define ID_CAIXA_CAMA_ESPACO_FALA 16
 
 GameContext InitializeZoomCaixaCamaState(GameContext context);
 

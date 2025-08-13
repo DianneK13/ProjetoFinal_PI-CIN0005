@@ -79,6 +79,9 @@ void ProcessFlags(GameContext* context, GameObject* target)
             case ID_GAMEPLAY_CAIXA_ARMARIO:
                 if (context->flags[CAIXA_ARMARIO] == 0) {
                     printf("dialogo caixa armario\n");
+                    context->gameplay.objects[ID_GAMEPLAY_ESPACO_FALA].texture = context->gameplay.objects[ID_CAIXA_ARMARIO_FALA].texture;
+                    context->gameplay.objects[ID_CAIXA_ARMARIO_FALA].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
+                    context->gameplay.objects[ID_CAIXA_ARMARIO_FALA].bounds = (Rectangle){211, 576, 778, 209};
                     context->flags[CAIXA_ARMARIO] = 1;
                 }
                 return;
@@ -283,7 +286,7 @@ int GetGameplayObjectCount(GameContext *context) {
 static void SetupGameplayMain(GameContext *ctx) {
     // GameplayFreeObjects(ctx);
 
-    ctx->gameplay.objectCount = 10;
+    ctx->gameplay.objectCount = 34;
     ctx->gameplay.objects = (GameObject*)malloc(sizeof(GameObject) * ctx->gameplay.objectCount);
     if (!ctx->gameplay.objects) { ctx->gameplay.objectCount = 0; return; }
 
@@ -366,6 +369,40 @@ static void SetupGameplayMain(GameContext *ctx) {
         .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
         .bounds=(Rectangle){0, 0, 0, 0}
     };
+
+     ctx->gameplay.objects[ID_GAMEPLAY_ESPACO_FALA] = (GameObject){
+        .name="continuar", .id=ID_GAMEPLAY_ESPACO_FALA, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture = LoadTexture("assets/.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
+        .bounds=(Rectangle){0, 0, 0, 0}
+    };
+
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_1].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_1.png");
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_2].texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_2.png");
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_3].texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_3.png");
+    ctx->gameplay.objects[ID_CAIXA_ARMARIO_FALA].texture = LoadTexture("assets/falas/FALAS/CAIXA_ARMARIO_FALA.png");
+    ctx->gameplay.objects[ID_VITROLA_FALA].texture = LoadTexture("assets/falas/FALAS/VITROLA_FALA.png");
+    ctx->gameplay.objects[ID_PEGOU_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/PEGOU_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_CAIXA_CAMA_FALA].texture = LoadTexture("assets/falas/FALAS/CAIXA_CAMA_FALA.png");
+    ctx->gameplay.objects[ID_DIARIO_SEM_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/DIARIO_SEM_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_DIARIO_COM_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/DIARIO_COM_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_PIRATA_FALA].texture = LoadTexture("assets/falas/FALAS/PIRATA_FALA.png");
+    ctx->gameplay.objects[ID_GARRAFA_FALA].texture = LoadTexture("assets/falas/FALAS/GARRAFA_FALA.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_1].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_1.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_2].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_2.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_3].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_3.png");
+    ctx->gameplay.objects[ID_ESTANTE_FALA].texture = LoadTexture("assets/falas/FALAS/ESTANTE_FALA.png");
+    ctx->gameplay.objects[ID_ESTANTE_POS_BILHETE_FALA].texture = LoadTexture("assets/falas/FALAS/ESTANTE_POS_BILHETE_FALA.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_1].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_1.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_2].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_2.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_3].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_3.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_4].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_4.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_5].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_5.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_6].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_6.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_7].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_7.png");
+
+
+
 
     if (ctx->gameplay.background.id) UnloadTexture(ctx->gameplay.background);
     ctx->gameplay.background = LoadTexture("assets/fundofodao.png");

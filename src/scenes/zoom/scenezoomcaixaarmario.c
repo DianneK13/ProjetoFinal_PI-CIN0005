@@ -1,7 +1,7 @@
 #include "scenes/zoom/scenezoomcaixaarmario.h"
 
 GameContext InitializeZoomCaixaArmarioState(GameContext context) {
-    context.caixa_armario.objectCount = 14;
+    context.caixa_armario.objectCount = 15;
     context.caixa_armario.objects = (GameObject*)malloc(context.caixa_armario.objectCount * sizeof(GameObject));
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].name = "voltar";
@@ -57,6 +57,15 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_BOTAO].bounds = (Rectangle){520, 114, 110, 100};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_BOTAO].state = ORIGINAL;
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_BOTAO].type = INTERACTIVE;
+
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].name = "continuar";
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].id = ID_CAIXA_ARMARIO_ESPACO_FALA;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].texture = LoadTexture("assets/.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].position = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].size = (Vector2){0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].bounds = (Rectangle){0, 0, 0, 0};
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].state = ORIGINAL;
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].type = INTERACTIVE;
     
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture = LoadTexture("assets/zoomCaixaArmario/SimboloCifrao.png");

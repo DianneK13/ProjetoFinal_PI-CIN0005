@@ -1,7 +1,7 @@
 #include "scenes/zoom/scenezoomestante.h"
 
 GameContext InitializeZoomEstanteState(GameContext context) {
-    context.estante.objectCount = 7;
+    context.estante.objectCount = 8;
     context.estante.objects = (GameObject*)malloc(context.estante.objectCount * sizeof(GameObject));
 
     context.estante.objects[ID_ESTANTE_VOLTAR].name = "voltar";
@@ -66,6 +66,15 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objects[ID_ESTANTE_LETRA_6].bounds = (Rectangle){0, 0, 0, 0};
     context.estante.objects[ID_ESTANTE_LETRA_6].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_LETRA_6].type = INTERACTIVE;
+
+    context.estante.objects[ID_ESTANTE_ESPACO_FALA].name = "continuar";
+    context.estante.objects[ID_ESTANTE_ESPACO_FALA].id = ID_ESTANTE_ESPACO_FALA;
+    context.estante.objects[ID_ESTANTE_ESPACO_FALA].texture = LoadTexture("assets/.png");
+    context.estante.objects[ID_ESTANTE_ESPACO_FALA].position = (Vector2){0, 0};
+    context.estante.objects[ID_ESTANTE_ESPACO_FALA].size = (Vector2){0,0};
+    context.estante.objects[ID_ESTANTE_ESPACO_FALA].bounds = (Rectangle){0, 0, 0, 0};
+    context.estante.objects[ID_ESTANTE_ESPACO_FALA].state = ORIGINAL;
+    context.estante.objects[ID_ESTANTE_ESPACO_FALA].type = INTERACTIVE;
 
     context.estante.background = LoadTexture("assets/zoomEstante/ZoomEstante.png");
     return context;
