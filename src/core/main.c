@@ -5,6 +5,14 @@
 
 #include "core/state_manager.h"
 
+// Música de fundo: controla qual música está tocando no jogo
+// bgm: música carregada
+// currentMusic: caminho do arquivo da música atual
+Music bgm;
+const char* currentMusic = NULL;
+
+// Global variables
+//Texture2D background;
 const char* hoveredObjectName = NULL;
 Font gameFont;
 GameObject* objects;
@@ -32,19 +40,53 @@ GameObject* GetClickedObject(GameObject* objects, int objectCount) {
 
 int main(void) {
     GameContext context = {};
-    
+
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
     SetTargetFPS(60);
-    
-   
+
+    // Inicia o sistema de áudio e prepara variáveis da música de fundo
+    InitAudioDevice();
+    bgm = (Music){0};
+    currentMusic = NULL;
+
+    // Load assets
     LoadAssets();
-    
-    
+
+    // Setup objects
     context = InitializeState(context);
 
-    //Loop principal
+    // Main game loop
     while (!WindowShouldClose() && !context.should_close)
     {
+    // Troca automática da música de fundo conforme o estado do jogo
+    // Menu/créditos: op.mp3 | Gameplay: strk.mp3 (volume baixo)
+        const char* desiredMusic = NULL;
+        if (context.state == STATE_MENU || context.state == STATE_ENDING) {
+            desiredMusic = "assets/audio/music/op.mp3";
+        } else if (context.state == STATE_GAMEPLAY) {
+            desiredMusic = "assets/audio/music/strk.mp3";
+        }
+
+    // Só troca a música se for diferente da atual
+        if (desiredMusic && (!currentMusic || strcmp(currentMusic, desiredMusic) != 0)) {
+            if (bgm.ctxData) {
+                StopMusicStream(bgm);
+                UnloadMusicStream(bgm);
+            }
+            bgm = LoadMusicStream(desiredMusic);
+            // Se for gameplay, deixa a música baixa; senão, volume normal
+            if (strcmp(desiredMusic, "assets/audio/music/strk.mp3") == 0) {
+                SetMusicVolume(bgm, 0.25f); // volume baixo
+            } else {
+                SetMusicVolume(bgm, 1.0f); // volume normal
+            }
+            PlayMusicStream(bgm);
+            currentMusic = desiredMusic;
+        }
+
+    // Mantém a música tocando corretamente
+        if (bgm.ctxData) UpdateMusicStream(bgm);
+
         if(IsKeyDown(KEY_M) && context.state == STATE_GAMEPLAY) {
             context.state = STATE_MENU;
             context.menu.substate = MENU_SUBSTATE_MAIN;
@@ -85,16 +127,21 @@ int main(void) {
             DrawTexturePro(bg, sourceRec, destRec, (Vector2){0, 0}, 0.0f, WHITE);
         }
         
-        
+        // Draw all objects
         if (objs && count > 0) DrawObjects(GetObjects(context), GetObjectCount(context));
         
-        
+
         DrawSubtitle();
         
         EndDrawing();
     }
-    
-    
+
+    // Libera recursos de áudio ao fechar o jogo
+    if (bgm.ctxData) {
+        StopMusicStream(bgm);
+        UnloadMusicStream(bgm);
+    }
+    CloseAudioDevice();
     //UnloadAssets();
     CloseWindow();
     
@@ -118,9 +165,9 @@ void CheckMouseHover(GameObject* objects, int objectCount)
 
 void LoadAssets(void)
 {
-    
+    // Load background
     //background = LoadTexture("assets/menu.png");
-    
+
     //gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
     if (gameFont.texture.id == 0) {
         gameFont = GetFontDefault();
@@ -132,11 +179,11 @@ void LoadAssets(void)
 void UnloadAssets(GameObject* objects, int objectCount)
 {
     UnloadTexture("assets/botarfundo");
-    
+
     for (int i = 0; i < objectCount; i++) {
         UnloadTexture(objects[i].texture);
     }
-    
+
     if (objects != NULL) {
         free(objects);
         objects = NULL;
@@ -146,11 +193,12 @@ void UnloadAssets(GameObject* objects, int objectCount)
 
 void DrawObjects(GameObject* objects, int objectCount)
 {
-    // Vector2 const m = GetMousePosition();
+    // Vector2 const m = GetMousePosition(); //uncomment for debugging
 
     for (int i = 0; i < objectCount; i++) {
+        // uncomment for debugging
         //bool isHovered = CheckCollisionPointRec(m, objects[i].bounds);
-        
+        // Draw object texture
         DrawTexturePro(
             objects[i].texture,
             (Rectangle){0, 0, objects[i].texture.width, objects[i].texture.height},
@@ -182,9 +230,9 @@ void DrawCenteredText(const char* text, const int y, const Color color)
 {
     const int textWidth = MeasureText(text, 24);
     const int x = (SCREEN_WIDTH - textWidth) / 2;
-    
+
     DrawRectangle(x - 10, y - 5, textWidth + 20, 34, (Color){255, 255, 255, 200});
     DrawRectangleLines(x - 10, y - 5, textWidth + 20, 34, BLACK);
     
     DrawText(text, x, y, 24, color);
-} 
+}
