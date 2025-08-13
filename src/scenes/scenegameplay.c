@@ -152,7 +152,11 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
         case GAMEPLAY_SUBSTATE_MAIN:
             switch(target->id) {
                 case ID_GAMEPLAY_CAIXA_ARMARIO:
-                    context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
+                    if(temChave == 1) {
+                        printf("ja tenho chave\n");
+                        return STATE_GAMEPLAY;
+                    }
+                    else context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_CAIXA_CAMA:
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
