@@ -12,4 +12,5 @@ GameState processEndingEvent(GameObject* object);
 GameObject* GetEndingBackground(void);
 
 GameObject* GetEndingObjects(void);
+
 int GetEndingObjectCount(void);

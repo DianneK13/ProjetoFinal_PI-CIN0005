@@ -15,7 +15,6 @@
 #define ID_GAMEPLAY_CHAVE          8
 #define ID_GAMEPLAY_BILHETE        9
 
-// object in player's hand
 GameObject* GetHand(void);
 
 GameContext InitializeGameplayState(GameContext context);

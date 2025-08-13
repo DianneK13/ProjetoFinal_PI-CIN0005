@@ -1,15 +1,5 @@
 #include "scenes/zoom/scenezoomestante.h"
 
-/*
-//array de objects desta cena
-GameObject* objects_sceneEstante;
-//qtd de objetos desta cena
-int objectCount_sceneEstante;
-
-//imagem de fundo desta cena
-Texture2D background_sceneEstante;
-*/
-
 GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objectCount = 7;
     context.estante.objects = (GameObject*)malloc(context.estante.objectCount * sizeof(GameObject));
@@ -23,7 +13,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objects[ID_ESTANTE_VOLTAR].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_VOLTAR].type = INTERACTIVE;
 
-    context.estante.objects[ID_ESTANTE_LETRA_1].name = "???1";
+    context.estante.objects[ID_ESTANTE_LETRA_1].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_1].id = ID_ESTANTE_LETRA_1;
     context.estante.objects[ID_ESTANTE_LETRA_1].texture = LoadTexture("assets/zoomEstante/bolaToguro_S.png");
     context.estante.objects[ID_ESTANTE_LETRA_1].position = (Vector2){0, 0};
@@ -32,7 +22,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objects[ID_ESTANTE_LETRA_1].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_LETRA_1].type = INTERACTIVE;
 
-    context.estante.objects[ID_ESTANTE_LETRA_2].name = "???2";
+    context.estante.objects[ID_ESTANTE_LETRA_2].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_2].id = ID_ESTANTE_LETRA_2;
     context.estante.objects[ID_ESTANTE_LETRA_2].texture = LoadTexture("assets/zoomEstante/bolaToguro_A1.png");
     context.estante.objects[ID_ESTANTE_LETRA_2].position = (Vector2){0, 0};
@@ -41,7 +31,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objects[ID_ESTANTE_LETRA_2].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_LETRA_2].type = INTERACTIVE;
 
-    context.estante.objects[ID_ESTANTE_LETRA_3].name = "???3";
+    context.estante.objects[ID_ESTANTE_LETRA_3].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_3].id = ID_ESTANTE_LETRA_3;
     context.estante.objects[ID_ESTANTE_LETRA_3].texture = LoadTexture("assets/zoomEstante/bolaToguro_N.png");
     context.estante.objects[ID_ESTANTE_LETRA_3].position = (Vector2){0, 0};
@@ -50,7 +40,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objects[ID_ESTANTE_LETRA_3].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_LETRA_3].type = INTERACTIVE;
 
-    context.estante.objects[ID_ESTANTE_LETRA_4].name = "???4";
+    context.estante.objects[ID_ESTANTE_LETRA_4].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_4].id = ID_ESTANTE_LETRA_4;
     context.estante.objects[ID_ESTANTE_LETRA_4].texture = LoadTexture("assets/zoomEstante/bolaToguro_D.png");
     context.estante.objects[ID_ESTANTE_LETRA_4].position = (Vector2){0, 0};
@@ -59,7 +49,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objects[ID_ESTANTE_LETRA_4].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_LETRA_4].type = INTERACTIVE;
 
-    context.estante.objects[ID_ESTANTE_LETRA_5].name = "???5";
+    context.estante.objects[ID_ESTANTE_LETRA_5].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_5].id = ID_ESTANTE_LETRA_5;
     context.estante.objects[ID_ESTANTE_LETRA_5].texture = LoadTexture("assets/zoomEstante/bolaToguro_R.png");
     context.estante.objects[ID_ESTANTE_LETRA_5].position = (Vector2){0, 0};
@@ -68,7 +58,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objects[ID_ESTANTE_LETRA_5].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_LETRA_5].type = INTERACTIVE;
 
-    context.estante.objects[ID_ESTANTE_LETRA_6].name = "???6";
+    context.estante.objects[ID_ESTANTE_LETRA_6].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_6].id = ID_ESTANTE_LETRA_6;
     context.estante.objects[ID_ESTANTE_LETRA_6].texture = LoadTexture("assets/zoomEstante/bolaToguro_A2.png");
     context.estante.objects[ID_ESTANTE_LETRA_6].position = (Vector2){0, 0};
