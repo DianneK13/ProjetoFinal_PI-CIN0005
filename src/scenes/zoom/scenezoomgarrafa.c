@@ -1,15 +1,5 @@
 #include "scenes/zoom/scenezoomgarrafa.h"
 
-/*
-//array de objects desta cena
-GameObject* objects_sceneGarrafa;
-//qtd de objetos desta cena
-int objectCount_sceneGarrafa;
-
-//imagem de fundo desta cena
-Texture2D background_sceneGarrafa;
-*/
-
 // SFX para a cena zoom garrafa
 #include "raylib.h"
 static Sound sfx_garrafa;
