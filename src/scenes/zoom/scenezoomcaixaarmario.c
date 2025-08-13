@@ -1,7 +1,26 @@
 #include "scenes/zoom/scenezoomcaixaarmario.h"
 
+/*
+//array de objects desta cena
+GameObject* objects_sceneCaixaArmario;
+//qtd de objetos desta cena
+int objectCount_sceneCaixaArmario;
+
+//imagem de fundo desta cena
+Texture2D background_sceneCaixaArmario;
+*/
+
+#include "raylib.h"
+static Sound sfx_caixaarmario;
+static int sfx_caixaarmario_loaded = 0;
+
 GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objectCount = 15;
+    if (!sfx_caixaarmario_loaded) {
+        sfx_caixaarmario = LoadSound("assets/audio/sfx/clicandopuzzle.mp3");
+        sfx_caixaarmario_loaded = 1;
+    }
+    if (sfx_caixaarmario_loaded) PlaySound(sfx_caixaarmario);
     context.caixa_armario.objects = (GameObject*)malloc(context.caixa_armario.objectCount * sizeof(GameObject));
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].name = "voltar";
@@ -66,7 +85,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].bounds = (Rectangle){0, 0, 0, 0};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].state = ORIGINAL;
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].type = INTERACTIVE;
-    
+
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture = LoadTexture("assets/zoomCaixaArmario/SimboloCifrao.png");
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloEspada.png");

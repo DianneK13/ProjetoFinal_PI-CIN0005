@@ -1,6 +1,24 @@
 #include "scenes/zoom/scenezoomdiario.h"
 
+/*
+//array de objects desta cena
+GameObject* objects_sceneDiario;
+//qtd de objetos desta cena
+int objectCount_sceneDiario;
+
+//imagem de fundo desta cena
+Texture2D background_sceneDiario;
+*/
+
+#include "raylib.h"
+static Sound sfx_diario;
+static int sfx_diario_loaded = 0;
+
 GameContext InitializeZoomDiarioState(GameContext context) {
+    if (!sfx_diario_loaded) {
+        sfx_diario = LoadSound("assets/audio/sfx/livro.mp3");
+        sfx_diario_loaded = 1;
+    }
     context.diario.objectCount = 2;
     context.diario.objects = (GameObject*)malloc(context.diario.objectCount * sizeof(GameObject));
 
@@ -27,6 +45,7 @@ GameContext InitializeZoomDiarioState(GameContext context) {
 }
 
 GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context) {
+    if (sfx_diario_loaded) PlaySound(sfx_diario);
     switch(target->id) {
         case ID_DIARIO_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
@@ -35,7 +54,7 @@ GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context
             target->size = (Vector2){0, 0};
             target->bounds = (Rectangle){0, 0, 0, 0};
             return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
-        
+
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
     }

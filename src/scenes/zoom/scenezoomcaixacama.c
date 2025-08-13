@@ -1,6 +1,25 @@
 #include "scenes/zoom/scenezoomcaixacama.h"
 
+/*
+//array de objects desta cena
+GameObject* objects_sceneCaixaCama;
+//qtd de objetos desta cena
+int objectCount_sceneCaixaCama;
+
+//imagem de fundo desta cena
+Texture2D background_sceneCaixaCama;
+*/
+
+#include "raylib.h"
+static Sound sfx_caixacama;
+static int sfx_caixacama_loaded = 0;
+
 GameContext InitializeZoomCaixaCamaState(GameContext context) {
+    if (!sfx_caixacama_loaded) {
+        sfx_caixacama = LoadSound("assets/audio/sfx/botão.mp3");
+        sfx_caixacama_loaded = 1;
+    }
+    if (sfx_caixacama_loaded) PlaySound(sfx_caixacama);
     context.caixa_cama.objectCount = 17;
     context.caixa_cama.objects = (GameObject*)malloc(context.caixa_cama.objectCount * sizeof(GameObject));
 
@@ -91,7 +110,7 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
             target->size = (Vector2){0, 0};
             target->bounds = (Rectangle){0, 0, 0, 0};
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
-        
+
         case ID_CAIXA_CAMA_SIMBOLO_1:
             counterNumeros[0]++;
 

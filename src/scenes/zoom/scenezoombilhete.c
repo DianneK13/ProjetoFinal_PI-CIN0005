@@ -1,6 +1,24 @@
 #include "scenes/zoom/scenezoombilhete.h"
 
+/*
+//array de objects desta cena
+GameObject* objects_sceneBilhete;
+//qtd de objetos desta cena
+int objectCount_sceneBilhete;
+
+//imagem de fundo desta cena
+Texture2D background_sceneBilhete;
+*/
+
+#include "raylib.h"
+static Sound sfx_bilhete;
+static int sfx_bilhete_loaded = 0;
+
 GameContext InitializeZoomBilheteState(GameContext context) {
+    if (!sfx_bilhete_loaded) {
+        sfx_bilhete = LoadSound("assets/audio/sfx/livro.mp3");
+        sfx_bilhete_loaded = 1;
+    }
     context.bilhete.objectCount = 1;
     context.bilhete.objects = (GameObject*)malloc(context.bilhete.objectCount * sizeof(GameObject));
 
@@ -18,6 +36,7 @@ GameContext InitializeZoomBilheteState(GameContext context) {
 }
 
 GameplaySubstate processZoomBilheteEvent(GameObject* target, GameContext* context) {
+    if (sfx_bilhete_loaded) PlaySound(sfx_bilhete);
     switch(target->id) {
         case ID_BILHETE_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;

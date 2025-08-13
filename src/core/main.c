@@ -5,16 +5,17 @@
 
 #include "core/state_manager.h"
 
-// Música de fundo: controla qual música está tocando no jogo
-// bgm: música carregada
-// currentMusic: caminho do arquivo da música atual
+// Música de fundo
 Music bgm;
 const char* currentMusic = NULL;
 
+// Global variables
+//Texture2D background;
 const char* hoveredObjectName = NULL;
 Font gameFont;
 GameObject* objects;
 
+// Function prototypes
 void LoadAssets(void);
 //void UnloadAssets(void);
 void DrawObjects(GameObject* objects, int objectCount);
@@ -34,28 +35,29 @@ GameObject* GetClickedObject(GameObject* objects, int objectCount) {
         }
     }
     return NULL;
-}
+// ...existing code...
 
 int main(void) {
     GameContext context = {};
-
+    // Initialize window
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
     SetTargetFPS(60);
 
-    // Inicia o sistema de áudio e prepara variáveis da música de fundo
+    // Inicializa áudio
     InitAudioDevice();
     bgm = (Music){0};
     currentMusic = NULL;
 
+    // Load assets
     LoadAssets();
 
+    // Setup objects
     context = InitializeState(context);
 
-    //Loop principal
+    // Main game loop
     while (!WindowShouldClose() && !context.should_close)
     {
-    // Troca automática da música de fundo conforme o estado do jogo
-    // Menu/créditos: op.mp3 | Gameplay: strk.mp3 (volume baixo)
+        // Troca música conforme o estado
         const char* desiredMusic = NULL;
         if (context.state == STATE_MENU || context.state == STATE_ENDING) {
             desiredMusic = "assets/audio/music/op.mp3";
@@ -63,14 +65,14 @@ int main(void) {
             desiredMusic = "assets/audio/music/strk.mp3";
         }
 
-    // Só troca a música se for diferente da atual
+
         if (desiredMusic && (!currentMusic || strcmp(currentMusic, desiredMusic) != 0)) {
             if (bgm.ctxData) {
                 StopMusicStream(bgm);
                 UnloadMusicStream(bgm);
             }
             bgm = LoadMusicStream(desiredMusic);
-            // Se for gameplay, deixa a música baixa; senão, volume normal
+            // Se for gameplay, volume baixo; senão, volume normal
             if (strcmp(desiredMusic, "assets/audio/music/strk.mp3") == 0) {
                 SetMusicVolume(bgm, 0.25f); // volume baixo
             } else {
@@ -80,7 +82,6 @@ int main(void) {
             currentMusic = desiredMusic;
         }
 
-    // Mantém a música tocando corretamente
         if (bgm.ctxData) UpdateMusicStream(bgm);
 
         if(IsKeyDown(KEY_M) && context.state == STATE_GAMEPLAY) {
@@ -132,7 +133,7 @@ int main(void) {
         EndDrawing();
     }
 
-    // Libera recursos de áudio ao fechar o jogo
+    // Cleanup
     if (bgm.ctxData) {
         StopMusicStream(bgm);
         UnloadMusicStream(bgm);
@@ -161,9 +162,10 @@ void CheckMouseHover(GameObject* objects, int objectCount)
 
 void LoadAssets(void)
 {
-
+    // Load background
     //background = LoadTexture("assets/menu.png");
-
+    
+    // Load font for subtitles
     //gameFont = LoadFontEx("BOTAR FONTE", 24, NULL, 0);
     if (gameFont.texture.id == 0) {
         gameFont = GetFontDefault();
@@ -194,7 +196,7 @@ void DrawObjects(GameObject* objects, int objectCount)
     for (int i = 0; i < objectCount; i++) {
         // uncomment for debugging
         //bool isHovered = CheckCollisionPointRec(m, objects[i].bounds);
-
+        // Draw object texture
         DrawTexturePro(
             objects[i].texture,
             (Rectangle){0, 0, objects[i].texture.width, objects[i].texture.height},
