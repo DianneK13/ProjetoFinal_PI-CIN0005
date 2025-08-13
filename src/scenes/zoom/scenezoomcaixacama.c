@@ -186,6 +186,7 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
                 context->caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_4].bounds = (Rectangle){0, 0, 0, 0};
                 context->caixa_cama.objects[ID_CAIXA_CAMA_BOTAO].size = (Vector2){0, 0};
                 context->caixa_cama.objects[ID_CAIXA_CAMA_BOTAO].bounds = (Rectangle){0, 0, 0, 0};
+                context->caixa_cama.background = context->caixa_cama.objects[ID_CAIXA_BILHETE].texture;
 
                 context->estante.objects[1].bounds = (Rectangle){153, 332, 37, 53}; // S
                 context->estante.objects[2].bounds = (Rectangle){329, 217, 38, 46}; // A
