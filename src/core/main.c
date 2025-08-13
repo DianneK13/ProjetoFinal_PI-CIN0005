@@ -35,7 +35,7 @@ GameObject* GetClickedObject(GameObject* objects, int objectCount) {
         }
     }
     return NULL;
-// ...existing code...
+}
 
 int main(void) {
     GameContext context = {};
