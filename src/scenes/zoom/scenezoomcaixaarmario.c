@@ -21,7 +21,9 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
         sfx_caixaarmario_loaded = 1;
     }
     if (sfx_caixaarmario_loaded) PlaySound(sfx_caixaarmario);
-    context.caixa_armario.objects = (GameObject*)malloc(context.caixa_armario.objectCount * sizeof(GameObject));
+    // calloc zera tudo: os símbolos (6..13) só recebem textura, então ficam com tamanho e bounds 0
+    // (com malloc eles ficavam com lixo de memória e podiam ser desenhados esticados por cima da cena)
+    context.caixa_armario.objects = (GameObject*)calloc(context.caixa_armario.objectCount, sizeof(GameObject));
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].name = "voltar";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].id = ID_CAIXA_ARMARIO_VOLTAR;
