@@ -164,7 +164,7 @@ GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* c
         
         case ID_CAIXA_ARMARIO_BOTAO:
             if(counterSimbolos[0]%8 == 7 && counterSimbolos[1]%8 == 4 && counterSimbolos[2]%8 == 6 && counterSimbolos[3]%8 == 0) {
-                PlaySFX(SFX_BAU);
+                PlaySFX(SFX_PUZZLE);
                 *temChave = 1;
                 printf("receba\n");
                 printf("dialogo chave\n");

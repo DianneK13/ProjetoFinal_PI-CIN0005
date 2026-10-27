@@ -166,7 +166,7 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
         
         case ID_CAIXA_CAMA_BOTAO:
             if(counterNumeros[0]%9 == 4 && counterNumeros[1]%9 == 2 && counterNumeros[2]%9 == 7 && counterNumeros[3]%9 == 6) {
-                PlaySFX(SFX_PUZZLE);
+                PlaySFX(SFX_BAU);
                 printf("receba\n");
                 *leuBilhete = 1;
 
