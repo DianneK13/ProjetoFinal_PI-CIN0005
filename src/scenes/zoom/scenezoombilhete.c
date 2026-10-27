@@ -45,16 +45,16 @@ GameplaySubstate processZoomBilheteEvent(GameObject* target, GameContext* contex
     }
 }
 
-Texture2D GetZoomBilheteBackground(GameContext) {
-    
+Texture2D GetZoomBilheteBackground(GameContext context) {
+    return context.bilhete.background;
 }
 
 GameObject* GetZoomBilheteObjects(GameContext context) {
-    
+    return context.bilhete.objects;
 }
 
 int GetZoomBilheteObjectCount(GameContext context) {
-    
+    return context.bilhete.objectCount;
 }
 
 // Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
