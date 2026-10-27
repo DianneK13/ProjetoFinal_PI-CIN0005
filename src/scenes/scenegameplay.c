@@ -248,11 +248,11 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
                     return STATE_GAMEPLAY;
 
-                // itens "normais" /sem zoom
+                // itens "normais" /sem zoom: a fala deles (se tiver) já é mostrada em ProcessFlags
                 case ID_GAMEPLAY_VITROLA:
-                    
                 case ID_GAMEPLAY_ARMARIO:
                 case ID_GAMEPLAY_CHAVE:
+                    return STATE_GAMEPLAY;
 
                 case ID_GAMEPLAY_ESPACO_FALA:
                 
