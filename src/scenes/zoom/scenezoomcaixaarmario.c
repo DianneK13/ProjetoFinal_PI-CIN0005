@@ -1,4 +1,5 @@
 #include "scenes/zoom/scenezoomcaixaarmario.h"
+#include "sfx.h"
 
 /*
 //array de objects desta cena
@@ -11,15 +12,9 @@ Texture2D background_sceneCaixaArmario;
 */
 
 #include "raylib.h"
-static Sound sfx_caixaarmario;
-static int sfx_caixaarmario_loaded = 0;
 
 GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objectCount = 15;
-    if (!sfx_caixaarmario_loaded) {
-        sfx_caixaarmario = LoadSound("assets/audio/sfx/botao.mp3");
-        sfx_caixaarmario_loaded = 1;
-    }
     // calloc zera tudo: os símbolos (6..13) só recebem textura, então ficam com tamanho e bounds 0
     // (com malloc eles ficavam com lixo de memória e podiam ser desenhados esticados por cima da cena)
     context.caixa_armario.objects = (GameObject*)calloc(context.caixa_armario.objectCount, sizeof(GameObject));
@@ -103,8 +98,8 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
 
 GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* context, int* counterSimbolos, int* temChave) {
     // som só ao girar os símbolos do cadeado
-    if (sfx_caixaarmario_loaded && target->id >= ID_CAIXA_ARMARIO_SIMBOLO_1 && target->id <= ID_CAIXA_ARMARIO_SIMBOLO_4) {
-        PlaySound(sfx_caixaarmario);
+    if (target->id >= ID_CAIXA_ARMARIO_SIMBOLO_1 && target->id <= ID_CAIXA_ARMARIO_SIMBOLO_4) {
+        PlaySFX(SFX_BOTAO);
     }
     switch(target->id) {
         case ID_CAIXA_ARMARIO_VOLTAR:
@@ -199,12 +194,4 @@ GameObject* GetZoomCaixaArmarioObjects(GameContext context) {
 
 int GetZoomCaixaArmarioObjectCount(GameContext context) {
     return context.caixa_armario.objectCount;
-}
-
-// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
-void UnloadZoomCaixaArmarioSFX(void) {
-    if (sfx_caixaarmario_loaded) {
-        UnloadSound(sfx_caixaarmario);
-        sfx_caixaarmario_loaded = 0;
-    }
 }

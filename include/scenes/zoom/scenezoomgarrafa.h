@@ -19,7 +19,3 @@ Texture2D GetZoomGarrafaBackground(GameContext context);
 GameObject* GetZoomGarrafaObjects(GameContext context);
 
 int GetZoomGarrafaObjectCount(GameContext context);
-
-void PlayZoomGarrafaSFX(void);
-
-void UnloadZoomGarrafaSFX(void);

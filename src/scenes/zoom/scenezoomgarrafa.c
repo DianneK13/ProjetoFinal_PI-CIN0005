@@ -1,15 +1,8 @@
 #include "scenes/zoom/scenezoomgarrafa.h"
-
-// SFX para a cena zoom garrafa
+#include "sfx.h"
 #include "raylib.h"
-static Sound sfx_garrafa;
-static int sfx_garrafa_loaded = 0;
 
 GameContext InitializeZoomGarrafaState(GameContext context) {
-    if (!sfx_garrafa_loaded) {
-        sfx_garrafa = LoadSound("assets/audio/sfx/garrafa.mp3");
-        sfx_garrafa_loaded = 1;
-    }
     context.garrafa.objectCount = 4;
     context.garrafa.objects = (GameObject*)malloc(context.garrafa.objectCount * sizeof(GameObject));
 
@@ -57,7 +50,7 @@ GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* contex
 
         case ID_GARRAFA_GARGALO:
         case ID_GARRAFA_CORPO:
-            PlayZoomGarrafaSFX();
+            PlaySFX(SFX_GARRAFA);
             return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
 
         case ID_GARRAFA_ESPACO_FALA:
@@ -67,19 +60,6 @@ GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* contex
 
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
-    }
-}
-
-// Som da garrafa: tocado ao clicar nela no quarto e no zoom
-void PlayZoomGarrafaSFX(void) {
-    if (sfx_garrafa_loaded) PlaySound(sfx_garrafa);
-}
-
-// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
-void UnloadZoomGarrafaSFX(void) {
-    if (sfx_garrafa_loaded) {
-        UnloadSound(sfx_garrafa);
-        sfx_garrafa_loaded = 0;
     }
 }
 

@@ -1,4 +1,5 @@
 #include "scenes/scenegameplay.h"
+#include "sfx.h"
 #include "scenes/zoom/scenezoomcaixaarmario.h"
 #include "scenes/zoom/scenezoomcaixacama.h"
 #include "scenes/zoom/scenezoombilhete.h"
@@ -232,7 +233,7 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_GARRAFA:
-                    PlayZoomGarrafaSFX();
+                    PlaySFX(SFX_GARRAFA);
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_DIARIO:

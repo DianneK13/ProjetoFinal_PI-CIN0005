@@ -1,14 +1,9 @@
 #include "scenes/zoom/scenezoomdiario.h"
+#include "sfx.h"
 
 #include "raylib.h"
-static Sound sfx_diario;
-static int sfx_diario_loaded = 0;
 
 GameContext InitializeZoomDiarioState(GameContext context) {
-    if (!sfx_diario_loaded) {
-        sfx_diario = LoadSound("assets/audio/sfx/livro.mp3");
-        sfx_diario_loaded = 1;
-    }
     context.diario.objectCount = 2;
     context.diario.objects = (GameObject*)malloc(context.diario.objectCount * sizeof(GameObject));
 
@@ -35,7 +30,7 @@ GameContext InitializeZoomDiarioState(GameContext context) {
 }
 
 GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context) {
-    if (sfx_diario_loaded) PlaySound(sfx_diario);
+    PlaySFX(SFX_LIVRO);
     switch(target->id) {
         case ID_DIARIO_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
@@ -60,12 +55,4 @@ GameObject* GetZoomDiarioObjects(GameContext context) {
 
 int GetZoomDiarioObjectCount(GameContext context) {
     return context.diario.objectCount;
-}
-
-// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
-void UnloadZoomDiarioSFX(void) {
-    if (sfx_diario_loaded) {
-        UnloadSound(sfx_diario);
-        sfx_diario_loaded = 0;
-    }
 }

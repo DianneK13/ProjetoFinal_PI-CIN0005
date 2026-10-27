@@ -15,5 +15,3 @@ Texture2D GetZoomBilheteBackground(GameContext context);
 GameObject* GetZoomBilheteObjects(GameContext context);
 
 int GetZoomBilheteObjectCount(GameContext context);
-
-void UnloadZoomBilheteSFX(void);

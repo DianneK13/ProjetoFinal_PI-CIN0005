@@ -11,8 +11,10 @@
 #include "scenes/zoom/scenezoomgarrafa.h"
 #include "scenes/zoom/scenezoompirata.h"
 #include "utility.h"
+#include "sfx.h"
 
 GameContext InitializeState(GameContext context) {
+    LoadSFX();
     context.state = STATE_MENU;
     context = InitializeMenuState(context);
     context = InitializeGameplayState(context);
@@ -36,11 +38,7 @@ GameContext InitializeState(GameContext context) {
 // Chamar antes de CloseAudioDevice e CloseWindow.
 void UnloadState(GameContext *context) {
     FreeAll(context);
-    UnloadZoomBilheteSFX();
-    UnloadZoomCaixaArmarioSFX();
-    UnloadZoomCaixaCamaSFX();
-    UnloadZoomDiarioSFX();
-    UnloadZoomGarrafaSFX();
+    UnloadSFX();
 }
 
 //funções atualizam o estado, o array de objetos e o fundo a ser desenhado no momento
