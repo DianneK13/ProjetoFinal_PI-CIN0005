@@ -10,7 +10,6 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
         sfx_caixacama = LoadSound("assets/audio/sfx/botao.mp3");
         sfx_caixacama_loaded = 1;
     }
-    if (sfx_caixacama_loaded) PlaySound(sfx_caixacama);
     context.caixa_cama.objectCount = 17;
     // calloc zera tudo: os números (6..14) e o bilhete (15) só recebem textura, então ficam com tamanho e bounds 0
     // (com malloc eles ficavam com lixo de memória e podiam ser desenhados esticados por cima do cofre)
@@ -95,6 +94,10 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
 }
 
 GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* context, int* counterNumeros, int* leuBilhete) {
+    // som só ao girar os números do cofre
+    if (sfx_caixacama_loaded && target->id >= ID_CAIXA_CAMA_SIMBOLO_1 && target->id <= ID_CAIXA_CAMA_SIMBOLO_4) {
+        PlaySound(sfx_caixacama);
+    }
     switch(target->id) {
         case ID_CAIXA_CAMA_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;

@@ -20,7 +20,6 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
         sfx_caixaarmario = LoadSound("assets/audio/sfx/clicandopuzzle.mp3");
         sfx_caixaarmario_loaded = 1;
     }
-    if (sfx_caixaarmario_loaded) PlaySound(sfx_caixaarmario);
     // calloc zera tudo: os símbolos (6..13) só recebem textura, então ficam com tamanho e bounds 0
     // (com malloc eles ficavam com lixo de memória e podiam ser desenhados esticados por cima da cena)
     context.caixa_armario.objects = (GameObject*)calloc(context.caixa_armario.objectCount, sizeof(GameObject));
@@ -103,6 +102,10 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
 }
 
 GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* context, int* counterSimbolos, int* temChave) {
+    // som só ao girar os símbolos do cadeado
+    if (sfx_caixaarmario_loaded && target->id >= ID_CAIXA_ARMARIO_SIMBOLO_1 && target->id <= ID_CAIXA_ARMARIO_SIMBOLO_4) {
+        PlaySound(sfx_caixaarmario);
+    }
     switch(target->id) {
         case ID_CAIXA_ARMARIO_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
