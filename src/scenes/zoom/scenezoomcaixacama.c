@@ -1,4 +1,5 @@
 #include "scenes/zoom/scenezoomcaixacama.h"
+#include "scenes/scenegameplay.h"
 
 #include "raylib.h"
 static Sound sfx_caixacama;
@@ -191,7 +192,8 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
                 context->estante.objects[7].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
                 context->estante.objects[7].bounds = (Rectangle){211, 576, 778, 209};
 
-                context->caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].texture = context->caixa_cama.objects[22].texture;
+                // fala "Abri o cofre!" fica nos objetos do gameplay (caixa_cama só tem 17 objetos)
+                context->caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].texture = context->gameplay.objects[ID_BILHETE_FALA_1].texture;
 
 
                 return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
