@@ -238,7 +238,10 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_DIARIO:
                     if(temChave == 0) context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
-                    else context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+                    else {
+                        PlaySFX(SFX_LIVRO);
+                        context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+                    }
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_ESTANTE:
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;

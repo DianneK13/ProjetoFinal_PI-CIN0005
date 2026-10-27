@@ -4,7 +4,7 @@
 #include "raylib.h"
 
 GameContext InitializeZoomDiarioState(GameContext context) {
-    context.diario.objectCount = 2;
+    context.diario.objectCount = 3;
     context.diario.objects = (GameObject*)malloc(context.diario.objectCount * sizeof(GameObject));
 
     context.diario.objects[ID_DIARIO_VOLTAR].name = "voltar";
@@ -25,15 +25,27 @@ GameContext InitializeZoomDiarioState(GameContext context) {
     context.diario.objects[ID_DIARIO_ESPACO_FALA].state = ORIGINAL;
     context.diario.objects[ID_DIARIO_ESPACO_FALA].type = INTERACTIVE;
 
+    // Área do livro aberto, medida em ZoomDiario.png (1200x800). Fica depois da caixa de fala
+    // no array, então enquanto o diálogo estiver aberto o clique vai pra ele.
+    context.diario.objects[ID_DIARIO_LIVRO] = (GameObject){
+        .name="diario", .id=ID_DIARIO_LIVRO, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture=(Texture2D){0},
+        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
+        .bounds=(Rectangle){80, 16, 1032, 768}
+    };
+
     context.diario.background = LoadTexture("assets/images/zoom/diario/ZoomDiario.png");
     return context;
 }
 
 GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context) {
-    PlaySFX(SFX_LIVRO);
     switch(target->id) {
         case ID_DIARIO_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_DIARIO_LIVRO:
+            PlaySFX(SFX_LIVRO);
+            return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
 
         case ID_DIARIO_ESPACO_FALA:
             target->size = (Vector2){0, 0};

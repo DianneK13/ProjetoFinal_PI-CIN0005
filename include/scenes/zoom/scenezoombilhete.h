@@ -5,6 +5,8 @@
 #include "common.h"
 
 #define ID_BILHETE_VOLTAR 0
+// o bilhete faz parte do fundo do zoom, então é só uma área de clique invisível
+#define ID_BILHETE_PAPEL 1
 
 GameContext InitializeZoomBilheteState(GameContext context);
 
