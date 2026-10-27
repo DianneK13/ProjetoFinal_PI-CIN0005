@@ -8,6 +8,7 @@ typedef enum SfxId {
     SFX_BOTAO,      // símbolos/números dos cadeados
     SFX_GARRAFA,    // clicar na garrafa
     SFX_LIVRO,      // diário e bilhete
+    SFX_INICIO,     // botão JOGAR do menu
     SFX_COUNT
 } SfxId;
 

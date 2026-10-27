@@ -5,6 +5,7 @@ static const char *sfxPaths[SFX_COUNT] = {
     [SFX_BOTAO]   = "assets/audio/sfx/botao.mp3",
     [SFX_GARRAFA] = "assets/audio/sfx/garrafa.mp3",
     [SFX_LIVRO]   = "assets/audio/sfx/livro.mp3",
+    [SFX_INICIO]  = "assets/audio/sfx/inicio_macaco.wav",
 };
 
 static Sound sounds[SFX_COUNT];
