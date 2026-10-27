@@ -17,7 +17,7 @@ static int sfx_caixaarmario_loaded = 0;
 GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objectCount = 15;
     if (!sfx_caixaarmario_loaded) {
-        sfx_caixaarmario = LoadSound("assets/audio/sfx/clicandopuzzle.mp3");
+        sfx_caixaarmario = LoadSound("assets/audio/sfx/botao.mp3");
         sfx_caixaarmario_loaded = 1;
     }
     // calloc zera tudo: os símbolos (6..13) só recebem textura, então ficam com tamanho e bounds 0
