@@ -46,6 +46,7 @@ GameContext InitializeZoomGarrafaState(GameContext context) {
 GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* context) {
     switch(target->id) {
         case ID_GARRAFA_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
 
         case ID_GARRAFA_GARGALO:

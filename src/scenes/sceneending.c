@@ -1,4 +1,5 @@
 #include "scenes/sceneending.h"
+#include "sfx.h"
 
 // tela de "obrigado por jogar", mostrada quando o jogador termina o puzzle da estante
 GameContext InitializeEndingState(GameContext context) {
@@ -22,6 +23,7 @@ GameState processEndingEvent(GameObject* clickedObject, GameContext *context) {
 
     switch (clickedObject->id) {
         case ID_ENDING_BOTAO_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return STATE_MENU;
         default:
             return STATE_ENDING;

@@ -1,4 +1,5 @@
 #include "scenes/zoom/scenezoomestante.h"
+#include "sfx.h"
 
 GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objectCount = 8;
@@ -83,6 +84,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 GameplaySubstate processZoomEstanteEvent(GameObject* target, GameContext* context, int* leuBilhete, int* flagFinal) {
     switch(target->id) {
         case ID_ESTANTE_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             if(context->estante.objects[ID_ESTANTE_LETRA_1].state == ALTERED && 
                 context->estante.objects[ID_ESTANTE_LETRA_2].state == ALTERED &&
                 context->estante.objects[ID_ESTANTE_LETRA_3].state == ALTERED &&

@@ -103,6 +103,7 @@ GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* c
     }
     switch(target->id) {
         case ID_CAIXA_ARMARIO_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
         
         case ID_CAIXA_ARMARIO_SIMBOLO_1:
@@ -162,6 +163,7 @@ GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* c
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
         
         case ID_CAIXA_ARMARIO_BOTAO:
+            PlaySFX(SFX_BOTAO);
             if(counterSimbolos[0]%8 == 7 && counterSimbolos[1]%8 == 4 && counterSimbolos[2]%8 == 6 && counterSimbolos[3]%8 == 0) {
                 *temChave = 1;
                 printf("receba\n");

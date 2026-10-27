@@ -41,6 +41,7 @@ GameContext InitializeZoomDiarioState(GameContext context) {
 GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context) {
     switch(target->id) {
         case ID_DIARIO_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
 
         case ID_DIARIO_LIVRO:

@@ -41,6 +41,7 @@ GameContext InitializeZoomBilheteState(GameContext context) {
 GameplaySubstate processZoomBilheteEvent(GameObject* target, GameContext* context) {
     switch(target->id) {
         case ID_BILHETE_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
         case ID_BILHETE_PAPEL:
             PlaySFX(SFX_LIVRO);

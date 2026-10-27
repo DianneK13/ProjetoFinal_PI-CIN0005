@@ -95,6 +95,7 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
     }
     switch(target->id) {
         case ID_CAIXA_CAMA_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
 
         case ID_CAIXA_CAMA_ESPACO_FALA:
@@ -163,6 +164,7 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
         
         case ID_CAIXA_CAMA_BOTAO:
+            PlaySFX(SFX_BOTAO);
             if(counterNumeros[0]%9 == 4 && counterNumeros[1]%9 == 2 && counterNumeros[2]%9 == 7 && counterNumeros[3]%9 == 6) {
                 printf("receba\n");
                 *leuBilhete = 1;
