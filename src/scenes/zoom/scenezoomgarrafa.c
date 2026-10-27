@@ -10,7 +10,7 @@ GameContext InitializeZoomGarrafaState(GameContext context) {
         sfx_garrafa = LoadSound("assets/audio/sfx/garrafa.mp3");
         sfx_garrafa_loaded = 1;
     }
-    context.garrafa.objectCount = 2;
+    context.garrafa.objectCount = 4;
     context.garrafa.objects = (GameObject*)malloc(context.garrafa.objectCount * sizeof(GameObject));
 
     context.garrafa.objects[ID_GARRAFA_VOLTAR].name = "voltar";
@@ -31,16 +31,34 @@ GameContext InitializeZoomGarrafaState(GameContext context) {
     context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].state = ORIGINAL;
     context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].type = INTERACTIVE;
 
+    // Áreas de clique da garrafa, medidas em ZoomGarrafa.png (1200x800). Ficam depois da caixa de fala
+    // no array, então enquanto o diálogo estiver aberto o clique vai pra ele.
+    context.garrafa.objects[ID_GARRAFA_GARGALO] = (GameObject){
+        .name="garrafa", .id=ID_GARRAFA_GARGALO, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture=(Texture2D){0},
+        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
+        .bounds=(Rectangle){505, 25, 230, 215}
+    };
+    context.garrafa.objects[ID_GARRAFA_CORPO] = (GameObject){
+        .name="garrafa", .id=ID_GARRAFA_CORPO, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture=(Texture2D){0},
+        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
+        .bounds=(Rectangle){390, 240, 450, 475}
+    };
+
     context.garrafa.background = LoadTexture("assets/images/zoom/garrafa/ZoomGarrafa.png");
     return context;
 }
 
 GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* context) {
-    // Toca o SFX ao clicar em qualquer objeto
-    if (sfx_garrafa_loaded) PlaySound(sfx_garrafa);
     switch(target->id) {
         case ID_GARRAFA_VOLTAR:
             return GAMEPLAY_SUBSTATE_MAIN;
+
+        case ID_GARRAFA_GARGALO:
+        case ID_GARRAFA_CORPO:
+            PlayZoomGarrafaSFX();
+            return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
 
         case ID_GARRAFA_ESPACO_FALA:
             target->size = (Vector2){0, 0};
@@ -50,6 +68,11 @@ GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* contex
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
     }
+}
+
+// Som da garrafa: tocado ao clicar nela no quarto e no zoom
+void PlayZoomGarrafaSFX(void) {
+    if (sfx_garrafa_loaded) PlaySound(sfx_garrafa);
 }
 
 // Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)

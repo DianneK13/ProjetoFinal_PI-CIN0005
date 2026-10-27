@@ -232,6 +232,7 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_GARRAFA:
+                    PlayZoomGarrafaSFX();
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_DIARIO:
