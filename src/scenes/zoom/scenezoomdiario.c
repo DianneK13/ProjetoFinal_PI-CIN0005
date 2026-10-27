@@ -61,3 +61,11 @@ GameObject* GetZoomDiarioObjects(GameContext context) {
 int GetZoomDiarioObjectCount(GameContext context) {
     return context.diario.objectCount;
 }
+
+// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
+void UnloadZoomDiarioSFX(void) {
+    if (sfx_diario_loaded) {
+        UnloadSound(sfx_diario);
+        sfx_diario_loaded = 0;
+    }
+}

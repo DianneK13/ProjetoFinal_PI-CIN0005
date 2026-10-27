@@ -52,7 +52,7 @@ GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* contex
     }
 }
 
-// Libera o SFX ao sair da cena (opcional, pode ser chamado externamente se desejar)
+// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
 void UnloadZoomGarrafaSFX(void) {
     if (sfx_garrafa_loaded) {
         UnloadSound(sfx_garrafa);

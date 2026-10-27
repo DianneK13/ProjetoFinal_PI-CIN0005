@@ -195,3 +195,11 @@ GameObject* GetZoomCaixaArmarioObjects(GameContext context) {
 int GetZoomCaixaArmarioObjectCount(GameContext context) {
     return context.caixa_armario.objectCount;
 }
+
+// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
+void UnloadZoomCaixaArmarioSFX(void) {
+    if (sfx_caixaarmario_loaded) {
+        UnloadSound(sfx_caixaarmario);
+        sfx_caixaarmario_loaded = 0;
+    }
+}

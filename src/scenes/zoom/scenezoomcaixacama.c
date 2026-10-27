@@ -212,3 +212,11 @@ GameObject* GetZoomCaixaCamaObjects(GameContext context) {
 int GetZoomCaixaCamaObjectCount(GameContext context) {
     return context.caixa_cama.objectCount;
 }
+
+// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
+void UnloadZoomCaixaCamaSFX(void) {
+    if (sfx_caixacama_loaded) {
+        UnloadSound(sfx_caixacama);
+        sfx_caixacama_loaded = 0;
+    }
+}

@@ -56,3 +56,11 @@ GameObject* GetZoomBilheteObjects(GameContext context) {
 int GetZoomBilheteObjectCount(GameContext context) {
     
 }
+
+// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
+void UnloadZoomBilheteSFX(void) {
+    if (sfx_bilhete_loaded) {
+        UnloadSound(sfx_bilhete);
+        sfx_bilhete_loaded = 0;
+    }
+}

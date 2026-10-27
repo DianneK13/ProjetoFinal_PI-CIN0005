@@ -24,15 +24,33 @@ void FreeObjects(GameObject **objects, int *count) {
     if (count) *count = 0;
 }
 
+// Várias cenas guardam cópias da mesma textura (ex.: as falas são copiadas para o objeto 10
+// do gameplay e para as cenas de zoom), então guardamos os ids já liberados pra não liberar duas vezes.
+// A lista é zerada no começo de FreeAll.
+static unsigned int unloadedIds[512];
+static int unloadedCount = 0;
+
+static void UnloadTextureOnce(Texture2D *tex) {
+    if (!tex || tex->id == 0) return;
+    for (int i = 0; i < unloadedCount; i++) {
+        if (unloadedIds[i] == tex->id) {
+            tex->id = 0;
+            return;
+        }
+    }
+    if (unloadedCount < (int)(sizeof(unloadedIds) / sizeof(unloadedIds[0]))) {
+        unloadedIds[unloadedCount++] = tex->id;
+    }
+    UnloadTexture(*tex);
+    tex->id = 0;
+}
+
 void FreeScene(GameScene *scene, const bool freeBackground) {
     if (!scene) return;
     // objetos da cena
     if (scene->objects) {
         for (int i = 0; i < scene->objectCount; ++i) {
-            if (scene->objects[i].texture.id != 0) {
-                UnloadTexture(scene->objects[i].texture);
-                scene->objects[i].texture.id = 0;
-            }
+            UnloadTextureOnce(&scene->objects[i].texture);
         }
         free(scene->objects);
         scene->objects = NULL;
@@ -40,12 +58,13 @@ void FreeScene(GameScene *scene, const bool freeBackground) {
     scene->objectCount = 0;
 
     if (freeBackground) {
-        UnloadTextureSafe(&scene->background);
+        UnloadTextureOnce(&scene->background);
     }
 }
 
 void FreeAll(GameContext *ctx) {
     if (!ctx) return;
+    unloadedCount = 0;
     FreeScene(&ctx->menu, true);
     FreeScene(&ctx->gameplay, true);
     FreeScene(&ctx->creditos, true);
@@ -53,6 +72,7 @@ void FreeAll(GameContext *ctx) {
 
     FreeScene(&ctx->bilhete, true);
     FreeScene(&ctx->caixa_armario, true);
+    FreeScene(&ctx->caixa_cama, true);
     FreeScene(&ctx->diario, true);
     FreeScene(&ctx->estante, true);
     FreeScene(&ctx->garrafa, true);

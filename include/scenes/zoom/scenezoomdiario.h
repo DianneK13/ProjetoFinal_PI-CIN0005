@@ -16,3 +16,5 @@ Texture2D GetZoomDiarioBackground(GameContext context);
 GameObject* GetZoomDiarioObjects(GameContext context);
 
 int GetZoomDiarioObjectCount(GameContext context);
+
+void UnloadZoomDiarioSFX(void);

@@ -17,7 +17,6 @@ GameObject* objects;
 
 // Function prototypes
 void LoadAssets(void);
-//void UnloadAssets(void);
 void DrawObjects(GameObject* objects, int objectCount);
 void CheckMouseHover(GameObject* objects, int objectCount);
 void DrawSubtitle(void);
@@ -184,15 +183,14 @@ int main(void) {
         EndDrawing();
     }
 
-    UnloadRenderTexture(gameTarget);
-
     // Cleanup
+    UnloadRenderTexture(gameTarget);
+    UnloadState(&context);
     if (bgm.ctxData) {
         StopMusicStream(bgm);
         UnloadMusicStream(bgm);
     }
     CloseAudioDevice();
-    //UnloadAssets();
     CloseWindow();
     
     return 0;
@@ -224,23 +222,6 @@ void LoadAssets(void)
         gameFont = GetFontDefault();
     }
 }
-
-
-/*
-void UnloadAssets(GameObject* objects, int objectCount)
-{
-    UnloadTexture("assets/botarfundo");
-
-    for (int i = 0; i < objectCount; i++) {
-        UnloadTexture(objects[i].texture);
-    }
-
-    if (objects != NULL) {
-        free(objects);
-        objects = NULL;
-    }
-}
-*/
 
 void DrawObjects(GameObject* objects, int objectCount)
 {
