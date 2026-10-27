@@ -25,7 +25,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].name = "voltar";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].id = ID_CAIXA_ARMARIO_VOLTAR;
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].texture = LoadTexture("assets/images/ui/voltarSubstates.png");
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].position = (Vector2){0, 0};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
@@ -34,7 +34,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].name = "simbolo1";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].id = ID_CAIXA_ARMARIO_SIMBOLO_1;
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloAncora.png");
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].position = (Vector2){0, 0};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_1].bounds = (Rectangle){220, 360, 178, 265};
@@ -43,7 +43,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_2].name = "simbolo2";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_2].id = ID_CAIXA_ARMARIO_SIMBOLO_2;
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_2].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_2].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloAncora.png");
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_2].position = (Vector2){178, 0};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_2].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_2].bounds = (Rectangle){398, 360, 178, 265};
@@ -52,7 +52,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].name = "simbolo3";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].id = ID_CAIXA_ARMARIO_SIMBOLO_3;
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloAncora.png");
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].position = (Vector2){370, 0};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_3].bounds = (Rectangle){576, 360, 178, 265};
@@ -61,7 +61,7 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
 
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].name = "simbolo4";
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].id = ID_CAIXA_ARMARIO_SIMBOLO_4;
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloAncora.png");
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].position = (Vector2){560, 0};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_SIMBOLO_4].bounds = (Rectangle){754, 360, 178, 265};
@@ -86,17 +86,17 @@ GameContext InitializeZoomCaixaArmarioState(GameContext context) {
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].state = ORIGINAL;
     context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPACO_FALA].type = INTERACTIVE;
 
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloAncora.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture = LoadTexture("assets/zoomCaixaArmario/SimboloCifrao.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloEspada.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].texture = LoadTexture("assets/zoomCaixaArmario/SimboloGancho.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloLula.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].texture = LoadTexture("assets/zoomCaixaArmario/SimboloRosa.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].texture = LoadTexture("assets/zoomCaixaArmario/SimboloTubarao.png");
-    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].texture = LoadTexture("assets/zoomCaixaArmario/SimboloX.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ANCORA].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloAncora.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_CIFRAO].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloCifrao.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ESPADA].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloEspada.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_GANCHO].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloGancho.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_LULA].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloLula.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_ROSA].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloRosa.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_TUBARAO].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloTubarao.png");
+    context.caixa_armario.objects[ID_CAIXA_ARMARIO_X].texture = LoadTexture("assets/images/zoom/caixaArmario/SimboloX.png");
     
     
-    context.caixa_armario.background = LoadTexture("assets/zoomCaixaArmario/ZoomCaixaArmario.png");
+    context.caixa_armario.background = LoadTexture("assets/images/zoom/caixaArmario/ZoomCaixaArmario.png");
     return context;
 }
 

@@ -23,7 +23,7 @@ GameContext InitializeGameplayState(GameContext context) {
     context.gameplay.objects = NULL;
     context.gameplay.objectCount = 0;
     context.gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
-    context.gameplay.background = LoadTexture("assets/fundofodao.png");
+    context.gameplay.background = LoadTexture("assets/images/gameplay/fundofodao.png");
     SetupGameplayMain(&context);
 
     return context;
@@ -415,7 +415,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // ARMÁRIO
     ctx->gameplay.objects[ID_GAMEPLAY_ARMARIO] = (GameObject){
         .name="armario", .id=ID_GAMEPLAY_ARMARIO, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture=LoadTexture("assets/objetosMainGameplay/Armario.png"),
+        .texture=LoadTexture("assets/images/gameplay/objetos/Armario.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds=(Rectangle){0, 0, 0, 0}
     };
@@ -423,7 +423,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // CAIXA ARMÁRIO
     ctx->gameplay.objects[ID_GAMEPLAY_CAIXA_ARMARIO] = (GameObject){
         .name="caixa", .id=ID_GAMEPLAY_CAIXA_ARMARIO, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/objetosMainGameplay/CaixaArmario.png"),
+        .texture = LoadTexture("assets/images/gameplay/objetos/CaixaArmario.png"),
         .position=(Vector2){0, 0}, .size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){66, 100, 140, 73},
     };
@@ -431,7 +431,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // CAIXA CAMA
     ctx->gameplay.objects[ID_GAMEPLAY_CAIXA_CAMA] = (GameObject){
         .name="cofre", .id=ID_GAMEPLAY_CAIXA_CAMA, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/objetosMainGameplay/CaixaCama.png"),
+        .texture = LoadTexture("assets/images/gameplay/objetos/CaixaCama.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){957, 710, 118, 75},
     };
@@ -439,7 +439,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // DIARIO
     ctx->gameplay.objects[ID_GAMEPLAY_DIARIO] = (GameObject){
         .name="diario", .id=ID_GAMEPLAY_DIARIO, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/objetosMainGameplay/Diario.png"),
+        .texture = LoadTexture("assets/images/gameplay/objetos/Diario.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){563, 417, 58, 54},
     };
@@ -447,7 +447,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // VITROLA
     ctx->gameplay.objects[ID_GAMEPLAY_VITROLA] = (GameObject){
         .name="vitrola", .id=ID_GAMEPLAY_VITROLA, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/objetosMainGameplay/Vitrola.png"),
+        .texture = LoadTexture("assets/images/gameplay/objetos/Vitrola.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){390, 313, 105, 153},
     };
@@ -455,7 +455,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // GARRAFA
     ctx->gameplay.objects[ID_GAMEPLAY_GARRAFA] = (GameObject){
         .name="garrafa", .id=ID_GAMEPLAY_GARRAFA, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/objetosMainGameplay/Garrafa.png"),
+        .texture = LoadTexture("assets/images/gameplay/objetos/Garrafa.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){725, 393, 45, 79}
     };
@@ -463,7 +463,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // ESTANTE
     ctx->gameplay.objects[ID_GAMEPLAY_ESTANTE] = (GameObject){
         .name="estante", .id=ID_GAMEPLAY_ESTANTE, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/objetosMainGameplay/Estante.png"),
+        .texture = LoadTexture("assets/images/gameplay/objetos/Estante.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){905, 191, 157, 101},
     };
@@ -471,7 +471,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // PIRATA
     ctx->gameplay.objects[ID_GAMEPLAY_PIRATA] = (GameObject){
         .name="pirata", .id=ID_GAMEPLAY_PIRATA, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/objetosMainGameplay/Pirata.png"),
+        .texture = LoadTexture("assets/images/gameplay/objetos/Pirata.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds = (Rectangle){873, 377, 156, 183}
     };
@@ -479,7 +479,7 @@ static void SetupGameplayMain(GameContext *ctx) {
     // CHAVE
     ctx->gameplay.objects[ID_GAMEPLAY_CHAVE] = (GameObject){
         .name="chave", .id=ID_GAMEPLAY_CHAVE, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture=LoadTexture("assets/jill.png"),
+        .texture=LoadTexture("assets/images/gameplay/jill.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
         .bounds=(Rectangle){0, 0, 0, 0}
     };
@@ -487,45 +487,45 @@ static void SetupGameplayMain(GameContext *ctx) {
     // BILHETE
     ctx->gameplay.objects[ID_GAMEPLAY_BILHETE] = (GameObject){
         .name="bilhete", .id=ID_GAMEPLAY_BILHETE, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/jill.png"),
+        .texture = LoadTexture("assets/images/gameplay/jill.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
         .bounds=(Rectangle){0, 0, 0, 0}
     };
 
      ctx->gameplay.objects[ID_GAMEPLAY_ESPACO_FALA] = (GameObject){
         .name="continuar.", .id=ID_GAMEPLAY_ESPACO_FALA, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_1.png"),
+        .texture = LoadTexture("assets/images/falas/HISTORIA_INICIAL_FALA_1.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds=(Rectangle){211, 576, 778, 209}
     };
 
-    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_1].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_1.png");
-    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_2].texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_2.png");
-    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_3].texture = LoadTexture("assets/falas/FALAS/HISTORIA_INICIAL_FALA_3.png");
-    ctx->gameplay.objects[ID_CAIXA_ARMARIO_FALA].texture = LoadTexture("assets/falas/FALAS/CAIXA_ARMARIO_FALA.png");
-    ctx->gameplay.objects[ID_VITROLA_FALA].texture = LoadTexture("assets/falas/FALAS/VITROLA_FALA.png");
-    ctx->gameplay.objects[ID_PEGOU_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/PEGOU_CHAVE_FALA.png");
-    ctx->gameplay.objects[ID_CAIXA_CAMA_FALA].texture = LoadTexture("assets/falas/FALAS/CAIXA_CAMA_FALA.png");
-    ctx->gameplay.objects[ID_DIARIO_SEM_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/DIARIO_SEM_CHAVE_FALA.png");
-    ctx->gameplay.objects[ID_DIARIO_COM_CHAVE_FALA].texture = LoadTexture("assets/falas/FALAS/DIARIO_COM_CHAVE_FALA.png");
-    ctx->gameplay.objects[ID_PIRATA_FALA].texture = LoadTexture("assets/falas/FALAS/PIRATA_FALA.png");
-    ctx->gameplay.objects[ID_GARRAFA_FALA].texture = LoadTexture("assets/falas/FALAS/GARRAFA_FALA.png");
-    ctx->gameplay.objects[ID_BILHETE_FALA_1].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_1.png");
-    ctx->gameplay.objects[ID_BILHETE_FALA_2].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_2.png");
-    ctx->gameplay.objects[ID_BILHETE_FALA_3].texture = LoadTexture("assets/falas/FALAS/BILHETE_FALA_3.png");
-    ctx->gameplay.objects[ID_ESTANTE_FALA].texture = LoadTexture("assets/falas/FALAS/ESTANTE_FALA.png");
-    ctx->gameplay.objects[ID_ESTANTE_POS_BILHETE_FALA].texture = LoadTexture("assets/falas/FALAS/ESTANTE_POS_BILHETE_FALA.png");
-    ctx->gameplay.objects[ID_FINAL_FALA_1].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_1.png");
-    ctx->gameplay.objects[ID_FINAL_FALA_2].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_2.png");
-    ctx->gameplay.objects[ID_FINAL_FALA_3].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_3.png");
-    ctx->gameplay.objects[ID_FINAL_FALA_4].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_4.png");
-    ctx->gameplay.objects[ID_FINAL_FALA_5].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_5.png");
-    ctx->gameplay.objects[ID_FINAL_FALA_6].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_6.png");
-    ctx->gameplay.objects[ID_FINAL_FALA_7].texture = LoadTexture("assets/falas/FALAS/FINAL_FALA_7.png");
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_1].texture = LoadTexture("assets/images/falas/BILHETE_FALA_1.png");
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_2].texture = LoadTexture("assets/images/falas/HISTORIA_INICIAL_FALA_2.png");
+    ctx->gameplay.objects[ID_HISTORIA_INICIAL_FALA_3].texture = LoadTexture("assets/images/falas/HISTORIA_INICIAL_FALA_3.png");
+    ctx->gameplay.objects[ID_CAIXA_ARMARIO_FALA].texture = LoadTexture("assets/images/falas/CAIXA_ARMARIO_FALA.png");
+    ctx->gameplay.objects[ID_VITROLA_FALA].texture = LoadTexture("assets/images/falas/VITROLA_FALA.png");
+    ctx->gameplay.objects[ID_PEGOU_CHAVE_FALA].texture = LoadTexture("assets/images/falas/PEGOU_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_CAIXA_CAMA_FALA].texture = LoadTexture("assets/images/falas/CAIXA_CAMA_FALA.png");
+    ctx->gameplay.objects[ID_DIARIO_SEM_CHAVE_FALA].texture = LoadTexture("assets/images/falas/DIARIO_SEM_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_DIARIO_COM_CHAVE_FALA].texture = LoadTexture("assets/images/falas/DIARIO_COM_CHAVE_FALA.png");
+    ctx->gameplay.objects[ID_PIRATA_FALA].texture = LoadTexture("assets/images/falas/PIRATA_FALA.png");
+    ctx->gameplay.objects[ID_GARRAFA_FALA].texture = LoadTexture("assets/images/falas/GARRAFA_FALA.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_1].texture = LoadTexture("assets/images/falas/BILHETE_FALA_1.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_2].texture = LoadTexture("assets/images/falas/BILHETE_FALA_2.png");
+    ctx->gameplay.objects[ID_BILHETE_FALA_3].texture = LoadTexture("assets/images/falas/BILHETE_FALA_3.png");
+    ctx->gameplay.objects[ID_ESTANTE_FALA].texture = LoadTexture("assets/images/falas/ESTANTE_FALA.png");
+    ctx->gameplay.objects[ID_ESTANTE_POS_BILHETE_FALA].texture = LoadTexture("assets/images/falas/ESTANTE_POS_BILHETE_FALA.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_1].texture = LoadTexture("assets/images/falas/FINAL_FALA_1.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_2].texture = LoadTexture("assets/images/falas/FINAL_FALA_2.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_3].texture = LoadTexture("assets/images/falas/FINAL_FALA_3.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_4].texture = LoadTexture("assets/images/falas/FINAL_FALA_4.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_5].texture = LoadTexture("assets/images/falas/FINAL_FALA_5.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_6].texture = LoadTexture("assets/images/falas/FINAL_FALA_6.png");
+    ctx->gameplay.objects[ID_FINAL_FALA_7].texture = LoadTexture("assets/images/falas/FINAL_FALA_7.png");
 
 
 
 
     if (ctx->gameplay.background.id) UnloadTexture(ctx->gameplay.background);
-    ctx->gameplay.background = LoadTexture("assets/fundofodao.png");
+    ctx->gameplay.background = LoadTexture("assets/images/gameplay/fundofodao.png");
 }

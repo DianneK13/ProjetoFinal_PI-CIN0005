@@ -6,7 +6,7 @@ GameContext InitializeZoomPirataState(GameContext context) {
 
     context.pirata.objects[ID_PIRATA_VOLTAR].name = "voltar";
     context.pirata.objects[ID_PIRATA_VOLTAR].id = ID_PIRATA_VOLTAR;
-    context.pirata.objects[ID_PIRATA_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.pirata.objects[ID_PIRATA_VOLTAR].texture = LoadTexture("assets/images/ui/voltarSubstates.png");
     context.pirata.objects[ID_PIRATA_VOLTAR].position = (Vector2){0, 0};
     context.pirata.objects[ID_PIRATA_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.pirata.objects[ID_PIRATA_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
@@ -22,7 +22,7 @@ GameContext InitializeZoomPirataState(GameContext context) {
     context.pirata.objects[ID_PIRATA_ESPACO_FALA].state = ORIGINAL;
     context.pirata.objects[ID_PIRATA_ESPACO_FALA].type = INTERACTIVE;
 
-    context.pirata.background = LoadTexture("assets/zoomPirata/ZoomPirata.png");
+    context.pirata.background = LoadTexture("assets/images/zoom/pirata/ZoomPirata.png");
     return context;
 }
 

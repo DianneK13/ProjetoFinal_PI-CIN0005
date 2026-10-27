@@ -14,7 +14,7 @@ GameContext InitializeZoomDiarioState(GameContext context) {
 
     context.diario.objects[ID_DIARIO_VOLTAR].name = "voltar";
     context.diario.objects[ID_DIARIO_VOLTAR].id = ID_DIARIO_VOLTAR;
-    context.diario.objects[ID_DIARIO_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.diario.objects[ID_DIARIO_VOLTAR].texture = LoadTexture("assets/images/ui/voltarSubstates.png");
     context.diario.objects[ID_DIARIO_VOLTAR].position = (Vector2){0, 0};
     context.diario.objects[ID_DIARIO_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.diario.objects[ID_DIARIO_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
@@ -30,7 +30,7 @@ GameContext InitializeZoomDiarioState(GameContext context) {
     context.diario.objects[ID_DIARIO_ESPACO_FALA].state = ORIGINAL;
     context.diario.objects[ID_DIARIO_ESPACO_FALA].type = INTERACTIVE;
 
-    context.diario.background = LoadTexture("assets/zoomDiario/ZoomDiario.png");
+    context.diario.background = LoadTexture("assets/images/zoom/diario/ZoomDiario.png");
     return context;
 }
 

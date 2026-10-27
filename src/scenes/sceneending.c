@@ -7,12 +7,12 @@ GameContext InitializeEndingState(GameContext context) {
 
     context.ending.objects[ID_ENDING_BOTAO_VOLTAR] = (GameObject) {
         .name="voltar ao menu", .id=ID_ENDING_BOTAO_VOLTAR, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture=LoadTexture("assets/voltarSubstates.png"),
+        .texture=LoadTexture("assets/images/ui/voltarSubstates.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds=(Rectangle){5, 7, 71, 73}
     };
 
-    context.ending.background = LoadTexture("assets/ending/ending_background.png");
+    context.ending.background = LoadTexture("assets/images/ending/ending_background.png");
     return context;
 }
 
