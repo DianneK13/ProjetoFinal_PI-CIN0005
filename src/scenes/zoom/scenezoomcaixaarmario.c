@@ -179,6 +179,7 @@ GameplaySubstate processZoomCaixaArmarioEvent(GameObject* target, GameContext* c
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_ARMARIO;
         
         case ID_CAIXA_ARMARIO_ESPACO_FALA:
+            PlaySFX(SFX_DIALOGO);
             target->size = (Vector2){0, 0};
             target->bounds = (Rectangle){0, 0, 0, 0};
 

@@ -260,7 +260,7 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     return STATE_GAMEPLAY;
 
                 case ID_GAMEPLAY_ESPACO_FALA:
-                
+                    PlaySFX(SFX_DIALOGO);
                     if(flagInicio == 0) {
                         context->gameplay.objects[10].texture = context->gameplay.objects[12].texture;
                         flagInicio++;

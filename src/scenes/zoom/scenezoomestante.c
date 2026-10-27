@@ -139,6 +139,7 @@ GameplaySubstate processZoomEstanteEvent(GameObject* target, GameContext* contex
             return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
 
         case ID_ESTANTE_ESPACO_FALA:
+            PlaySFX(SFX_DIALOGO);
             target->size = (Vector2){0, 0};
             target->bounds = (Rectangle){0, 0, 0, 0};
             return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;   
