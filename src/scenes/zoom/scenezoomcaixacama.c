@@ -164,8 +164,8 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
         
         case ID_CAIXA_CAMA_BOTAO:
-            PlaySFX(SFX_BOTAO);
             if(counterNumeros[0]%9 == 4 && counterNumeros[1]%9 == 2 && counterNumeros[2]%9 == 7 && counterNumeros[3]%9 == 6) {
+                PlaySFX(SFX_PUZZLE);
                 printf("receba\n");
                 *leuBilhete = 1;
 
@@ -198,7 +198,10 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
 
                 return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
             }
-            else return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
+            else {
+                PlaySFX(SFX_BOTAO);
+                return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
+            }
         
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;

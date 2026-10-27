@@ -9,6 +9,8 @@ typedef enum SfxId {
     SFX_GARRAFA,    // clicar na garrafa
     SFX_LIVRO,      // diário e bilhete
     SFX_INICIO,     // botão JOGAR do menu
+    SFX_BAU,        // baú (caixa do armário) aberto
+    SFX_PUZZLE,     // puzzle concluído (cofre e estante)
     SFX_COUNT
 } SfxId;
 
