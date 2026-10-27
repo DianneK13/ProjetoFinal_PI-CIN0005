@@ -399,7 +399,9 @@ static void SetupGameplayMain(GameContext *ctx) {
     // GameplayFreeObjects(ctx);
 
     ctx->gameplay.objectCount = 34;
-    ctx->gameplay.objects = (GameObject*)malloc(sizeof(GameObject) * ctx->gameplay.objectCount);
+    // calloc zera tudo: as falas (11..33) só recebem textura, então ficam com tamanho e bounds 0
+    // (sem isso elas eram desenhadas com tamanho aleatório por cima da tela e roubavam os cliques)
+    ctx->gameplay.objects = (GameObject*)calloc(ctx->gameplay.objectCount, sizeof(GameObject));
     if (!ctx->gameplay.objects) { ctx->gameplay.objectCount = 0; return; }
 
     // ARMÁRIO
