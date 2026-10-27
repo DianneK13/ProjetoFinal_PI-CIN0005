@@ -248,11 +248,11 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_PIRATA;
                     return STATE_GAMEPLAY;
 
-                // itens "normais" /sem zoom
+                // itens "normais" /sem zoom: a fala deles (se tiver) já é mostrada em ProcessFlags
                 case ID_GAMEPLAY_VITROLA:
-                    
                 case ID_GAMEPLAY_ARMARIO:
                 case ID_GAMEPLAY_CHAVE:
+                    return STATE_GAMEPLAY;
 
                 case ID_GAMEPLAY_ESPACO_FALA:
                 
@@ -294,6 +294,14 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     else if(flagFinal == 6) {
                         context->gameplay.objects[10].texture = context->gameplay.objects[33].texture;
                         flagFinal++;
+                    }
+
+                    // última fala do final já foi lida: vai pra tela de finalização
+                    else if(flagFinal == 7) {
+                        target->size = (Vector2){0, 0};
+                        target->bounds = (Rectangle){0, 0, 0, 0};
+                        flagFinal++;
+                        return STATE_ENDING;
                     }
 
                     else {
@@ -399,7 +407,9 @@ static void SetupGameplayMain(GameContext *ctx) {
     // GameplayFreeObjects(ctx);
 
     ctx->gameplay.objectCount = 34;
-    ctx->gameplay.objects = (GameObject*)malloc(sizeof(GameObject) * ctx->gameplay.objectCount);
+    // calloc zera tudo: as falas (11..33) só recebem textura, então ficam com tamanho e bounds 0
+    // (sem isso elas eram desenhadas com tamanho aleatório por cima da tela e roubavam os cliques)
+    ctx->gameplay.objects = (GameObject*)calloc(ctx->gameplay.objectCount, sizeof(GameObject));
     if (!ctx->gameplay.objects) { ctx->gameplay.objectCount = 0; return; }
 
     // ARMÁRIO

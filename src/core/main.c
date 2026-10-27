@@ -37,11 +37,36 @@ GameObject* GetClickedObject(GameObject* objects, int objectCount) {
     return NULL;
 }
 
+// Liga/desliga a tela cheia sem trocar a resolução do monitor.
+// (o ToggleFullscreen do raylib troca o modo de vídeo, o que no Mac deixa a imagem "com zoom")
+#ifdef __APPLE__
+#include <objc/runtime.h>
+#include <objc/message.h>
+// usa a tela cheia nativa do macOS (a mesma do botão verde da janela)
+void ToggleGameFullscreen(void) {
+    id window = (id)GetWindowHandle();
+    ((void (*)(id, SEL, id))objc_msgSend)(window, sel_registerName("toggleFullScreen:"), (id)0);
+}
+#else
+void ToggleGameFullscreen(void) {
+    ToggleBorderlessWindowed();
+}
+#endif
+
 int main(void) {
     GameContext context = {};
     // Initialize window
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sagui Island");
     SetTargetFPS(60);
+
+    // O jogo é sempre desenhado em 1200x800 nessa textura e depois escalado pra janela,
+    // mantendo a proporção (sobra borda preta quando a tela tem outro formato)
+    RenderTexture2D gameTarget = LoadRenderTexture(SCREEN_WIDTH, SCREEN_HEIGHT);
+    SetTextureFilter(gameTarget.texture, TEXTURE_FILTER_BILINEAR);
+
+    // Começa em tela cheia; F ou F11 alterna
+    ToggleGameFullscreen();
 
     // Inicializa áudio
     InitAudioDevice();
@@ -84,6 +109,19 @@ int main(void) {
 
         if (bgm.ctxData) UpdateMusicStream(bgm);
 
+        if (IsKeyPressed(KEY_F11) || IsKeyPressed(KEY_F)) ToggleGameFullscreen();
+
+        // Escala e bordas pretas pra encaixar 1200x800 na janela atual
+        float scaleX = (float)GetScreenWidth() / SCREEN_WIDTH;
+        float scaleY = (float)GetScreenHeight() / SCREEN_HEIGHT;
+        float scale = (scaleX < scaleY) ? scaleX : scaleY;
+        int offsetX = (GetScreenWidth() - (int)(SCREEN_WIDTH * scale)) / 2;
+        int offsetY = (GetScreenHeight() - (int)(SCREEN_HEIGHT * scale)) / 2;
+
+        // Faz GetMousePosition devolver coordenadas do jogo (1200x800), descontando as bordas
+        SetMouseOffset(-offsetX, -offsetY);
+        SetMouseScale(1.0f / scale, 1.0f / scale);
+
         if(IsKeyDown(KEY_M) && context.state == STATE_GAMEPLAY) {
             context.state = STATE_MENU;
             context.menu.substate = MENU_SUBSTATE_MAIN;
@@ -111,8 +149,8 @@ int main(void) {
         CheckMouseHover(GetObjects(context), GetObjectCount(context));
 
         // Draw
-        BeginDrawing();
-        
+        BeginTextureMode(gameTarget);
+
         ClearBackground(RAYWHITE);
 
         Texture2D bg = GetBackground(context);
@@ -129,9 +167,24 @@ int main(void) {
         
 
         DrawSubtitle();
-        
+
+        EndTextureMode();
+
+        BeginDrawing();
+        ClearBackground(BLACK);
+        // altura negativa porque a render texture fica de cabeça pra baixo
+        DrawTexturePro(
+            gameTarget.texture,
+            (Rectangle){0, 0, SCREEN_WIDTH, -SCREEN_HEIGHT},
+            (Rectangle){offsetX, offsetY, SCREEN_WIDTH * scale, SCREEN_HEIGHT * scale},
+            (Vector2){0, 0},
+            0.0f,
+            WHITE
+        );
         EndDrawing();
     }
+
+    UnloadRenderTexture(gameTarget);
 
     // Cleanup
     if (bgm.ctxData) {
