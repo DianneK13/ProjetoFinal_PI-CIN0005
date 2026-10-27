@@ -50,6 +50,8 @@ GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* contex
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
     }
+}
+
 // Libera o SFX ao sair da cena (opcional, pode ser chamado externamente se desejar)
 void UnloadZoomGarrafaSFX(void) {
     if (sfx_garrafa_loaded) {
@@ -57,7 +59,7 @@ void UnloadZoomGarrafaSFX(void) {
         sfx_garrafa_loaded = 0;
     }
 }
-}
+
 
 Texture2D GetZoomGarrafaBackground(GameContext context) {
     return context.garrafa.background;
