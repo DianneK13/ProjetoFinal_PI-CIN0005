@@ -42,7 +42,7 @@ GameContext processEvent(GameObject* clickedObject,GameContext context) {
             context.state = processGameplayEvent(GetHand(), clickedObject, &context);
             break;
         case STATE_ENDING:
-            //state = processEndingEvent(clickedObject);
+            context.state = processEndingEvent(clickedObject, &context);
             break;
     }
     return context;
@@ -63,7 +63,7 @@ Texture2D GetBackground(GameContext context){
             background.width = SCREEN_WIDTH;
             return background;
         case STATE_ENDING:
-            //background = GetEndingBackground(context);
+            background = GetEndingBackground(context);
             background.height = SCREEN_HEIGHT;
             background.width = SCREEN_WIDTH;
             return background;
@@ -77,8 +77,7 @@ GameObject* GetObjects(GameContext context){
         case STATE_GAMEPLAY:
             return GetGameplayObjects(&context);
         case STATE_ENDING:
-            //return GetEndingObjects(context);
-            return NULL;
+            return GetEndingObjects(context);
     }
     return NULL;
 }
@@ -90,8 +89,7 @@ int GetObjectCount(GameContext context){
         case STATE_GAMEPLAY:
             return GetGameplayObjectCount(&context);
         case STATE_ENDING:
-            //return GetEndingObjectCount(context);
-            return 0;
+            return GetEndingObjectCount(context);
     }
     return 0;
 }

@@ -4,13 +4,14 @@
 
 #include "common.h"
 
+#define ID_ENDING_BOTAO_VOLTAR 0
 
 GameContext InitializeEndingState(GameContext context);
 
-GameState processEndingEvent(GameObject* object);
+GameState processEndingEvent(GameObject* clickedObject, GameContext *context);
 
-GameObject* GetEndingBackground(void);
+Texture2D GetEndingBackground(GameContext context);
 
-GameObject* GetEndingObjects(void);
+GameObject* GetEndingObjects(GameContext context);
 
-int GetEndingObjectCount(void);
+int GetEndingObjectCount(GameContext context);

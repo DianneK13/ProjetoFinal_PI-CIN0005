@@ -296,6 +296,14 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                         flagFinal++;
                     }
 
+                    // última fala do final já foi lida: vai pra tela de finalização
+                    else if(flagFinal == 7) {
+                        target->size = (Vector2){0, 0};
+                        target->bounds = (Rectangle){0, 0, 0, 0};
+                        flagFinal++;
+                        return STATE_ENDING;
+                    }
+
                     else {
                         target->size = (Vector2){0, 0};
                         target->bounds = (Rectangle){0, 0, 0, 0};

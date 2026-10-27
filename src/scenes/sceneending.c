@@ -1,21 +1,41 @@
 #include "scenes/sceneending.h"
 
+// tela de "obrigado por jogar", mostrada quando o jogador termina o puzzle da estante
+GameContext InitializeEndingState(GameContext context) {
+    context.ending.objectCount = 1;
+    context.ending.objects = malloc(context.ending.objectCount * sizeof(GameObject));
 
-//array de objects desta cena
-GameObject* objects_ending;
-//qtd de objetos desta cena
-int objectCount_ending;
+    context.ending.objects[ID_ENDING_BOTAO_VOLTAR] = (GameObject) {
+        .name="voltar ao menu", .id=ID_ENDING_BOTAO_VOLTAR, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture=LoadTexture("assets/voltarSubstates.png"),
+        .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
+        .bounds=(Rectangle){5, 7, 71, 73}
+    };
 
-//imagem de fundo desta cena
-Texture2D background_ending;
-
-
-//processa ações da tela de final do jogo
-GameState processEndingEvent(GameObject* clickedObject){
+    context.ending.background = LoadTexture("assets/ending/ending_background.png");
+    return context;
 }
 
-GameContext InitializeEndingState(GameContext context) {
+//processa ações da tela de final do jogo
+GameState processEndingEvent(GameObject* clickedObject, GameContext *context) {
+    if (!clickedObject) return STATE_ENDING;
 
-    return context;
+    switch (clickedObject->id) {
+        case ID_ENDING_BOTAO_VOLTAR:
+            return STATE_MENU;
+        default:
+            return STATE_ENDING;
+    }
+}
 
+Texture2D GetEndingBackground(GameContext context) {
+    return context.ending.background;
+}
+
+GameObject* GetEndingObjects(GameContext context) {
+    return context.ending.objects;
+}
+
+int GetEndingObjectCount(GameContext context) {
+    return context.ending.objectCount;
 }
