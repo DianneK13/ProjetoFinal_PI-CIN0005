@@ -1,4 +1,5 @@
 #include "scenes/scenegameplay.h"
+#include "sfx.h"
 #include "scenes/zoom/scenezoomcaixaarmario.h"
 #include "scenes/zoom/scenezoomcaixacama.h"
 #include "scenes/zoom/scenezoombilhete.h"
@@ -232,11 +233,15 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_GARRAFA:
+                    PlaySFX(SFX_GARRAFA);
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_GARRAFA;
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_DIARIO:
                     if(temChave == 0) context->gameplay.substate = GAMEPLAY_SUBSTATE_MAIN;
-                    else context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+                    else {
+                        PlaySFX(SFX_LIVRO);
+                        context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+                    }
                     return STATE_GAMEPLAY;
                 case ID_GAMEPLAY_ESTANTE:
                     context->gameplay.substate = GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
@@ -255,7 +260,7 @@ GameState processGameplayEvent(GameObject* utility, GameObject* target, GameCont
                     return STATE_GAMEPLAY;
 
                 case ID_GAMEPLAY_ESPACO_FALA:
-                
+                    PlaySFX(SFX_DIALOGO);
                     if(flagInicio == 0) {
                         context->gameplay.objects[10].texture = context->gameplay.objects[12].texture;
                         flagInicio++;

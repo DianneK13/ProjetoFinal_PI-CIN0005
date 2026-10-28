@@ -1,4 +1,5 @@
 #include "scenes/zoom/scenezoomestante.h"
+#include "sfx.h"
 
 GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objectCount = 8;
@@ -80,9 +81,22 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     return context;
 }
 
+static bool TodasLetrasAchadas(GameContext* context) {
+    for (int i = ID_ESTANTE_LETRA_1; i <= ID_ESTANTE_LETRA_6; i++) {
+        if (context->estante.objects[i].state != ALTERED) return false;
+    }
+    return true;
+}
+
 GameplaySubstate processZoomEstanteEvent(GameObject* target, GameContext* context, int* leuBilhete, int* flagFinal) {
+    // som de puzzle concluído só no clique que acha a última letra
+    if (target->id >= ID_ESTANTE_LETRA_1 && target->id <= ID_ESTANTE_LETRA_6 && !TodasLetrasAchadas(context)) {
+        context->estante.objects[target->id].state = ALTERED;
+        if (TodasLetrasAchadas(context)) PlaySFX(SFX_PUZZLE);
+    }
     switch(target->id) {
         case ID_ESTANTE_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             if(context->estante.objects[ID_ESTANTE_LETRA_1].state == ALTERED && 
                 context->estante.objects[ID_ESTANTE_LETRA_2].state == ALTERED &&
                 context->estante.objects[ID_ESTANTE_LETRA_3].state == ALTERED &&
@@ -125,6 +139,7 @@ GameplaySubstate processZoomEstanteEvent(GameObject* target, GameContext* contex
             return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;
 
         case ID_ESTANTE_ESPACO_FALA:
+            PlaySFX(SFX_DIALOGO);
             target->size = (Vector2){0, 0};
             target->bounds = (Rectangle){0, 0, 0, 0};
             return GAMEPLAY_SUBSTATE_ZOOM_ESTANTE;   

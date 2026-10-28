@@ -1,4 +1,5 @@
 #include "scenes/zoom/scenezoompirata.h"
+#include "sfx.h"
 
 GameContext InitializeZoomPirataState(GameContext context) {
     context.pirata.objectCount = 2;
@@ -29,9 +30,11 @@ GameContext InitializeZoomPirataState(GameContext context) {
 GameplaySubstate processZoomPirataEvent(GameObject* target, GameContext* context) {
     switch(target->id) {
         case ID_PIRATA_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
 
         case ID_PIRATA_ESPACO_FALA:
+            PlaySFX(SFX_DIALOGO);
             target->size = (Vector2){0, 0};
             target->bounds = (Rectangle){0, 0, 0, 0};
             return GAMEPLAY_SUBSTATE_ZOOM_PIRATA;

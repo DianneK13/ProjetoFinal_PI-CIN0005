@@ -1,15 +1,10 @@
 #include "scenes/zoom/scenezoomdiario.h"
+#include "sfx.h"
 
 #include "raylib.h"
-static Sound sfx_diario;
-static int sfx_diario_loaded = 0;
 
 GameContext InitializeZoomDiarioState(GameContext context) {
-    if (!sfx_diario_loaded) {
-        sfx_diario = LoadSound("assets/audio/sfx/livro.mp3");
-        sfx_diario_loaded = 1;
-    }
-    context.diario.objectCount = 2;
+    context.diario.objectCount = 3;
     context.diario.objects = (GameObject*)malloc(context.diario.objectCount * sizeof(GameObject));
 
     context.diario.objects[ID_DIARIO_VOLTAR].name = "voltar";
@@ -30,17 +25,31 @@ GameContext InitializeZoomDiarioState(GameContext context) {
     context.diario.objects[ID_DIARIO_ESPACO_FALA].state = ORIGINAL;
     context.diario.objects[ID_DIARIO_ESPACO_FALA].type = INTERACTIVE;
 
+    // Área do livro aberto, medida em ZoomDiario.png (1200x800). Fica depois da caixa de fala
+    // no array, então enquanto o diálogo estiver aberto o clique vai pra ele.
+    context.diario.objects[ID_DIARIO_LIVRO] = (GameObject){
+        .name="diario", .id=ID_DIARIO_LIVRO, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture=(Texture2D){0},
+        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
+        .bounds=(Rectangle){80, 16, 1032, 768}
+    };
+
     context.diario.background = LoadTexture("assets/images/zoom/diario/ZoomDiario.png");
     return context;
 }
 
 GameplaySubstate processZoomDiarioEvent(GameObject* target, GameContext* context) {
-    if (sfx_diario_loaded) PlaySound(sfx_diario);
     switch(target->id) {
         case ID_DIARIO_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
 
+        case ID_DIARIO_LIVRO:
+            PlaySFX(SFX_LIVRO);
+            return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
+
         case ID_DIARIO_ESPACO_FALA:
+            PlaySFX(SFX_DIALOGO);
             target->size = (Vector2){0, 0};
             target->bounds = (Rectangle){0, 0, 0, 0};
             return GAMEPLAY_SUBSTATE_ZOOM_DIARIO;
@@ -60,12 +69,4 @@ GameObject* GetZoomDiarioObjects(GameContext context) {
 
 int GetZoomDiarioObjectCount(GameContext context) {
     return context.diario.objectCount;
-}
-
-// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
-void UnloadZoomDiarioSFX(void) {
-    if (sfx_diario_loaded) {
-        UnloadSound(sfx_diario);
-        sfx_diario_loaded = 0;
-    }
 }

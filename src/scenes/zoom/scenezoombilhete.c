@@ -1,4 +1,5 @@
 #include "scenes/zoom/scenezoombilhete.h"
+#include "sfx.h"
 
 /*
 //array de objects desta cena
@@ -11,15 +12,9 @@ Texture2D background_sceneBilhete;
 */
 
 #include "raylib.h"
-static Sound sfx_bilhete;
-static int sfx_bilhete_loaded = 0;
 
 GameContext InitializeZoomBilheteState(GameContext context) {
-    if (!sfx_bilhete_loaded) {
-        sfx_bilhete = LoadSound("assets/audio/sfx/livro.mp3");
-        sfx_bilhete_loaded = 1;
-    }
-    context.bilhete.objectCount = 1;
+    context.bilhete.objectCount = 2;
     context.bilhete.objects = (GameObject*)malloc(context.bilhete.objectCount * sizeof(GameObject));
 
     context.bilhete.objects[ID_BILHETE_VOLTAR].name = "voltar";
@@ -31,15 +26,26 @@ GameContext InitializeZoomBilheteState(GameContext context) {
     context.bilhete.objects[ID_BILHETE_VOLTAR].state = ORIGINAL;
     context.bilhete.objects[ID_BILHETE_VOLTAR].type = INTERACTIVE;
 
+    // Área do papel, medida em ZoomBilhete.png (1200x800)
+    context.bilhete.objects[ID_BILHETE_PAPEL] = (GameObject){
+        .name="bilhete", .id=ID_BILHETE_PAPEL, .type=INTERACTIVE, .state=ORIGINAL,
+        .texture=(Texture2D){0},
+        .position=(Vector2){0, 0}, .size=(Vector2){0, 0},
+        .bounds=(Rectangle){410, 264, 416, 316}
+    };
+
     context.bilhete.background = LoadTexture("assets/images/zoom/bilhete/ZoomBilhete.png");
     return context;
 }
 
 GameplaySubstate processZoomBilheteEvent(GameObject* target, GameContext* context) {
-    if (sfx_bilhete_loaded) PlaySound(sfx_bilhete);
     switch(target->id) {
         case ID_BILHETE_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
+        case ID_BILHETE_PAPEL:
+            PlaySFX(SFX_LIVRO);
+            return GAMEPLAY_SUBSTATE_ZOOM_BILHETE;
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_BILHETE;
     }
@@ -55,12 +61,4 @@ GameObject* GetZoomBilheteObjects(GameContext context) {
 
 int GetZoomBilheteObjectCount(GameContext context) {
     return context.bilhete.objectCount;
-}
-
-// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
-void UnloadZoomBilheteSFX(void) {
-    if (sfx_bilhete_loaded) {
-        UnloadSound(sfx_bilhete);
-        sfx_bilhete_loaded = 0;
-    }
 }

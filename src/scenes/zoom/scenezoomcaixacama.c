@@ -1,15 +1,10 @@
 #include "scenes/zoom/scenezoomcaixacama.h"
+#include "scenes/scenegameplay.h"
+#include "sfx.h"
 
 #include "raylib.h"
-static Sound sfx_caixacama;
-static int sfx_caixacama_loaded = 0;
 
 GameContext InitializeZoomCaixaCamaState(GameContext context) {
-    if (!sfx_caixacama_loaded) {
-        sfx_caixacama = LoadSound("assets/audio/sfx/botao.mp3");
-        sfx_caixacama_loaded = 1;
-    }
-    if (sfx_caixacama_loaded) PlaySound(sfx_caixacama);
     context.caixa_cama.objectCount = 17;
     // calloc zera tudo: os números (6..14) e o bilhete (15) só recebem textura, então ficam com tamanho e bounds 0
     // (com malloc eles ficavam com lixo de memória e podiam ser desenhados esticados por cima do cofre)
@@ -94,11 +89,17 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
 }
 
 GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* context, int* counterNumeros, int* leuBilhete) {
+    // som só ao girar os números do cofre
+    if (target->id >= ID_CAIXA_CAMA_SIMBOLO_1 && target->id <= ID_CAIXA_CAMA_SIMBOLO_4) {
+        PlaySFX(SFX_BOTAO);
+    }
     switch(target->id) {
         case ID_CAIXA_CAMA_VOLTAR:
+            PlaySFX(SFX_BOTAO);
             return GAMEPLAY_SUBSTATE_MAIN;
 
         case ID_CAIXA_CAMA_ESPACO_FALA:
+            PlaySFX(SFX_DIALOGO);
             target->size = (Vector2){0, 0};
             target->bounds = (Rectangle){0, 0, 0, 0};
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
@@ -165,6 +166,7 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
         
         case ID_CAIXA_CAMA_BOTAO:
             if(counterNumeros[0]%9 == 4 && counterNumeros[1]%9 == 2 && counterNumeros[2]%9 == 7 && counterNumeros[3]%9 == 6) {
+                PlaySFX(SFX_BAU);
                 printf("receba\n");
                 *leuBilhete = 1;
 
@@ -191,12 +193,16 @@ GameplaySubstate processZoomCaixaCamaEvent(GameObject* target, GameContext* cont
                 context->estante.objects[7].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
                 context->estante.objects[7].bounds = (Rectangle){211, 576, 778, 209};
 
-                context->caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].texture = context->caixa_cama.objects[22].texture;
+                // fala "Abri o cofre!" fica nos objetos do gameplay (caixa_cama só tem 17 objetos)
+                context->caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].texture = context->gameplay.objects[ID_BILHETE_FALA_1].texture;
 
 
                 return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
             }
-            else return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
+            else {
+                PlaySFX(SFX_BOTAO);
+                return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
+            }
         
         default:
             return GAMEPLAY_SUBSTATE_ZOOM_CAIXA_CAMA;
@@ -213,12 +219,4 @@ GameObject* GetZoomCaixaCamaObjects(GameContext context) {
 
 int GetZoomCaixaCamaObjectCount(GameContext context) {
     return context.caixa_cama.objectCount;
-}
-
-// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
-void UnloadZoomCaixaCamaSFX(void) {
-    if (sfx_caixacama_loaded) {
-        UnloadSound(sfx_caixacama);
-        sfx_caixacama_loaded = 0;
-    }
 }

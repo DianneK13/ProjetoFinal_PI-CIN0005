@@ -1,4 +1,5 @@
 #include "scenes/scenemenu.h"
+#include "sfx.h"
 
 // Libera texturas e array de objetos do menu
 static void MenuFreeObjects(GameContext *ctx) {
@@ -87,8 +88,10 @@ GameState processMenuEvent(GameObject* clickedObject, GameContext *context) {
         case MENU_SUBSTATE_MAIN:
             switch(clickedObject->id) {
             case ID_MENU_BOTAO_START:
+                    PlaySFX(SFX_INICIO);
                     return STATE_GAMEPLAY;
             case ID_MENU_BOTAO_CREDITOS:
+                    PlaySFX(SFX_BOTAO);
                     context->menu.substate = MENU_SUBSTATE_CREDITOS;
                     SetupMenuCreditos(context);
                     return STATE_MENU;
@@ -103,6 +106,7 @@ GameState processMenuEvent(GameObject* clickedObject, GameContext *context) {
         case MENU_SUBSTATE_CREDITOS:
             switch (clickedObject->id) {
             case ID_MENU_BOTAO_VOLTAR:
+                    PlaySFX(SFX_BOTAO);
                     context->menu.substate = MENU_SUBSTATE_MAIN;
                     SetupMenuMain(context);
                     return STATE_MENU;
