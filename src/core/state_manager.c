@@ -10,6 +10,7 @@
 #include "scenes/zoom/scenezoomestante.h"
 #include "scenes/zoom/scenezoomgarrafa.h"
 #include "scenes/zoom/scenezoompirata.h"
+#include "utility.h"
 
 GameContext InitializeState(GameContext context) {
     context.state = STATE_MENU;
@@ -29,6 +30,17 @@ GameContext InitializeState(GameContext context) {
         context.flags[i] = 0;
     }
     return context;
+}
+
+// Libera texturas, arrays de objetos e sons de todas as cenas.
+// Chamar antes de CloseAudioDevice e CloseWindow.
+void UnloadState(GameContext *context) {
+    FreeAll(context);
+    UnloadZoomBilheteSFX();
+    UnloadZoomCaixaArmarioSFX();
+    UnloadZoomCaixaCamaSFX();
+    UnloadZoomDiarioSFX();
+    UnloadZoomGarrafaSFX();
 }
 
 //funções atualizam o estado, o array de objetos e o fundo a ser desenhado no momento

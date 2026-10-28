@@ -6,7 +6,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 
     context.estante.objects[ID_ESTANTE_VOLTAR].name = "voltar";
     context.estante.objects[ID_ESTANTE_VOLTAR].id = ID_ESTANTE_VOLTAR;
-    context.estante.objects[ID_ESTANTE_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.estante.objects[ID_ESTANTE_VOLTAR].texture = LoadTexture("assets/images/ui/voltarSubstates.png");
     context.estante.objects[ID_ESTANTE_VOLTAR].position = (Vector2){0, 0};
     context.estante.objects[ID_ESTANTE_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.estante.objects[ID_ESTANTE_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
@@ -15,7 +15,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 
     context.estante.objects[ID_ESTANTE_LETRA_1].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_1].id = ID_ESTANTE_LETRA_1;
-    context.estante.objects[ID_ESTANTE_LETRA_1].texture = LoadTexture("assets/zoomEstante/bolaToguro_S.png");
+    context.estante.objects[ID_ESTANTE_LETRA_1].texture = LoadTexture("assets/images/zoom/estante/bolaToguro_S.png");
     context.estante.objects[ID_ESTANTE_LETRA_1].position = (Vector2){0, 0};
     context.estante.objects[ID_ESTANTE_LETRA_1].size = (Vector2){0,0};
     context.estante.objects[ID_ESTANTE_LETRA_1].bounds = (Rectangle){0, 0, 0, 0};
@@ -24,7 +24,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 
     context.estante.objects[ID_ESTANTE_LETRA_2].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_2].id = ID_ESTANTE_LETRA_2;
-    context.estante.objects[ID_ESTANTE_LETRA_2].texture = LoadTexture("assets/zoomEstante/bolaToguro_A1.png");
+    context.estante.objects[ID_ESTANTE_LETRA_2].texture = LoadTexture("assets/images/zoom/estante/bolaToguro_A1.png");
     context.estante.objects[ID_ESTANTE_LETRA_2].position = (Vector2){0, 0};
     context.estante.objects[ID_ESTANTE_LETRA_2].size = (Vector2){0,0};
     context.estante.objects[ID_ESTANTE_LETRA_2].bounds = (Rectangle){0, 0, 0, 0};
@@ -33,7 +33,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 
     context.estante.objects[ID_ESTANTE_LETRA_3].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_3].id = ID_ESTANTE_LETRA_3;
-    context.estante.objects[ID_ESTANTE_LETRA_3].texture = LoadTexture("assets/zoomEstante/bolaToguro_N.png");
+    context.estante.objects[ID_ESTANTE_LETRA_3].texture = LoadTexture("assets/images/zoom/estante/bolaToguro_N.png");
     context.estante.objects[ID_ESTANTE_LETRA_3].position = (Vector2){0, 0};
     context.estante.objects[ID_ESTANTE_LETRA_3].size = (Vector2){0,0};
     context.estante.objects[ID_ESTANTE_LETRA_3].bounds = (Rectangle){0, 0, 0, 0};
@@ -42,7 +42,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 
     context.estante.objects[ID_ESTANTE_LETRA_4].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_4].id = ID_ESTANTE_LETRA_4;
-    context.estante.objects[ID_ESTANTE_LETRA_4].texture = LoadTexture("assets/zoomEstante/bolaToguro_D.png");
+    context.estante.objects[ID_ESTANTE_LETRA_4].texture = LoadTexture("assets/images/zoom/estante/bolaToguro_D.png");
     context.estante.objects[ID_ESTANTE_LETRA_4].position = (Vector2){0, 0};
     context.estante.objects[ID_ESTANTE_LETRA_4].size = (Vector2){0,0};
     context.estante.objects[ID_ESTANTE_LETRA_4].bounds = (Rectangle){0, 0, 0, 0};
@@ -51,7 +51,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 
     context.estante.objects[ID_ESTANTE_LETRA_5].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_5].id = ID_ESTANTE_LETRA_5;
-    context.estante.objects[ID_ESTANTE_LETRA_5].texture = LoadTexture("assets/zoomEstante/bolaToguro_R.png");
+    context.estante.objects[ID_ESTANTE_LETRA_5].texture = LoadTexture("assets/images/zoom/estante/bolaToguro_R.png");
     context.estante.objects[ID_ESTANTE_LETRA_5].position = (Vector2){0, 0};
     context.estante.objects[ID_ESTANTE_LETRA_5].size = (Vector2){0,0};
     context.estante.objects[ID_ESTANTE_LETRA_5].bounds = (Rectangle){0, 0, 0, 0};
@@ -60,7 +60,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
 
     context.estante.objects[ID_ESTANTE_LETRA_6].name = "???";
     context.estante.objects[ID_ESTANTE_LETRA_6].id = ID_ESTANTE_LETRA_6;
-    context.estante.objects[ID_ESTANTE_LETRA_6].texture = LoadTexture("assets/zoomEstante/bolaToguro_A2.png");
+    context.estante.objects[ID_ESTANTE_LETRA_6].texture = LoadTexture("assets/images/zoom/estante/bolaToguro_A2.png");
     context.estante.objects[ID_ESTANTE_LETRA_6].position = (Vector2){0, 0};
     context.estante.objects[ID_ESTANTE_LETRA_6].size = (Vector2){0,0};
     context.estante.objects[ID_ESTANTE_LETRA_6].bounds = (Rectangle){0, 0, 0, 0};
@@ -76,7 +76,7 @@ GameContext InitializeZoomEstanteState(GameContext context) {
     context.estante.objects[ID_ESTANTE_ESPACO_FALA].state = ORIGINAL;
     context.estante.objects[ID_ESTANTE_ESPACO_FALA].type = INTERACTIVE;
 
-    context.estante.background = LoadTexture("assets/zoomEstante/ZoomEstante.png");
+    context.estante.background = LoadTexture("assets/images/zoom/estante/ZoomEstante.png");
     return context;
 }
 

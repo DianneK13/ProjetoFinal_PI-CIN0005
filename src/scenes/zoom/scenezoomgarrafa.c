@@ -15,7 +15,7 @@ GameContext InitializeZoomGarrafaState(GameContext context) {
 
     context.garrafa.objects[ID_GARRAFA_VOLTAR].name = "voltar";
     context.garrafa.objects[ID_GARRAFA_VOLTAR].id = ID_GARRAFA_VOLTAR;
-    context.garrafa.objects[ID_GARRAFA_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.garrafa.objects[ID_GARRAFA_VOLTAR].texture = LoadTexture("assets/images/ui/voltarSubstates.png");
     context.garrafa.objects[ID_GARRAFA_VOLTAR].position = (Vector2){0, 0};
     context.garrafa.objects[ID_GARRAFA_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.garrafa.objects[ID_GARRAFA_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
@@ -31,7 +31,7 @@ GameContext InitializeZoomGarrafaState(GameContext context) {
     context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].state = ORIGINAL;
     context.garrafa.objects[ID_GARRAFA_ESPACO_FALA].type = INTERACTIVE;
 
-    context.garrafa.background = LoadTexture("assets/zoomGarrafa/ZoomGarrafa.png");
+    context.garrafa.background = LoadTexture("assets/images/zoom/garrafa/ZoomGarrafa.png");
     return context;
 }
 
@@ -52,7 +52,7 @@ GameplaySubstate processZoomGarrafaEvent(GameObject* target, GameContext* contex
     }
 }
 
-// Libera o SFX ao sair da cena (opcional, pode ser chamado externamente se desejar)
+// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
 void UnloadZoomGarrafaSFX(void) {
     if (sfx_garrafa_loaded) {
         UnloadSound(sfx_garrafa);

@@ -22,27 +22,27 @@ static void SetupMenuMain(GameContext *ctx) {
 
     ctx->menu.objects[ID_MENU_BOTAO_START] = (GameObject) {
         .name="botao_start", .id=ID_MENU_BOTAO_START, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture=LoadTexture("assets/JOGAR.png"),
+        .texture=LoadTexture("assets/images/menu/JOGAR.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds=(Rectangle){763, 293, 261, 67}
     };
 
     ctx->menu.objects[ID_MENU_BOTAO_CREDITOS] = (GameObject) {
         .name="botao_creditos", .id=ID_MENU_BOTAO_CREDITOS, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture=LoadTexture("assets/CREDITOS.png"),
+        .texture=LoadTexture("assets/images/menu/CREDITOS.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds=(Rectangle){763, 377, 261, 67}
     };
 
     ctx->menu.objects[ID_MENU_BOTAO_SAIR] = (GameObject) {
         .name="botao_sair", .id=ID_MENU_BOTAO_SAIR, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture=LoadTexture("assets/SAIR.png"),
+        .texture=LoadTexture("assets/images/menu/SAIR.png"),
         .position=(Vector2){0, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds=(Rectangle){763, 460, 261, 67}
     };
 
     if (ctx->menu.background.id != 0) UnloadTexture(ctx->menu.background);
-    ctx->menu.background = LoadTexture("assets/menu_background.png");
+    ctx->menu.background = LoadTexture("assets/images/menu/menu_background.png");
 }
 
 
@@ -55,13 +55,13 @@ static void SetupMenuCreditos(GameContext *ctx) {
     // Índice é 0, id é o constante de VOLTAR
     ctx->menu.objects[0] = (GameObject) {
         .name="botao_voltar", .id=ID_MENU_BOTAO_VOLTAR, .type=INTERACTIVE, .state=ORIGINAL,
-        .texture=LoadTexture("assets/voltarSubstates.png"),
+        .texture=LoadTexture("assets/images/ui/voltarSubstates.png"),
         .position=(Vector2){1116, 0}, .size=(Vector2){SCREEN_WIDTH, SCREEN_HEIGHT},
         .bounds=(Rectangle){1123, 7, 71, 73}
     };
 
     if (ctx->menu.background.id != 0) UnloadTexture(ctx->menu.background);
-    ctx->menu.background = LoadTexture("assets/créditos_background.png");
+    ctx->menu.background = LoadTexture("assets/images/menu/creditos_background.png");
 }
 
 

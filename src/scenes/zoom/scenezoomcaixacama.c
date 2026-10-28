@@ -6,16 +6,18 @@ static int sfx_caixacama_loaded = 0;
 
 GameContext InitializeZoomCaixaCamaState(GameContext context) {
     if (!sfx_caixacama_loaded) {
-        sfx_caixacama = LoadSound("assets/audio/sfx/botão.mp3");
+        sfx_caixacama = LoadSound("assets/audio/sfx/botao.mp3");
         sfx_caixacama_loaded = 1;
     }
     if (sfx_caixacama_loaded) PlaySound(sfx_caixacama);
     context.caixa_cama.objectCount = 17;
-    context.caixa_cama.objects = (GameObject*)malloc(context.caixa_cama.objectCount * sizeof(GameObject));
+    // calloc zera tudo: os números (6..14) e o bilhete (15) só recebem textura, então ficam com tamanho e bounds 0
+    // (com malloc eles ficavam com lixo de memória e podiam ser desenhados esticados por cima do cofre)
+    context.caixa_cama.objects = (GameObject*)calloc(context.caixa_cama.objectCount, sizeof(GameObject));
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].name = "voltar";
     context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].id = ID_CAIXA_CAMA_VOLTAR;
-    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].texture = LoadTexture("assets/images/ui/voltarSubstates.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].position = (Vector2){0, 0};
     context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_cama.objects[ID_CAIXA_CAMA_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
@@ -24,7 +26,7 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].name = "simbolo1";
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].id = ID_CAIXA_CAMA_SIMBOLO_1;
-    context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].texture = LoadTexture("assets/zoomCaixaCama/1.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].texture = LoadTexture("assets/images/zoom/caixaCama/1.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].position = (Vector2){0, 0};
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_1].bounds = (Rectangle){186, 284, 132, 222};
@@ -33,7 +35,7 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_2].name = "simbolo2";
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_2].id = ID_CAIXA_CAMA_SIMBOLO_2;
-    context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_2].texture = LoadTexture("assets/zoomCaixaCama/1.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_2].texture = LoadTexture("assets/images/zoom/caixaCama/1.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_2].position = (Vector2){132, 0};
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_2].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_2].bounds = (Rectangle){318, 284, 132, 222};
@@ -42,7 +44,7 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_3].name = "simbolo3";
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_3].id = ID_CAIXA_CAMA_SIMBOLO_3;
-    context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_3].texture = LoadTexture("assets/zoomCaixaCama/1.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_3].texture = LoadTexture("assets/images/zoom/caixaCama/1.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_3].position = (Vector2){264, 0};
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_3].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_3].bounds = (Rectangle){450, 284, 132, 222};
@@ -51,7 +53,7 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
 
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_4].name = "simbolo4";
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_4].id = ID_CAIXA_CAMA_SIMBOLO_4;
-    context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_4].texture = LoadTexture("assets/zoomCaixaCama/1.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_4].texture = LoadTexture("assets/images/zoom/caixaCama/1.png");
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_4].position = (Vector2){396, 0};
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_4].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.caixa_cama.objects[ID_CAIXA_CAMA_SIMBOLO_4].bounds = (Rectangle){582, 284, 132, 222};
@@ -76,18 +78,18 @@ GameContext InitializeZoomCaixaCamaState(GameContext context) {
     context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].state = ORIGINAL;
     context.caixa_cama.objects[ID_CAIXA_CAMA_ESPACO_FALA].type = INTERACTIVE;
 
-    context.caixa_cama.objects[ID_CAIXA_CAMA_1].texture = LoadTexture("assets/zoomCaixaCama/1.png");
-    context.caixa_cama.objects[ID_CAIXA_CAMA_2].texture = LoadTexture("assets/zoomCaixaCama/2.png");
-    context.caixa_cama.objects[ID_CAIXA_CAMA_3].texture = LoadTexture("assets/zoomCaixaCama/3.png");
-    context.caixa_cama.objects[ID_CAIXA_CAMA_4].texture = LoadTexture("assets/zoomCaixaCama/4.png");
-    context.caixa_cama.objects[ID_CAIXA_CAMA_5].texture = LoadTexture("assets/zoomCaixaCama/5.png");
-    context.caixa_cama.objects[ID_CAIXA_CAMA_6].texture = LoadTexture("assets/zoomCaixaCama/6.png");
-    context.caixa_cama.objects[ID_CAIXA_CAMA_7].texture = LoadTexture("assets/zoomCaixaCama/7.png");
-    context.caixa_cama.objects[ID_CAIXA_CAMA_8].texture = LoadTexture("assets/zoomCaixaCama/8.png");
-    context.caixa_cama.objects[ID_CAIXA_CAMA_9].texture = LoadTexture("assets/zoomCaixaCama/9.png");
-    context.caixa_cama.objects[ID_CAIXA_BILHETE].texture = LoadTexture("assets/zoomCaixaCama/ZoomBilhete.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_1].texture = LoadTexture("assets/images/zoom/caixaCama/1.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_2].texture = LoadTexture("assets/images/zoom/caixaCama/2.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_3].texture = LoadTexture("assets/images/zoom/caixaCama/3.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_4].texture = LoadTexture("assets/images/zoom/caixaCama/4.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_5].texture = LoadTexture("assets/images/zoom/caixaCama/5.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_6].texture = LoadTexture("assets/images/zoom/caixaCama/6.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_7].texture = LoadTexture("assets/images/zoom/caixaCama/7.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_8].texture = LoadTexture("assets/images/zoom/caixaCama/8.png");
+    context.caixa_cama.objects[ID_CAIXA_CAMA_9].texture = LoadTexture("assets/images/zoom/caixaCama/9.png");
+    context.caixa_cama.objects[ID_CAIXA_BILHETE].texture = LoadTexture("assets/images/zoom/bilhete/ZoomBilhete.png");
 
-    context.caixa_cama.background = LoadTexture("assets/zoomCaixaCama/ZoomCaixaCama.png");
+    context.caixa_cama.background = LoadTexture("assets/images/zoom/caixaCama/ZoomCaixaCama.png");
     return context;
 }
 
@@ -211,4 +213,12 @@ GameObject* GetZoomCaixaCamaObjects(GameContext context) {
 
 int GetZoomCaixaCamaObjectCount(GameContext context) {
     return context.caixa_cama.objectCount;
+}
+
+// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
+void UnloadZoomCaixaCamaSFX(void) {
+    if (sfx_caixacama_loaded) {
+        UnloadSound(sfx_caixacama);
+        sfx_caixacama_loaded = 0;
+    }
 }

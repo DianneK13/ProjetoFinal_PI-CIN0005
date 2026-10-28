@@ -42,6 +42,29 @@ make
 
 ---
 
+## Organização dos assets
+
+```
+assets/
+├── audio/
+│   ├── music/            # músicas de fundo (menu e gameplay)
+│   └── sfx/              # efeitos sonoros
+└── images/
+    ├── menu/             # fundo do menu, fundo dos créditos e botões
+    ├── gameplay/         # fundo do quarto
+    │   └── objetos/      # camadas dos objetos clicáveis do quarto
+    ├── zoom/             # uma pasta por cena de zoom (caixaArmario, caixaCama, bilhete, ...)
+    ├── falas/            # caixas de diálogo
+    ├── ending/           # tela de finalização
+    ├── ui/               # elementos de interface (botão de voltar, ícones de som)
+    └── personagens/      # artes dos personagens
+```
+
+- Use nomes de arquivo sem acento nem espaço (evita problemas entre Linux, WSL e macOS).
+- O jogo desenha tudo em 1200x800; imagens novas que ocupam a tela inteira devem ser exportadas nesse tamanho.
+
+---
+
 ## Contribuidores
 
 <a href="https://github.com/DianneK13/ProjetoFinal_PI-CIN0005/graphs/contributors">

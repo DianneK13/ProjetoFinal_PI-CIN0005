@@ -30,3 +30,5 @@ Texture2D GetZoomCaixaArmarioBackground(GameContext context);
 GameObject* GetZoomCaixaArmarioObjects(GameContext context);
 
 int GetZoomCaixaArmarioObjectCount(GameContext context);
+
+void UnloadZoomCaixaArmarioSFX(void);

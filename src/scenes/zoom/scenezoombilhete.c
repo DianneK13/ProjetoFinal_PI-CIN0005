@@ -24,14 +24,14 @@ GameContext InitializeZoomBilheteState(GameContext context) {
 
     context.bilhete.objects[ID_BILHETE_VOLTAR].name = "voltar";
     context.bilhete.objects[ID_BILHETE_VOLTAR].id = ID_BILHETE_VOLTAR;
-    context.bilhete.objects[ID_BILHETE_VOLTAR].texture = LoadTexture("assets/voltarSubstates.png");
+    context.bilhete.objects[ID_BILHETE_VOLTAR].texture = LoadTexture("assets/images/ui/voltarSubstates.png");
     context.bilhete.objects[ID_BILHETE_VOLTAR].position = (Vector2){0, 0};
     context.bilhete.objects[ID_BILHETE_VOLTAR].size = (Vector2){SCREEN_WIDTH, SCREEN_HEIGHT};
     context.bilhete.objects[ID_BILHETE_VOLTAR].bounds = (Rectangle){5, 7, 71, 73};
     context.bilhete.objects[ID_BILHETE_VOLTAR].state = ORIGINAL;
     context.bilhete.objects[ID_BILHETE_VOLTAR].type = INTERACTIVE;
 
-    context.bilhete.background = LoadTexture("assets/zoomBilhete/ZoomBilhete.png");
+    context.bilhete.background = LoadTexture("assets/images/zoom/bilhete/ZoomBilhete.png");
     return context;
 }
 
@@ -45,14 +45,22 @@ GameplaySubstate processZoomBilheteEvent(GameObject* target, GameContext* contex
     }
 }
 
-Texture2D GetZoomBilheteBackground(GameContext) {
-    
+Texture2D GetZoomBilheteBackground(GameContext context) {
+    return context.bilhete.background;
 }
 
 GameObject* GetZoomBilheteObjects(GameContext context) {
-    
+    return context.bilhete.objects;
 }
 
 int GetZoomBilheteObjectCount(GameContext context) {
-    
+    return context.bilhete.objectCount;
+}
+
+// Libera o SFX da cena (chamado por UnloadState ao fechar o jogo)
+void UnloadZoomBilheteSFX(void) {
+    if (sfx_bilhete_loaded) {
+        UnloadSound(sfx_bilhete);
+        sfx_bilhete_loaded = 0;
+    }
 }
